@@ -84,10 +84,10 @@ The leave icon (top right of your lobby) or **LEAVE ROOM** in the Esc menu takes
 
 ### The lobby
 
-- **Left:** the match setup. Pick one of the seven arena types, its size (**Small**, **Big** or **Mega**) and the map type (**Regular**, **Bounce**, **Active** or **Rising**), then the match rules underneath. The arena you pick is shown live behind the lobby.
-- **Middle:** every player's tank, big, turning slowly on a show platform with its driver standing beside it. The driver waves once that player is ready. Under each tank is the player's name plate: their tank, their two weapons and how they're playing (keys, controller or phone). Keyboard and controller players can click their tank's name or weapons to change them. Click the team badge to move a player to another team, and **×** to remove them.
+- **Left:** the match setup. The **arena** drop-down lists the seven arena types with a little map of each; the size buttons under it pick **Small**, **Big** or **Mega**. The **map type** drop-down picks **Regular**, **Classic**, **Bounce**, **Active** or **Rising** (see *Map type*), and the match rules sit underneath. The arena you pick is shown live behind the lobby, a little darker so the tanks stand out.
+- **Middle:** every player's tank, big, turning slowly on a plain dark turntable under a spotlight. Under each tank is the player's name plate: their tank, their two weapons and how they're playing (keys, controller or phone). Keyboard and controller players can click their tank's name or weapons to change them. Click the team badge to move a player to another team, and **×** to remove them.
 - **Right:** the room code and QR code for phones, the CPU players, and **Start match**.
-- **Top right:** three icons. The gear opens the sound settings (music and effects volume), the keyboard opens the controls, and the last one goes full screen.
+- **Top right:** the gear opens the settings: music and effects volume, mouse aiming, and **Customize keys**, which shows and changes every control. The icon next to it goes full screen.
 
 ### CPU players
 
@@ -96,7 +96,7 @@ Click **+ Add CPU** in the CPUs panel on the right to add a computer-controlled 
 ### Match settings
 
 - **Mode · Lives / Timed / Diamond:** a set number of lives each, last one standing wins; or a timed match. The **− / +** buttons set the lives (1 to 9) or the minutes (1 to 10). In a timed match you respawn every time, score **+1 for every tank you knock out and −1 each time you go down** (including falling off), and the highest score when time runs out wins. If it's tied, the tied players go into **sudden death**: low health, and the next knockout wins.
-- **Mode · Diamond:** hold the diamond for as long as you can. A glowing diamond drops in at the top of the arena; drive into it to grab it, and your clock (on your card) runs for as long as you carry it. Getting knocked out drops it: it pops out and rolls around until someone else picks it up. If it falls off the map (or into lava or a rising hazard), it comes back at the top. Every attack does **double damage** in this mode, so the diamond changes hands a lot. You respawn every time, and the **− / +** buttons set the length (1 to 10 minutes). When time runs out, the player (or team, adding up its players' times) who held it the longest wins. If it's tied, the match goes to **overtime** and the next one to take the lead wins. CPUs go after the diamond and its carrier too.
+- **Mode · Diamond:** hold the diamond for as long as you can. A glowing diamond drops in at the top of the arena; drive into it to grab it, and your clock (on your card) runs for as long as you carry it. Getting knocked out drops it: it pops out and rolls around until someone else picks it up. If it falls off the map (or into lava or a rising hazard), it comes back at the top. Every attack does **2.5× damage** in this mode but knocks tanks back about 30% less, so tanks go down (and the diamond changes hands) a lot more often than they fly off. If it touches a bounce net it also comes back at the top. You respawn every time. There's no match clock: the **− / +** buttons set how long you need to hold it (15 seconds to 5 minutes, 1:00 to start with), and the first player (or team, adding up its players' times) to hold it that long wins. The clock at the top shows the leader's time and the goal. CPUs go after the diamond and its carrier too.
 - **Teams · Free-for-all / Teams:** with Teams on, each player is on the red, blue, green or gold team, and everyone on a team drives that colour. Teams can be any size (1 against 3 is fine). New players join the smaller of red and blue; click the team badge on a player's card to move them, or players can tap **TEAM · SWITCH** on their phone. **Auto** splits everyone evenly between red and blue. Teammates can't hurt each other, and in every mode each team starts together on its own side of the map (red on the left, blue on the right, then green and gold in between when there are more teams). In timed and diamond games your team also respawns on its own side of the centre. When two or more real players (not CPUs) are on the same team, each one gets a coloured dot and their tag in their own player colour (on their card, above their tank and on the phone), so teammates can tell each other apart while their tanks stay the team colour.
 - **Power-ups:** click it to open a small panel: how often power-ups fall (Off, Low, Normal, High or Chaos) and which kinds can drop (at least one stays on). See *Power-ups*.
 - **Sound:** the gear icon at the top right has the music and effects volume. They're also on the pause screen, and M mutes everything.
@@ -105,8 +105,8 @@ Click **+ Add CPU** in the CPUs panel on the right to add a computer-controlled 
 
 The first phone to join is the host (its name plate says HOST). Once everyone has joined, nobody needs to touch the computer. The host's phone has two tabs so it never gets crowded:
 
-- **1 · Your tank:** pick your two weapons and your tank, like every other phone. **Next · Match setup** at the bottom takes you to the second tab.
-- **2 · Match setup:** the arena type, the arena size, the map type (Regular, Bounce, Active or Rising), how often power-ups drop and which kinds, how many bots and how hard they are, the mode (lives, timed or diamond), and teams.
+- **1 · Your tank:** the same tank garage as every other phone (see *Your phone in the lobby*). **Next · Match setup** at the bottom takes you to the second tab.
+- **2 · Match setup:** a split screen. On the right, the arena card shows the arena theme with its colours, a little map and what's special about it; **swipe it** (or tap the arrows) to slide in the next arena type (Skyforge, Frostpeak, Magma and so on), and the big screen follows. On the left, drop-down menus set the arena size, the map type (Regular, Classic, Bounce, Active or Rising), how often power-ups drop (with **Pick power-ups** to choose which kinds), the mode (lives, timed or diamond), the lives, minutes or diamond goal, teams, how many bots and how hard they are.
 - **Start match** starts right away, even if not everyone has tapped ready.
 - **During a match**, the host has a **MENU** button in the top-right corner. It pauses the game and offers **RESUME** or **END MATCH · MAIN MENU**.
 - **After a match**, the host gets **REMATCH** and **MAIN MENU** buttons.
@@ -122,12 +122,21 @@ Full screen hides the browser bars and stops the page from zooming when thumbs b
 
 Even without full screen, the controller blocks pinch and double-tap zoom while you're playing.
 
+### Your phone in the lobby
+
+- **Tank garage:** one side of the screen shows your tank turning on a stage, the other its stats (speed, armour, blast, reload, jet) and what makes it different. **Swipe the tank** left or right (or tap the arrows) and the next one slides in, spinning. Your two weapons are underneath.
+- **Ready up:** tap **READY UP** and the screen shows **WAITING FOR GAME START**. **← Change tank** takes you back to the garage.
+- **Control settings:** once you're ready, the gear at the top right (**CONTROLS**) opens your control settings, saved on that phone:
+  - **Quick weapon swap:** double-tap the driving side of the screen to swap weapons, instead of using the weapon button above BOMB.
+  - **Sides:** drive on the left and aim on the right (the normal way), or swap them: aim on the left, drive on the right. The BOMB and weapon buttons move to the aiming side.
+
 ### Phone controls
 
 - **Left half:** put your thumb down anywhere and slide. Left and right drive. **Push up to fire the jetpack.** Pull down to drop through a floating ledge.
 - **Right half:** drag in the direction you want to shoot. The farther you drag, the more power. **Let go to fire.** A quick tap fires your last shot again.
 - **BOMB button** (bottom right, unlimited bombs): put your thumb on it and drag, just like aiming a missile. The farther you drag, the harder you throw, and the host’s screen shows where the bomb will land. **Let go to throw.** A quick tap without dragging drops a mine under your tank.
-- **Weapon button** (above BOMB): tap to swap between your two weapons (see *Weapons*). It shows the one you have.
+- **Weapon button** (above BOMB): tap to swap between your two weapons (see *Weapons*). It shows the one you have. With **quick weapon swap** on, double-tap the driving side instead.
+- The left and right halves swap over if you picked **aim left · drive right** in the control settings.
 - **AIR STRIKE button** (next to BOMB): appears when you grab an air strike. Tap it, then steer the big red target on the TV with the left stick and tap **LAUNCH**.
 - **SOUND** (lobby): your phone plays its own sounds when your tank gets hit, knocks someone out, grabs a power-up or goes down. iPhones stay silent when the ring/silent switch is set to silent.
 
@@ -161,7 +170,7 @@ One keyboard player can aim with the mouse or trackpad. It's Keys 1 to start wit
 - **Right-click** (a two-finger click on most trackpads) drops a mine. Hold the right button to throw a bomb toward the pointer instead. The bomb key still throws along the barrel too.
 - **Air strike:** the big target follows the pointer; click to launch.
 
-The keyboard keys keep working alongside the mouse, and the pointer turns into a crosshair during a match.
+The keyboard keys keep working alongside the mouse, and the pointer is a bigger red target, so it's easy to see.
 
 ### Game controllers
 
@@ -174,7 +183,9 @@ Game controllers join with A. Left stick drives (A or LB for jetpack), right sti
 - Every hit **knocks you back**, and the less health you have, the farther you fly. Each player's card shows a **knockback multiplier**: ×1.0 at full health, about ×2.2 at half and nearly ×4 when you're almost out. It turns red at ×2 or more.
 - Your **jetpack** has about 3.5 seconds of fuel and **refills the moment you land**. Use it to reach higher levels and to fly back after a big knockback.
 - Falling off the map is **instant death**: you lose a life no matter how much health you had.
-- Running out of health also costs a life. You respawn at the top after a couple of seconds, briefly invincible.
+- Running out of health also costs a life. You respawn at the top after a couple of seconds, invincible for about 3 seconds.
+- **Combos:** hit the same tank again before it lands and settles and the hit does more damage: ×1.25 for the second hit, ×1.5 for the third, up to ×2. The hit shows **2 HIT COMBO**, **3 HIT COMBO** and so on. Only hits from the same player (or CPU) count, so hits from different players never add up to one combo. For example, bomb a tank into the air, then snipe it before it lands, and the snipe does extra damage.
+- Who goes down and who grabs a power-up shows near the top of the host’s screen, small enough to stay out of the way.
 - The camera only zooms in and slows down for the **final knockout** of a match. The screen shakes when tanks get hit, and shakes less the more tanks there are, so an 8-player brawl stays easy to watch.
 
 ### Music
@@ -233,18 +244,19 @@ There are seven arena types, and each one comes in three sizes: **Small**, **Big
 | Type | Small | Big | Mega | What's special |
 |---|---|---|---|---|
 | Skyforge (grass) | Skyforge Isles | Skyforge Archipelago | Skyforge Expanse | **Earthquakes:** every so often the ground rumbles, then the islands shake for a few seconds and bounce the tanks around. Careful near the edges. |
-| Frostpeak (ice) | Frostpeak Basin | Glacier Fortress | Frostfall Citadel | Slippery ice: tanks slide and take a moment to stop or turn round. |
+| Frostpeak (ice) | Frostpeak Basin | Glacier Fortress | Frostfall Citadel | Very slippery ice: tanks slide a long way and take a while to stop or turn round. |
 | Magma (fire) | Magma Foundry | Magma Refinery | Magma Inferno | **Volcano bounce pads** (glowing pads with arrows rising out of them) throw any tank that drives or lands on them sky-high, with a full jetpack. Every few seconds a pad also rumbles and erupts in a column of fire that burns and launches whoever is on top. |
-| Titan (space) | Titan Outpost | Titan Orbital | Titan Megastation | Low gravity: tanks jump and fall slower, and shells fly in longer, floatier arcs. |
+| Titan (space) | Titan Outpost | Titan Orbital | Titan Megastation | Low gravity (half normal): tanks float up and drift down, and shells fly in long, floaty arcs. |
 | Warp (portals) | Warp Junction | Warp Nexus | Warp Labyrinth | Linked portals (shown by colour) teleport tanks, missiles and bombs. The camera holds still so teleports don't make it jump. |
-| Abyss (underwater) | Coral Reef | Sunken Ruins | Abyssal Trench | Tanks sink slowly, and a current slowly drifts back and forth, pushing tanks and shots with it. |
-| Neon City (city) | Neon Rooftops | Neon Boulevard | Neon Megacity | **Fog** rolls in every so often and hides the platforms for a few seconds. They're still there, so remember where they were. Tanks, bombs and power-ups stay visible. |
+| Abyss (underwater) | Coral Reef | Sunken Ruins | Abyssal Trench | Tanks are buoyant and sink slowly, missiles and bombs drag through the water and slow down, and a strong current drifts back and forth, pushing tanks and shots with it. |
+| Neon City (city) | Neon Rooftops | Neon Boulevard | Neon Megacity | **Fog** rolls in every so often, thick enough to hide the whole background and the platforms for a few seconds. They're still there, so remember where they were. Tanks, bombs and power-ups stay visible. |
 
 **Map type** (pick one; only one can be on at a time):
 
-- **Regular:** the arena as it is.
-- **Bounce:** a glowing energy net stretches under the arena. Fall into it and it throws you back up with a full jetpack, but every bounce costs 12 health (and can knock you out if you're low). Fly off the sides past the net and you still fall. Bombs and missiles explode on the net.
-- **Active:** the map changes while you play. Every 11 to 17 seconds a warning banner comes up and something happens. Half the time a group of platforms (the left side, the right side, the top platforms or the bottom decks) blinks red, crumbles away, and comes back about 6 seconds later, so get off them when they blink. The other half is the arena's own event:
+- **Regular:** the arena as it is, with its own twist (see the table above).
+- **Classic:** no twists at all: no bounce pads, fog, earthquakes, portals, slippery ice, low gravity or water. Just the platforms.
+- **Bounce:** a glowing energy net stretches under the arena. Fall into it and it throws you back up with a full jetpack, but every bounce costs 30 health (and can knock you out if you're low). Fly off the sides past the net and you still fall. Bombs and missiles explode on the net.
+- **Active:** the map changes while you play. Every 11 to 17 seconds something happens. There's no warning banner: each event has its own signature sound (a howling wind, a rumbling avalanche, bubbling lava, horns of hover traffic and so on) that starts a second or two before it hits, so you can hear it coming. Half the time a group of platforms (the left side, the right side, the top platforms or the bottom decks) blinks red, crumbles away, and comes back about 6 seconds later, so get off them when they blink. The other half is the arena's own event:
 
 | Type | Active-map event |
 |---|---|
@@ -256,7 +268,7 @@ There are seven arena types, and each one comes in three sizes: **Small**, **Big
 | Abyss | **Tidal surge:** a powerful current pushes everything one way. |
 | Neon City | **Hover traffic:** a stream of flying cars sweeps across the high or low half of the map, hitting and shoving every tank in its way. |
 
-- **Rising:** the whole map keeps climbing. A few seconds into the match a hazard that matches the arena starts rising from the bottom, and the view (and the edge you fall off) climbs with it. New platforms keep appearing at the top; the lowest ones flash, then the hazard swallows them, so keep climbing. The camera always keeps the hazard in view, and it rises a little faster the longer the match goes on.
+- **Rising:** the whole map keeps climbing. A few seconds into the match a deep rumble plays and a hazard that matches the arena starts rising from the bottom, and the view (and the edge you fall off) climbs with it. New platforms keep appearing at the top; the lowest ones flash, then the hazard swallows them, so keep climbing. The camera always keeps the hazard in view, and it rises a little faster the longer the match goes on.
 
 | Type | What rises |
 |---|---|
@@ -268,13 +280,13 @@ There are seven arena types, and each one comes in three sizes: **Small**, **Big
 | Abyss | **Riptide:** the tide floods the lowest shelves. Touching it hurts and pushes you back up. |
 | Neon City | **Toxic fog:** the fog swallows the lowest rooftops, and you can't see platforms inside it. Touching it hurts and throws you back up. |
 
-CPU players see the warnings too: they get off dropping platforms, away from rising lava, and on a rising map they keep climbing.
+CPU players know what's coming too: they get off dropping platforms, away from rising lava, and on a rising map they keep climbing.
 
 Mega maps are wide, so with everyone spread out the camera pulls back a long way and tanks look small. They play best on a big TV.
 
 ### Tanks
 
-In the lobby, each player's tank turns slowly on a show platform with its driver standing beside it. Each tank has its own look, but every tank is the same size and uses the same missiles, bombs and jetpack. They differ in these stats (the phone shows them when you pick a tank):
+In the lobby, each player's tank turns slowly on a turntable. Each tank has its own look, but every tank is the same size and uses the same missiles, bombs and jetpack. They differ in these stats (the phone shows them when you pick a tank):
 
 | Tank | Role | Strengths | Trade-offs |
 |---|---|---|---|
