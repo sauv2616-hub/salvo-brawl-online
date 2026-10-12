@@ -229,6 +229,7 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 .starc{font-family:var(--display);font-weight:600;font-size:22px;line-height:.8;padding-top:.08em;color:var(--alert);max-width:30vw;min-width:0;flex:0 1 auto;overflow:hidden;text-overflow:ellipsis;}
 .scorec,.clockc{font-family:var(--display);font-weight:600;font-size:26px;line-height:.8;padding-top:.08em;font-variant-numeric:tabular-nums;}
 .scorec{color:var(--pc);}
+.scorec.gem{color:#a8f4ff;text-shadow:0 0 12px rgba(110,235,255,.8);}
 .clockc.urgent{color:var(--danger);}
 .teamc{font-size:10px;font-weight:700;letter-spacing:.16em;padding:3px 6px 2px;background:var(--ink);color:var(--night);}
 .lobinfo{display:block;margin-top:6px;letter-spacing:.2em;color:var(--pc)!important;}
@@ -253,6 +254,7 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
     <button class="primary" id="joinBtn" type="submit" disabled>JOIN</button>
   </form>
   <p class="note">The four-letter code is on the game screen. Scanning its QR code fills this in for you. Phones connect best on the same Wi-Fi as the game screen.</p>
+  <button class="ghost" id="playHere" type="button">NO COMPUTER? PLAY ON THIS PHONE</button>
   <button class="ghost fsbtn" type="button">FULL SCREEN</button>
 </section>
 
@@ -294,7 +296,7 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
         <div class="hrow"><span class="hstep"><small class="hlab">HOW MANY</small><button class="hbtn sq" type="button" data-a="cpu" data-d="-1" aria-label="Fewer bots">−</button><b id="hCpu">0</b><button class="hbtn sq" type="button" data-a="cpu" data-d="1" aria-label="More bots">+</button></span>
           <span class="hstep"><small class="hlab">DIFFICULTY</small><button class="hbtn sq" type="button" data-a="cpulvl" data-d="-1" aria-label="Easier bots">−</button><b id="hLv">5</b><button class="hbtn sq" type="button" data-a="cpulvl" data-d="1" aria-label="Harder bots">+</button></span></div></div>
       <div class="hsec"><div class="hh"><span>MATCH</span></div>
-        <div class="hrow"><div class="hseg" id="hMode"><button type="button" data-a="modeset" data-d="0">LIVES</button><button type="button" data-a="modeset" data-d="1">TIMED</button></div>
+        <div class="hrow"><div class="hseg" id="hMode"><button type="button" data-a="modeset" data-d="0">LIVES</button><button type="button" data-a="modeset" data-d="1">TIMED</button><button type="button" data-a="modeset" data-d="2">DIAMOND</button></div>
           <span class="hstep"><button class="hbtn sq" type="button" data-a="count" data-d="-1" aria-label="Less">−</button><b id="hCount">3 LIVES</b><button class="hbtn sq" type="button" data-a="count" data-d="1" aria-label="More">+</button></span></div>
         <div class="hrow"><div class="hseg" id="hTeams"><button type="button" data-a="teamset" data-d="0">FREE-FOR-ALL</button><button type="button" data-a="teamset" data-d="1">TEAMS</button></div><button class="hbtn" type="button" data-a="pair" id="hPair" hidden>AUTO TEAMS</button></div>
         <div class="hteams" id="hTeamsSum"></div></div>
@@ -557,7 +559,7 @@ function onData(d){
       $('meTag').textContent=S.tag; $('pTag').textContent=S.tag;
       renderLobby(); keepAwake(); trapBack(); vib([20,40,20]);
       break; }
-    case 'lobby': setLo(d.lo); setMk(d.mk); S.tank=d.tank|0; S.ready=!!d.ready; S.lteam=typeof d.team==='number'?d.team:-1; S.lmode=d.mode==='time'?'time':'stock'; S.lmins=d.mins|0; S.llives=d.lives|0; S.host=!!d.host; S.cfg=d.cfg&&typeof d.cfg==='object'?d.cfg:null; S.teamsOn=!!d.teamsOn; S.myTeam=d.myTeam|0; setCol(d.col); renderLobby(); break;
+    case 'lobby': setLo(d.lo); setMk(d.mk); S.tank=d.tank|0; S.ready=!!d.ready; S.lteam=typeof d.team==='number'?d.team:-1; S.lmode=['time','gem'].includes(d.mode)?d.mode:'stock'; S.lmins=d.mins|0; S.llives=d.lives|0; S.host=!!d.host; S.cfg=d.cfg&&typeof d.cfg==='object'?d.cfg:null; S.teamsOn=!!d.teamsOn; S.myTeam=d.myTeam|0; setCol(d.col); renderLobby(); break;
     case 'phase': setPhase(d); break;
     case 'hud': S.hud=d; renderHud(); break;
     case 'buzz': if(Array.isArray(d.p)) vib(d.p.slice(0,10)); if(d.s) phoneSound(String(d.s)); break;
@@ -584,7 +586,7 @@ function setPhase(d){
     S.wasSudden=false;
     const win=typeof d.win==='number'?d.win:-1, me=win===S.slot, wt=typeof d.winTeam==='number'?d.winTeam:-1;
     if(wt>=0){ const mine=d.team===wt; $('rTitle').textContent=mine?'YOUR TEAM WINS!':String(d.winTeamName||'TEAM')+' WINS'; $('rSub').textContent=String(d.winTeamTags||'')+(mine?' · Nice teamwork.':''); }
-    else { $('rTitle').textContent=win<0?'DRAW':me?'YOU WIN!':(String(d.winTag||'')+' WINS'); $('rSub').textContent=win<0?'Nobody left standing.':me?(d.timed?'Top score.':'Last tank standing.'):(d.winTank?'Piloting '+d.winTank+'.':''); }
+    else { $('rTitle').textContent=win<0?'DRAW':me?'YOU WIN!':(String(d.winTag||'')+' WINS'); $('rSub').textContent=win<0?'Nobody left standing.':me?(d.gem?'Held the diamond the longest.':d.timed?'Top score.':'Last tank standing.'):(d.winTank?'Piloting '+d.winTank+'.':''); }
     show('vResult');
   }
 }
@@ -639,8 +641,8 @@ function renderLobby(){
   const wl=$('wpnPick'), wh=WPN.map((n,i)=>'<button type="button" class="wcard" data-w="'+i+'" aria-pressed="'+S.lo.includes(i)+'"><b><i>'+n.split(' ')[0]+'</i>'+esc(n.slice(n.indexOf(' ')+1))+'</b><small>'+WINFO[i]+'</small>'+(S.lo[0]===i?'<em>START</em>':'')+'</button>').join('');
   if(wl._h!==wh){ wl._h=wh; wl.innerHTML=wh; }
   const rb=$('readyBtn'); rb.textContent=S.ready?'READY ✓ · TAP TO UNDO':'READY UP'; rb.classList.toggle('on',S.ready);
-  const C=S.cfg, cnt=C&&C.cnt?String(C.cnt):S.lmode==='time'?(S.lmins||3)+' MIN':(S.llives||3)+' LIVES';
-  const info=[S.lteam>=0?TEAMN[S.lteam]+' TEAM':'',C&&C.an?String(C.an).toUpperCase():'',S.lmode==='time'?'TIMED · '+cnt:cnt].filter(Boolean).join(' · '); setTxt($('lobInfo'),info);
+  const C=S.cfg, cnt=C&&C.cnt?String(C.cnt):S.lmode!=='stock'?(S.lmins||3)+' MIN':(S.llives||3)+' LIVES';
+  const info=[S.lteam>=0?TEAMN[S.lteam]+' TEAM':'',C&&C.an?String(C.an).toUpperCase():'',S.lmode==='time'?'TIMED · '+cnt:S.lmode==='gem'?'DIAMOND · '+cnt:cnt].filter(Boolean).join(' · '); setTxt($('lobInfo'),info);
   const host=S.host&&!!C; if(!host) S.tab='tank'; const setup=host&&S.tab==='setup';
   $('lTabs').hidden=!host; $('lTabs').querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===S.tab)));
   $('paneTank').hidden=setup; $('hostBox').hidden=!setup; $('toSetup').hidden=!host; $('hostStart').hidden=!host;
@@ -652,7 +654,7 @@ function renderLobby(){
     const hf=$('hFam'); if(hf._h!==fh){ hf._h=fh; hf.innerHTML=fh; }
     setTxt($('hArena'),String(C.an||'')); setTxt($('hDesc'),String(C.ad||''));
     const press=(id,i)=>$(id).querySelectorAll('button').forEach((b,k)=>b.setAttribute('aria-pressed',String(k===i)));
-    press('hSize',C.szi|0); press('hAm',C.am|0); press('hMode',C.mode==='time'?1:0); press('hTeams',C.teams?1:0);
+    press('hSize',C.szi|0); press('hAm',C.am|0); press('hMode',Math.max(0,['stock','time','gem'].indexOf(C.mode))); press('hTeams',C.teams?1:0);
     const pn=Array.isArray(C.pwn)?C.pwn:[], ph=pn.map((n,k)=>'<button type="button" data-a="pwrset" data-d="'+k+'" aria-pressed="'+((C.pwl|0)===k)+'">'+esc(n)+'</button>').join('');
     const hp=$('hPwr'); if(hp._h!==ph){ hp._h=ph; hp.innerHTML=ph; } press('hPwr',C.pwl|0);
     const pk=Array.isArray(C.pk)?C.pk:[], pkn=Array.isArray(C.pkn)?C.pkn:[], kh=pkn.map((n,k)=>'<button type="button" data-a="pwrk" data-d="'+k+'" aria-pressed="'+(!!pk[k])+'">'+esc(n)+'</button>').join('');
@@ -790,7 +792,7 @@ function renderHud(){
     const ml=clamp(h.ml|0||3,1,9); if(H.ml!==ml){ H.ml=ml; H.livesBox.innerHTML=ml<=5?'<i></i>'.repeat(ml):'<i></i><b></b>'; H.lives=Array.from(H.livesBox.querySelectorAll('i')); H.livesN=H.livesBox.querySelector('b'); }
     if(H.livesN) setTxt(H.livesN,'×'+(h.lives|0)); else H.lives.forEach((el,i)=>setCls(el,'lost',i>=(h.lives|0)));
     const tm=!!h.timed; if(H.livesBox.hidden!==tm) H.livesBox.hidden=tm; if(H.score.hidden===tm) H.score.hidden=!tm; if(H.clock.hidden===tm) H.clock.hidden=!tm;
-    if(tm){ const sc=h.sc|0, tl=Math.max(0,h.tl|0); setTxt(H.score,(sc>0?'+':'')+sc); setTxt(H.clock,Math.floor(tl/60)+':'+String(tl%60).padStart(2,'0')); setCls(H.clock,'urgent',tl<=10); }
+    if(tm){ const sc=h.sc|0, tl=Math.max(0,h.tl|0); setTxt(H.score,typeof h.gm==='number'?'◆ '+Math.floor(h.gm/60)+':'+String(h.gm%60).padStart(2,'0'):(sc>0?'+':'')+sc); setCls(H.score,'gem',!!h.gc); setTxt(H.clock,Math.floor(tl/60)+':'+String(tl%60).padStart(2,'0')); setCls(H.clock,'urgent',tl<=10); }
     const team=typeof h.team==='number'&&h.team>=0; if(H.team.hidden===team) H.team.hidden=!team; if(team) setTxt(H.team,(TEAMN[h.team]||'')+' TEAM');
     setW(H.fuel,(clamp(+h.fuel||0,0,1)*100).toFixed(0)+'%');
     const rl=clamp(+h.rl||0,0,1); setTxt(H.rl,rl>0.02?'RELOAD':'READY'); setCls(H.rl,'ready',rl<=0.02); setW(H.rlb,((1-rl)*100).toFixed(0)+'%');
@@ -809,6 +811,7 @@ function renderHud(){
 
 // ---------- start ----------
 const pre=(new URLSearchParams(location.search).get('room')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4);
+$('playHere').addEventListener('click',()=>{ const c=($('codeIn').value||'').toUpperCase().replace(/[^A-Z]/g,''); location.href='index.html?'+(c.length===4?'join='+c+'&':'')+'touch=1'; });
 const last=(store.get('salvo-ol-last-room')||'').replace(/[^A-Z]/g,'').slice(0,4);
 let sess=''; try{ sess=(sessionStorage.getItem('salvo-ol-auto')||'').slice(0,4); }catch(e){}
 // strip ?room= from the address: a home-screen shortcut saved from here then opens the join screen instead of an old game

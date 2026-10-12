@@ -46,7 +46,7 @@ The host's screen works like the local game's big screen. To make it follow your
 
 Guests can't change the arena or settings; the host picks those. If a match is already running when you join, you watch it and join the next one.
 
-Guests need a keyboard, so join from a computer. A phone can't be a full guest on its own, but it can be a guest's controller (see below).
+Guests usually join from a computer. A phone can join on its own too (see *No computer? Play on your phone*), or be a guest's controller (see below).
 
 ### Guest keys
 
@@ -63,6 +63,10 @@ Guests need a keyboard, so join from a computer. A phone can't be a full guest o
 | Camera: your tank or the whole battle | V | |
 | Menu (volume, camera, leave) | Esc | |
 | Mute | M | |
+
+### No computer? Play on your phone
+
+Someone with only a phone can still join an online game. Open the game's address on the phone (or tap **NO COMPUTER? PLAY ON THIS PHONE** on the phone controller page), type the room code and tap **JOIN**. The phone shows the game itself, following your tank, with the same touch controls as the phone controller on top: left thumb drives (push up to jet, pull down to drop), right thumb drags to aim and lets go to fire, plus the **BOMB**, weapon-swap and air-strike buttons. **MENU** (top right) has the camera, keys and leave options, and **⤢ FULL** goes full screen. Turn the phone sideways to play. Your thumbs cover part of a small screen, so a computer (or a phone used as a controller next to a computer) is still the better way to play; this is for when there's no computer around.
 
 ### Change any key, or aim with the mouse
 
@@ -91,7 +95,8 @@ Click **+ Add CPU** in the CPUs panel on the right to add a computer-controlled 
 
 ### Match settings
 
-- **Mode · Lives / Timed:** a set number of lives each, last one standing wins; or a timed match. The **− / +** buttons set the lives (1 to 9) or the minutes (1 to 10). In a timed match you respawn every time, score **+1 for every tank you knock out and −1 each time you go down** (including falling off), and the highest score when time runs out wins. If it's tied, the tied players go into **sudden death**: low health, and the next knockout wins.
+- **Mode · Lives / Timed / Diamond:** a set number of lives each, last one standing wins; or a timed match. The **− / +** buttons set the lives (1 to 9) or the minutes (1 to 10). In a timed match you respawn every time, score **+1 for every tank you knock out and −1 each time you go down** (including falling off), and the highest score when time runs out wins. If it's tied, the tied players go into **sudden death**: low health, and the next knockout wins.
+- **Mode · Diamond:** hold the diamond for as long as you can. A glowing diamond drops in at the top of the arena; drive into it to grab it, and your clock (on your card) runs for as long as you carry it. Getting knocked out drops it: it pops out and rolls around until someone else picks it up. If it falls off the map (or into rising lava), it comes back at the top. Every attack does **double damage** in this mode, so the diamond changes hands a lot. You respawn every time, and the **− / +** buttons set the length (1 to 10 minutes). When time runs out, the player (or team, adding up its players' times) who held it the longest wins. If it's tied, the match goes to **overtime** and the next one to take the lead wins. CPUs go after the diamond and its carrier too.
 - **Teams · Free-for-all / Teams:** with Teams on, each player is on the red, blue, green or gold team, and everyone on a team drives that colour. Teams can be any size (1 against 3 is fine). New players join the smaller of red and blue; click the team badge on a player's card to move them, or players can tap **TEAM · SWITCH** on their phone. **Auto** splits everyone evenly between red and blue. Teammates can't hurt each other. When two or more real players (not CPUs) are on the same team, each one gets a coloured dot and their tag in their own player colour (on their card, above their tank and on the phone), so teammates can tell each other apart while their tanks stay the team colour.
 - **Power-ups:** click it to open a small panel: how often power-ups fall (Off, Low, Normal, High or Chaos) and which kinds can drop (at least one stays on). See *Power-ups*.
 - **Sound:** the gear icon at the top right has the music and effects volume. They're also on the pause screen, and M mutes everything.
@@ -101,7 +106,7 @@ Click **+ Add CPU** in the CPUs panel on the right to add a computer-controlled 
 The first phone to join is the host (its name plate says HOST). Once everyone has joined, nobody needs to touch the computer. The host's phone has two tabs so it never gets crowded:
 
 - **1 · Your tank:** pick your two weapons and your tank, like every other phone. **Next · Match setup** at the bottom takes you to the second tab.
-- **2 · Match setup:** the arena type, the arena size, the map type (Regular, Bounce or Active), how often power-ups drop and which kinds, how many bots and how hard they are, lives or timed, and teams.
+- **2 · Match setup:** the arena type, the arena size, the map type (Regular, Bounce or Active), how often power-ups drop and which kinds, how many bots and how hard they are, the mode (lives, timed or diamond), and teams.
 - **Start match** starts right away, even if not everyone has tapped ready.
 - **During a match**, the host has a **MENU** button in the top-right corner. It pauses the game and offers **RESUME** or **END MATCH · MAIN MENU**.
 - **After a match**, the host gets **REMATCH** and **MAIN MENU** buttons.

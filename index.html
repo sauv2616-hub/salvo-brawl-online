@@ -75,6 +75,11 @@ button{font:inherit;color:inherit;}
 .score{font-family:var(--display);font-weight:600;font-size:34px;line-height:.8;padding-bottom:2px;color:var(--pc);font-variant-numeric:tabular-nums;}
 .pc-team{font-size:9px;font-weight:700;letter-spacing:.16em;padding:2px 5px 1px;background:var(--ink);color:var(--night);white-space:nowrap;}
 .matchclock.urgent{color:var(--danger);font-size:30px;}
+.gemline{position:absolute;top:calc(env(safe-area-inset-top,0px) + 50px);left:50%;transform:translateX(-50%);display:flex;gap:14px;font-size:11px;font-weight:700;letter-spacing:.16em;color:#a8f4ff;white-space:nowrap;text-shadow:0 1px 6px rgba(0,0,0,.7);}
+.gemline[hidden]{display:none;}
+.gemline b{font-weight:700;}
+.pc.gem{box-shadow:inset 0 0 0 2px #8ff3ff,0 0 22px rgba(110,235,255,.5);}
+.pc.gem .score{color:#a8f4ff;}
 .hpbar{position:relative;height:8px;margin-top:6px;background:rgba(255,255,255,.08);overflow:hidden;transform:skewX(-18deg);}
 .hp-ghost,.hp-fill{position:absolute;top:0;bottom:0;left:0;width:100%;}
 .hp-ghost{background:#fff;transition:width .8s cubic-bezier(.3,.7,.2,1) .45s;}
@@ -423,6 +428,54 @@ span.s-team{cursor:default;}
 #olLost{position:absolute;left:50%;top:20px;transform:translateX(-50%);z-index:9;display:flex;gap:14px;align-items:center;max-width:min(600px,calc(100% - 32px));padding:12px 16px;background:var(--panel);border-top:2px solid var(--danger);font-size:14px;line-height:1.45;color:var(--ink);}
 #olLost[hidden]{display:none;}
 @media (max-width:760px){ .ochoices{grid-template-columns:1fr;} }
+@media (max-width:640px){ .lb-top{flex-wrap:wrap;row-gap:8px;} .ol-badge{order:3;flex-basis:100%;margin:0;text-align:center;} }
+/* ---------- playing on a phone with no computer ---------- */
+.phone-note{display:none;margin:0;padding:8px 10px;font-size:12.5px;line-height:1.45;color:var(--ink);background:rgba(255,208,74,.08);border-left:3px solid var(--alert);}
+#app.phone .phone-note{display:block;}
+#app.phone .ochoice.host-card{display:none;}
+#app.touch #globby .joincard,#app.touch #globby .lb-foot,#app.touch [data-pop="gHelpPop"]{display:none;}
+#app.touch #globby .lb-top{grid-row:1;grid-column:1/-1;}
+#app.touch #globby .lb-stage{grid-row:2;grid-column:1/-1;}
+#app.touch #globby .lb-left{grid-row:3;grid-column:1;}
+#app.touch #globby .lb-right{grid-row:3;grid-column:2;}
+#app.touch #globby .lobby{padding-bottom:86px;}
+#app.touch #globby .lb-start{position:fixed;z-index:4;left:calc(env(safe-area-inset-left,0px) + 12px);right:calc(env(safe-area-inset-right,0px) + 12px);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);flex-direction:row;align-items:center;gap:12px;padding:8px 10px;background:rgba(8,11,22,.92);border-top:2px solid var(--alert);}
+#app.touch #globby .lb-start .btn.primary{flex:1;font-size:22px;padding:12px 14px 9px;}
+#app.touch #globby .lb-start .start-note{flex:1;text-align:left;}
+@media (max-width:640px){ #app.touch #globby .lb-left,#app.touch #globby .lb-right{grid-column:1/-1;grid-row:auto;} }
+#app.touch .cards{top:calc(env(safe-area-inset-top,0px) + 2px);bottom:auto;left:0;right:0;transform:scale(.5);transform-origin:top center;}
+#app.touch .matchclock{top:calc(env(safe-area-inset-top,0px) + 6px);left:calc(env(safe-area-inset-left,0px) + 12px);transform:none;font-size:18px;}
+#app.touch .matchclock.urgent{font-size:20px;}
+#app.touch .gemline{top:calc(env(safe-area-inset-top,0px) + 30px);left:calc(env(safe-area-inset-left,0px) + 12px);transform:none;font-size:9px;}
+#app.touch #roomChip{display:none !important;}
+#tpad{position:absolute;inset:0;z-index:5;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}
+#tpad[hidden]{display:none;}
+.tp-stick{position:absolute;left:0;top:0;border-radius:50%;border:2px solid rgba(255,255,255,.28);background:rgba(10,14,28,.22);pointer-events:none;}
+.tp-stick[hidden]{display:none;}
+.tp-stick i{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 0 0 2px rgba(255,255,255,.25);}
+.tp-stick.jet i{background:var(--alert);}
+.tp-aim{position:absolute;left:0;top:0;pointer-events:none;}
+.tp-aim[hidden]{display:none;}
+.tp-aimbase{position:absolute;border-radius:50%;border:2px dashed rgba(255,255,255,.3);}
+.tp-aimline{position:absolute;left:0;top:-2px;height:4px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,255,255,.2),#fff);border-radius:2px;}
+.tp-aim.bomb .tp-aimline{background:linear-gradient(90deg,rgba(255,180,60,.2),#ffb43c);}
+.tp-aimtxt{position:absolute;left:-80px;top:-64px;width:160px;text-align:center;font-family:var(--display);font-size:20px;letter-spacing:.06em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.8);}
+.tp-btn,.tp-chip{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-sizing:border-box;border:2px solid rgba(255,255,255,.3);background:rgba(10,14,28,.5);color:#fff;font-weight:700;letter-spacing:.12em;pointer-events:none;}
+.tp-btn[hidden],.tp-chip[hidden]{display:none;}
+.tp-btn small{font-size:7.5px;letter-spacing:.12em;opacity:.75;}
+.tp-btn.hit,.tp-chip.hit{background:rgba(255,208,74,.35);border-color:var(--alert);}
+.tp-bomb{right:calc(env(safe-area-inset-right,0px) + 22px);bottom:calc(env(safe-area-inset-bottom,0px) + 20px);width:92px;height:92px;border-radius:50%;font-size:13px;}
+.tp-wpn{right:calc(env(safe-area-inset-right,0px) + 26px);bottom:calc(env(safe-area-inset-bottom,0px) + 126px);min-width:96px;height:44px;padding:0 10px;border-radius:8px;font-size:12px;}
+.tp-wpn b{font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:.04em;line-height:1;}
+.tp-strike{right:calc(env(safe-area-inset-right,0px) + 128px);bottom:calc(env(safe-area-inset-bottom,0px) + 30px);height:52px;padding:0 14px;border-radius:26px;font-size:12px;border-color:#ff5a4a;background:rgba(120,20,16,.6);}
+.tp-launch{left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);height:64px;padding:0 34px;border-radius:32px;font-size:18px;border-color:#ff5a4a;background:rgba(200,40,30,.75);}
+.tp-chip{top:calc(env(safe-area-inset-top,0px) + 8px);height:34px;padding:0 12px;border-radius:17px;font-size:10px;}
+.tp-menu{right:calc(env(safe-area-inset-right,0px) + 10px);}
+.tp-fs{right:calc(env(safe-area-inset-right,0px) + 88px);}
+.tp-hint{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);transform:translateX(-50%);font-size:8.5px;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.55);white-space:nowrap;pointer-events:none;}
+#tpad.dead .tp-hint::after{content:" · WAITING TO RESPAWN";color:var(--alert);}
+#tpRotate{position:absolute;inset:0;z-index:8;display:grid;place-items:center;padding:24px;background:rgba(6,8,15,.92);font-family:var(--display);font-size:30px;letter-spacing:.08em;text-align:center;}
+#tpRotate[hidden]{display:none;}
 @media (min-width:1001px) and (max-width:1440px){
   .lobby{grid-template-columns:288px minmax(0,1fr) 262px;gap:12px 18px;}
 }
@@ -448,7 +501,10 @@ span.s-team{cursor:default;}
   .small-note{font-size:11px;}
 }
 @media (max-width:1000px){
-  .lobby{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto auto;}
+  .lobby{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:none;grid-auto-rows:auto;min-height:0;}
+  .lb-left,.lb-right,.lb-stage{min-height:auto;}
+  .lb-stage{padding-top:8px;}
+  .hero .s-view{height:clamp(150px,36vh,300px);}
   .lb-left{grid-column:1;grid-row:2;}
   .lb-right{grid-column:2;grid-row:2;}
   .lb-stage{grid-column:1/-1;grid-row:3;}
@@ -457,6 +513,7 @@ span.s-team{cursor:default;}
 @media (max-width:640px){
   .lobby{grid-template-columns:minmax(0,1fr);}
   .lb-left,.lb-right,.lb-stage{grid-column:1;grid-row:auto;}
+  .lb-top{order:-1;} .lb-stage{order:1;} .lb-right{order:2;} .lb-left{order:3;} .lb-foot{order:4;}
   .controls{grid-template-columns:1fr;}
   #victory{background:rgba(6,8,15,.88);}
   .cards{gap:6px;left:8px;right:8px;}
@@ -476,6 +533,7 @@ span.s-team{cursor:default;}
 
   <div id="hud" hidden>
     <div class="matchclock" id="matchClock">0:00</div>
+    <div class="gemline" id="gemLine" hidden></div>
     <div class="notice" id="notice"></div>
     <div class="roomchip" id="roomChip" hidden>ROOM<b id="roomChipCode">----</b></div>
     <div id="tags"></div>
@@ -504,7 +562,7 @@ span.s-team{cursor:default;}
         <div class="setrow"><span class="opt-l">Map</span><div class="seg full" id="amodeSeg" role="group" aria-label="Map mode"><button type="button" data-am="regular">Regular</button><button type="button" data-am="bounce">Bounce</button><button type="button" data-am="active">Active</button></div></div>
         <p class="arena-desc" id="arenaDesc"></p>
         <h2 class="sec-h">Match</h2>
-        <div class="setrow"><span class="opt-l">Mode</span><div class="opt-c"><div class="seg" id="modeSeg" role="group" aria-label="Mode"><button type="button" data-mode="stock">Lives</button><button type="button" data-mode="time">Timed</button></div>
+        <div class="setrow"><span class="opt-l">Mode</span><div class="opt-c"><div class="seg" id="modeSeg" role="group" aria-label="Mode"><button type="button" data-mode="stock">Lives</button><button type="button" data-mode="time">Timed</button><button type="button" data-mode="gem" title="Hold the diamond the longest">Diamond</button></div>
           <span class="stepper" id="cntStep"><button class="btn sq" id="cntDn" type="button" aria-label="Fewer">−</button><b id="cntVal">3 lives</b><button class="btn sq" id="cntUp" type="button" aria-label="More">+</button></span></div></div>
         <div class="setrow"><span class="opt-l">Teams</span><div class="opt-c"><div class="seg" id="teamSeg" role="group" aria-label="Teams"><button type="button" data-teams="0">Free-for-all</button><button type="button" data-teams="1">Teams</button></div>
           <button class="btn small" id="pairBtn" type="button" hidden title="Split everyone evenly between red and blue">Auto</button></div></div>
@@ -614,7 +672,7 @@ span.s-team{cursor:default;}
       <div class="kicker">ONLINE · 2–8 PLAYERS · EVERYONE ON THEIR OWN SCREEN</div>
       <h1 class="logo"><span class="l1">Salvo</span><span class="l2"><b>ONLINE</b></span></h1>
       <div class="ochoices">
-        <div class="ochoice">
+        <div class="ochoice host-card">
           <h2>HOST A GAME</h2>
           <p>This computer runs the match and gets a 4-letter room code. Friends join from their own computers with the code. People in the room with you can also play here on the keyboard, a game controller or a phone.</p>
           <button class="btn primary" id="oHost" type="button">HOST A GAME</button>
@@ -622,6 +680,7 @@ span.s-team{cursor:default;}
         <form class="ochoice" id="oJoinForm" autocomplete="off">
           <h2>JOIN A GAME</h2>
           <p>Type the room code from the host’s screen. You play with your keyboard, or link your phone as the controller once you’re in.</p>
+          <p class="phone-note">On a phone with no computer? You can play right here: the game fills the screen and the touch controls sit on top. Turn the phone sideways. It’s cramped, so a computer or a phone controller is better when you have one.</p>
           <div class="ocode"><input id="oCode" type="text" inputmode="text" maxlength="4" placeholder="ABCD" spellcheck="false" autocapitalize="characters" aria-label="Room code"><button class="btn primary" id="oJoin" type="submit">JOIN</button></div>
         </form>
       </div>
@@ -709,6 +768,18 @@ span.s-team{cursor:default;}
     </div>
   </div>
 
+  <div id="tpad" hidden>
+    <div class="tp-stick" id="tpStick" hidden><i id="tpKnob"></i></div>
+    <div class="tp-aim" id="tpAim" hidden><div class="tp-aimbase" id="tpAimBase"></div><div class="tp-aimline" id="tpAimLine"></div><div class="tp-aimtxt" id="tpAimTxt"></div></div>
+    <div class="tp-btn tp-bomb" id="tpBomb">BOMB<small>DRAG · TAP: MINE</small></div>
+    <div class="tp-btn tp-wpn" id="tpWpn"><b id="tpWpnName">◆ MISSILE</b><small>TAP TO SWAP</small></div>
+    <div class="tp-btn tp-strike" id="tpStrike" hidden>◎ AIR STRIKE</div>
+    <div class="tp-btn tp-launch" id="tpLaunch" hidden>LAUNCH</div>
+    <div class="tp-chip tp-menu" id="tpMenu">MENU</div>
+    <div class="tp-chip tp-fs" id="tpFs">⤢ FULL</div>
+    <div class="tp-hint">LEFT: DRIVE · PUSH UP TO JET · RIGHT: DRAG TO AIM, LET GO TO FIRE</div>
+  </div>
+  <div id="tpRotate" hidden>TURN YOUR PHONE SIDEWAYS TO PLAY</div>
   <div id="olLost" role="alert" hidden><span>Lost the connection to the host. Reconnecting…</span><button class="btn small" id="lostLeave" type="button">LEAVE</button></div>
 
   <div id="boot"><div><div class="boot-logo">SALVO</div><div id="bootMsg">LOADING THE ARENA</div></div></div>
@@ -1890,6 +1961,7 @@ function actUpdate(dt){
 // ---------- what the map changes look like (runs on every screen) ----------
 let avMesh=null; const meteorMeshes=[];
 function mapVisual(dt){
+  gemVisual(dt);
   ventVisual(dt);
   const A=world.arena; if(!A) return;
   for(const p of A.platforms){ if(!p.mesh||!p.edgeMat) continue;
@@ -1920,6 +1992,80 @@ function cpuHazard(me,c){
   c.mx=Math.abs(best.cx-me.x)>0.5?Math.sign(best.cx-me.x):0; c.up=me.y<best.p.top+2.5; return true;
 }
 
+
+// =====================================================================
+// DIAMOND MODE: hold the diamond the longest. Going down drops it; it rolls until someone grabs it.
+// =====================================================================
+const GEM={on:false,x:0,y:0,vx:0,vy:0,car:null,cool:0,spin:0,ot:false,ground:false,mesh:null,beam:null,light:null};
+const GEM_R=0.55;
+function gemStart(){ GEM.on=!!G.gem; GEM.car=null; GEM.ot=false; G.tanks.forEach(t=>{ t.gemT=0; }); if(GEM.on) gemSpawn(false); }
+function gemStop(){ GEM.on=false; GEM.car=null; GEM.ot=false; }
+function gemSpawn(fx){ const R=world.arena.respawn; GEM.x=R[0]+rand(-2,2); GEM.y=R[1]+1.5; GEM.vx=rand(-4,4); GEM.vy=0; GEM.car=null; GEM.cool=0.4; GEM.ground=false; if(fx) gemFX(2,GEM.x,GEM.y,-1); }
+function gemPick(tk){ GEM.car=tk; GEM.cool=0; gemFX(0,tk.x,tk.y+2.4*tk.s,tk.p.slot); buzz(tk.p,[30,40,70],'power'); }
+function gemDrop(tk,lost){ GEM.car=null; if(lost){ gemSpawn(true); return; }
+  GEM.x=tk.x; GEM.y=tk.y+1.6*tk.s; GEM.vx=clamp(tk.vx*0.4+rand(-7,7),-12,12); GEM.vy=rand(9,13); GEM.cool=0.55; GEM.ground=false; gemFX(1,GEM.x,GEM.y,tk.p.slot); }
+// 0 picked up · 1 dropped · 2 back at the top (also replayed on online players' screens)
+function gemFX(kind,x,y,slot){
+  for(let i=0;i<(kind===1?40:28);i++){ const a=rand(0,TAU), sp=rand(3,11); addP.spawn({x,y,z:rand(-.4,.4),vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:rand(.35,.8),s0:rand(.2,.45),s1:.04,c0:[1.6,5.5,7],c1:[.3,1.2,1.6],a0:1,a1:0,drag:2.5}); }
+  spawnRing(x,y,0.6,kind===1?4:3,0.4,[2,6,8],false);
+  const t=G.tanks.find(q=>q.p.slot===slot);
+  if(kind===0){ notice('◆ '+(t?t.st.tag+' ':'')+'HAS THE DIAMOND'); SFX.gemGet(); }
+  else if(kind===1){ notice('◆ '+(t?t.st.tag+' ':'')+'DROPPED THE DIAMOND'); SFX.gemDrop(); }
+  else { notice('◆ THE DIAMOND IS BACK AT THE TOP'); SFX.gemBack(); }
+}
+function gemScores(){ const sc={}; for(const tk of G.tanks){ const k=groupKey(tk); sc[k]=(sc[k]||0)+(tk.gemT||0); } return sc; }
+function gemLeader(){ const sc=gemScores(); let best=-1, lead=[]; for(const k in sc){ const v=Math.round(sc[k]*10); if(v>best){ best=v; lead=[k]; } else if(v===best) lead.push(k); } return {lead,best:best/10}; }
+function gemEnd(L){ const win=G.tanks.filter(t=>groupKey(t)===L.lead[0]); endWith(win,false);
+  banner('TIME!',(G.winTeam>=0?TEAM_NAMES[G.winTeam]+' ('+teamTags(G.winTeam)+')':SLOTS[G.winner].tag)+' WINS · HELD THE DIAMOND '+fmtTime(L.best),'go',2.4); SFX.go(); }
+function gemTimeUp(){ const L=gemLeader(); if(L.lead.length===1&&L.best>0){ gemEnd(L); return; }
+  GEM.ot=true; banner('OVERTIME','TIED · THE NEXT TO TAKE THE LEAD WINS','go',2.2); SFX.go(); }
+function gemUpdate(dt){
+  if(!GEM.on||G.phase!=='battle'||dt<=0) return;
+  const A=world.arena, B=A.blast;
+  if(GEM.car){ const t=GEM.car;
+    if(!t.onField||t.wreck) gemDrop(t,t.y<B.y0+3||t.x<B.x0||t.x>B.x1||(ACT.lava!==null&&t.y<ACT.lava));
+    else { GEM.x=t.x; GEM.y=t.y+2.7*t.s; if(!G.ending) t.gemT=(t.gemT||0)+dt; } }
+  if(!GEM.car){
+    GEM.cool-=dt;
+    const px=GEM.x, py=GEM.y;
+    GEM.vy-=CFG.gT*ENV.g*dt; if(ENV.water) GEM.vy=Math.max(GEM.vy,-10);
+    GEM.vx+=envPush()*dt*0.6;
+    GEM.x+=GEM.vx*dt; GEM.y+=GEM.vy*dt; GEM.ground=false;
+    if(GEM.vy<=0) for(const p of world.live){ if(GEM.x>=p.x0&&GEM.x<=p.x1&&py-GEM_R>=p.top-0.05&&GEM.y-GEM_R<p.top){ GEM.y=p.top+GEM_R; if(GEM.vy<-6) GEM.vy=-GEM.vy*0.36; else { GEM.vy=0; GEM.ground=true; } break; } }
+    if(!GEM.ground&&groundHit(GEM.x,GEM.y)){ GEM.x=px; GEM.vx=-GEM.vx*0.45; }
+    if(GEM.ground) GEM.vx*=Math.max(0,1-dt*(ENV.grip<1?0.18:1.2));
+    if(A.floor!=null&&GEM.y-GEM_R<A.floor&&GEM.x>=A.floorX0&&GEM.x<=A.floorX1){ GEM.y=A.floor+GEM_R; GEM.vy=Math.max(16,-GEM.vy*0.85); }
+    GEM.spin+=GEM.vx*dt/GEM_R;
+    if(GEM.y<B.y0||GEM.x<B.x0||GEM.x>B.x1||(ACT.lava!==null&&GEM.y<ACT.lava)) gemSpawn(true);
+    else if(GEM.cool<=0) for(const tk of G.tanks){ if(!tk.onField) continue; const dx=tk.x-GEM.x, dy=tk.y+0.9*tk.s-GEM.y, r=1.7*tk.s+0.6; if(dx*dx+dy*dy<r*r){ gemPick(tk); break; } }
+  }
+  if(GEM.ot&&!G.ending){ const L=gemLeader(); if(L.lead.length===1&&L.best>0) gemEnd(L); }
+}
+// the leader (or the team totals) under the match clock
+function gemLine(){
+  const el=hudEls.gemLine||(hudEls.gemLine=$('gemLine')); const on=!!(G.gem&&GEM.on&&(G.phase==='battle'||G.phase==='countdown'));
+  if(el.hidden===on) el.hidden=!on; if(!on) return;
+  let h='';
+  if(G.teamMode){ const sc={}; G.tanks.forEach(t=>{ sc[t.team]=(sc[t.team]||0)+(t.gemT||0); }); h=Object.keys(sc).sort().map(k=>'<b style="color:'+TEAMS[k].color+'">'+TEAMS[k].name+'</b> ◆ '+fmtTime(sc[k])).join('<span>·</span>'); }
+  else { let best=null; G.tanks.forEach(t=>{ if(!best||(t.gemT||0)>(best.gemT||0)) best=t; }); h=GEM.car?'<b style="color:'+GEM.car.st.color+'">'+GEM.car.st.tag+'</b> HAS THE DIAMOND':'THE DIAMOND IS LOOSE'; if(best&&(best.gemT||0)>0) h+='<span>·</span><b style="color:'+best.st.color+'">'+best.st.tag+'</b> LEADS ◆ '+fmtTime(best.gemT); }
+  setT(el,'html',h);
+}
+function gemBuild(){
+  const m=new T.Mesh(new T.OctahedronGeometry(GEM_R*1.25,0),new T.MeshStandardMaterial({color:col('#c8fbff'),emissive:col('#2ee6ff'),emissiveIntensity:1.7,metalness:0.35,roughness:0.12,flatShading:true}));
+  m.scale.set(1,1.4,1); scene.add(m); GEM.mesh=m;
+  const b=new T.Mesh(new T.CylinderGeometry(0.32,0.5,16,14,1,true),new T.MeshBasicMaterial({color:col('#7ff3ff'),transparent:true,opacity:0.22,blending:T.AdditiveBlending,depthWrite:false,side:T.DoubleSide})); scene.add(b); GEM.beam=b;
+  const l=new T.PointLight(col('#6ff0ff'),2.4,13,2); scene.add(l); GEM.light=l;
+}
+function gemVisual(dt){
+  const show=GEM.on&&(G.phase==='battle'||G.phase==='countdown');
+  if(!GEM.mesh){ if(!show) return; gemBuild(); }
+  GEM.mesh.visible=show; GEM.beam.visible=show&&!GEM.car; GEM.light.visible=show; if(!show) return;
+  const held=!!GEM.car, bob=held?Math.sin(timeNow*3.2)*0.14:0.08;
+  GEM.mesh.position.set(GEM.x,GEM.y+bob,0); GEM.mesh.rotation.y+=dt*(held?2.4:1.0); GEM.mesh.rotation.z=held?0:-GEM.spin*0.6;
+  GEM.light.position.set(GEM.x,GEM.y+0.6,1.6); GEM.light.intensity=2.2+Math.sin(timeNow*5)*0.4;
+  GEM.beam.position.set(GEM.x,GEM.y+8,0); GEM.beam.material.opacity=0.16+0.08*Math.sin(timeNow*4);
+  if(dt>0&&Math.random()<dt*(held?16:24)) addP.spawn({x:GEM.x+rand(-.5,.5),y:GEM.y+rand(-.6,.6),z:rand(-.4,.4),vx:rand(-.6,.6),vy:rand(.4,1.8),life:rand(.4,.9),s0:rand(.12,.26),s1:.02,c0:[2,6,7.5],c1:[.4,1.4,1.8],a0:1,a1:0,drag:1});
+}
 // =====================================================================
 // TANK & MISSILE MESHES
 // =====================================================================
@@ -2524,6 +2670,9 @@ const SFX=(()=>{
     crumble(){ noise(1.1,0.35,'lowpass',700,90,0.9); tone(70,0.8,'sine',0.25,35); },
     reform(){ tone(300,0.4,'triangle',0.05,900); },
     shieldHit(){ tone(1800,0.18,'sine',0.08,900); noise(0.15,0.1,'highpass',5000,2000,2); },
+    gemGet(){ tone(880,0.12,'triangle',0.09); tone(1320,0.14,'triangle',0.08,null,0.07); tone(1760,0.24,'sine',0.08,null,0.14); noise(0.3,0.05,'highpass',7000,3000,2,0.1); },
+    gemDrop(){ tone(1400,0.34,'triangle',0.08,330); noise(0.22,0.06,'bandpass',3200,800,2); },
+    gemBack(){ tone(660,0.18,'sine',0.07,1320); tone(990,0.22,'sine',0.06,1980,0.1); },
     megaLaunch(){ noise(0.9,0.6,'lowpass',1600,120,0.8); tone(90,0.7,'sawtooth',0.3,30); },
     megaBoom(){ this.boom(1.6,2.2); tone(38,2.2,'sine',0.6,18,0.05); },
     starDrop(){ tone(1568,0.6,'sine',0.05,784); noise(0.8,0.06,'bandpass',3000,800,3); },
@@ -2815,11 +2964,13 @@ function knock(tk,x,y,base,att,self,cap){
 }
 // machine-gun hits land many times a second, so their damage numbers and phone buzz are bundled
 function hurtLight(tk,dmg,att){
+  if(G.gem) dmg*=2;
   tk.hp=Math.max(0,tk.hp-dmg); tk.flash=Math.max(tk.flash,0.45); tk.lastHit={by:att,t:G.matchT}; att.p.stats.dealt+=dmg;
   if(!(tk.mgAcc>0)) tk.mgT=0.35; tk.mgAcc=(tk.mgAcc||0)+dmg; tk.mgBy=att.p.slot;
   if(tk.hp<=0) destroyTank(tk,att);
 }
 function hurt(tk,dmg,att,direct,label){
+  if(G.gem) dmg=Math.round(dmg*2);
   tk.hp=Math.max(0,tk.hp-dmg); tk.flash=1; tk.lastHit={by:att,t:G.matchT};
   att.p.stats.dealt+=dmg; if(direct) att.p.stats.direct++;
   popupWorld(tk.x,tk.y+2.5*tk.s,'−'+dmg,label||(direct?'DIRECT HIT':null),att.p.slot,direct?'direct':'');
@@ -2880,9 +3031,9 @@ function loseLife(tk,cause,by){
   const byOther=killer&&killer!==tk;
   if(byOther) killer.p.stats.kos++;
   if(cause==='fell') tk.p.stats.falls++;
-  if(timed){ tk.score--; if(byOther) killer.score++; }
+  if(timed&&!G.gem){ tk.score--; if(byOther) killer.score++; }
   const how=byOther?('KO BY '+killer.st.tag+' '+killer.cls.name):(cause==='fell'?'FELL OFF THE MAP':'DESTROYED');
-  if(timed){ tk.respawnT=CFG.respawnDelay; banner(tk.st.tag+' DOWN',how+' · −1'+(byOther?' · '+killer.st.tag+' +1':''),'down p'+(tk.p.slot+1),1.5); }
+  if(timed){ tk.respawnT=CFG.respawnDelay; banner(tk.st.tag+' DOWN',G.gem?how+(GEM.car===tk?' · DIAMOND DROPPED':''):how+' · −1'+(byOther?' · '+killer.st.tag+' +1':''),'down p'+(tk.p.slot+1),1.5); }
   else if(tk.lives>0){ tk.respawnT=CFG.respawnDelay; banner(tk.st.tag+' DOWN',how+' · '+tk.lives+(tk.lives===1?' LIFE':' LIVES')+' LEFT','down p'+(tk.p.slot+1),1.5); }
   else { tk.out=true; banner(tk.st.tag+' IS OUT',how,'down p'+(tk.p.slot+1),1.8); }
   buzz(tk.p,[90,40,160],'ko'); if(byOther) buzz(killer.p,[20,30,20],'kill'); SFX.ko();
@@ -2900,6 +3051,7 @@ function endWith(alive,ko){
   else { G.winner=alive[0].p.slot; G.winTeam=-1; }
 }
 function timeUp(){
+  if(G.gem){ if(!GEM.ot) gemTimeUp(); return; }
   const sc={}; for(const tk of G.tanks){ const k=groupKey(tk); sc[k]=(sc[k]||0)+tk.score; }
   const best=Math.max(...Object.values(sc)), leaders=Object.keys(sc).filter(k=>sc[k]===best);
   if(leaders.length===1){ const win=G.tanks.filter(t=>groupKey(t)===leaders[0]); endWith(win,false);
@@ -3208,7 +3360,7 @@ function syncLobbyTanks(){
 function resetPlatforms(){ const A=world.arena; if(!A.crumble) return; A.platforms.forEach(p=>{ if(!p.crumble) return; p.gone=false; p.crT=0; p.goneT=0; p.rise=0; if(p.mesh){ p.mesh.visible=true; p.mesh.position.set(0,0,0); } }); world.live=A.platforms.slice(); }
 function enterLobby(){
   resetPlatforms();
-  actReset();
+  actReset(); gemStop();
   G.phase='lobby'; G.pt=0; G.paused=false; G.ending=false; G.slow=0; G.ts=1; G.tsTarget=1; G.timers=[]; G.autoT=0;
   clearProjectiles(); clearFX();
   G.players.forEach(p=>{ if(p){ p.ready=false; p.pending=false; } });
@@ -3220,9 +3372,9 @@ function clearMissiles(){ G.missiles.forEach(retireMissile); G.missiles=[]; }
 function startCountdown(){
   const ps=G.players.filter(Boolean); if(ps.length<2) return;
   ps.forEach(p=>{ p.pending=false; p.ready=false; p.stats=mkStats(); }); actReset();
-  G.teamMode=teamsActive(); G.timed=G.mode==='time'; G.timeLeft=G.mins*60; G.sudden=false; G.winTeam=-1;
+  G.teamMode=teamsActive(); G.timed=G.mode==='time'||G.mode==='gem'; G.gem=G.mode==='gem'; G.timeLeft=G.mins*60; G.sudden=false; G.winTeam=-1;
   clearProjectiles(); clearFX(); clearTanks(); resetPlatforms();
-  G.tanks=ps.map(p=>makeTank(p)); G.pwrNext=pwrGap(true);
+  G.tanks=ps.map(p=>makeTank(p)); G.pwrNext=pwrGap(true); gemStart();
   G.phase='countdown'; G.pt=0; G.cdStep=-1; G.matchT=0; G.ending=false; G.winner=-1; G.slow=0; G.ts=1; G.tsTarget=1; G.paused=false; G.timers=[]; G.koFocus=0;
   showScreen(null); $('hud').hidden=false; buildCards(); buildTags();
   broadcastPhase(); SFX.init();
@@ -3290,7 +3442,7 @@ function cpuControls(p){
   if(B.tk!==me){ B.tk=me; B.cool=rand(0.8,1.6); B.target=null; }
   B.think-=dt; B.cool-=dt; B.dodge-=dt; B.wpnT-=dt; B.bombT-=dt; B.strikeT-=dt; B.jumpT-=dt;
   if(B.think<=0||!B.target||!B.target.onField){ B.think=S.think*rand(0.7,1.3); let best=null,bs=1e9;
-    for(const t of G.tanks){ if(t===me||!t.onField||ally(t,me)) continue; const d=Math.hypot(t.x-me.x,(t.y-me.y)*1.3)-S.k*(1-t.hp/t.maxHp)*8; if(d<bs){ bs=d; best=t; } } B.target=best; }
+    for(const t of G.tanks){ if(t===me||!t.onField||ally(t,me)) continue; const d=Math.hypot(t.x-me.x,(t.y-me.y)*1.3)-S.k*(1-t.hp/t.maxHp)*8-(GEM.on&&GEM.car===t?30:0); if(d<bs){ bs=d; best=t; } } B.target=best; }
   const foe=B.target;
   // aiming an air strike: steer the target onto the enemy (sloppier at low levels), then launch
   if(me.aiming){ const A=me.aiming; if(foe){ const tx=foe.x+B.aimOff, ty=foe.y+1; c.mx=clamp((tx-A.x)/2.5,-1,1); c.my=clamp((ty-A.y)/2.5,-1,1); if(Math.abs(tx-A.x)<1.2&&Math.abs(ty-A.y)<1.2) B.still+=dt; else B.still=0; if(B.still>0.25||A.t>5) c.strike=true; } else if(A.t>2) c.strike=true; return c; }
@@ -3305,9 +3457,9 @@ function cpuControls(p){
   if(foe&&B.wpnT<=0&&!me.mega&&!me.seek){ B.wpnT=rand(3,7); const d=Math.hypot(foe.x-me.x,foe.y-me.y);
     const L=me.loadout||[0,1], pref=d<10?[1,0,3,2]:d>26?[2,0,3,1]:Math.random()<0.3?[3,0,2,1]:[0,3,2,1];
     if(p.level>=4){ c.weapon=pref.find(k=>L.includes(k)); } else if(B.w0===undefined){ B.w0=L[Math.random()<0.7?0:1]; c.weapon=B.w0; } }
-  const W=shotDef(me), want=W.auto?8:W.key==='sniper'?26:W.key==='bazooka'?18:W===SEEKER?20:15;
+  const W=shotDef(me), want=(W.auto?8:W.key==='sniper'?26:W.key==='bazooka'?18:W===SEEKER?20:15)+(GEM.on&&GEM.car===me?14:0);
   // movement: power-ups first when they're close, otherwise keep the weapon's range from the target
-  let goal=null; if(G.pwr&&G.pwr.state==='ground'&&S.k>0.15){ const d=Math.abs(G.pwr.x-me.x)+Math.abs(G.pwr.y-me.y)*1.5; if(d<lerp(10,32,S.k)) goal=G.pwr; }
+  let goal=GEM.on&&!GEM.car?GEM:null; if(!goal&&G.pwr&&G.pwr.state==='ground'&&S.k>0.15){ const d=Math.abs(G.pwr.x-me.x)+Math.abs(G.pwr.y-me.y)*1.5; if(d<lerp(10,32,S.k)) goal=G.pwr; }
   let mv=0;
   if(goal){ if(Math.abs(goal.x-me.x)>0.6) mv=Math.sign(goal.x-me.x); if(goal.y>me.y+2.5&&me.grounded&&B.jumpT<=0){ c.up=true; B.jumpT=0.6; } }
   else if(foe){ const dx=foe.x-me.x, dist=Math.abs(dx); if(dist>want+4) mv=Math.sign(dx); else if(dist<want-5) mv=-Math.sign(dx);
@@ -3316,7 +3468,8 @@ function cpuControls(p){
   // high levels hop over missiles that are about to hit them
   if(S.dodge>0.3&&me.grounded) for(const m of G.missiles){ if(!m.alive||m.owner===me||ally(m.owner,me)||m.bullet) continue; const dx=me.x-m.x, dy=me.y+0.8-m.y; if(Math.abs(dx)<7&&Math.abs(dy)<3&&dx*m.vx>0&&Math.random()<S.dodge*dt*12){ c.up=true; B.jumpT=0.35; break; } }
   if(B.jumpT>0.1&&!me.grounded) c.up=true;
-  if(mv&&me.grounded&&!cpuGroundAhead(me.x+mv*2.2*me.s,me.y)) mv=0;
+  if(goal===GEM&&me.grounded&&GEM.y<me.y-1.5&&Math.abs(GEM.x-me.x)<2.5) c.down=true;
+  if(mv&&me.grounded&&!cpuGroundAhead(me.x+mv*2.2*me.s,me.y)&&!(goal===GEM&&GEM.y<me.y-1.5&&cpuBelow(me.x+mv*2.2*me.s,me.y))) mv=0;
   c.mx=mv*0.9;
   // shooting
   if(foe){ const tx=foe.x+foe.vx*0.25*S.k, ty=foe.y+0.7*foe.s;
@@ -3355,7 +3508,7 @@ function tickRest(rdt){
     const step=Math.floor(G.pt/0.8);
     if(step!==G.cdStep){ G.cdStep=step;
       if(step<3){ banner(String(3-step),step===0?'GET READY':'','go',0.8); SFX.tick(false); }
-      else { G.phase='battle'; G.pt=0; banner('BRAWL!',G.timed?'HIGHEST SCORE IN '+G.mins+(G.mins===1?' MINUTE':' MINUTES')+' WINS':G.teamMode?'LAST TEAM STANDING WINS':'LAST TANK STANDING WINS','go',1.2); SFX.go(); broadcastPhase(); } }
+      else { G.phase='battle'; G.pt=0; banner('BRAWL!',G.gem?'HOLD THE DIAMOND THE LONGEST · '+G.mins+(G.mins===1?' MINUTE':' MINUTES'):G.timed?'HIGHEST SCORE IN '+G.mins+(G.mins===1?' MINUTE':' MINUTES')+' WINS':G.teamMode?'LAST TEAM STANDING WINS':'LAST TANK STANDING WINS','go',1.2); SFX.go(); broadcastPhase(); } }
   } else if(G.phase==='battle'){ G.matchT+=dt; if(G.timed&&!G.sudden&&!G.ending){ const was=Math.ceil(G.timeLeft); G.timeLeft-=dt; if(G.timeLeft<=0){ G.timeLeft=0; timeUp(); } else if(was<=10&&Math.ceil(G.timeLeft)<was) SFX.tick(was<=4); } }
   if(G.phase==='countdown'||G.phase==='battle'){ G.cpuDt=dt; for(const tk of G.tanks) applyControls(tk,controlsFor(tk.p),dt); }
   else if(G.phase==='lobby'){ G.tanks.forEach((tk,i)=>{ tk.angle=(tk.x<=0?52:128)+Math.sin(timeNow*0.6+i*1.7)*12; }); }
@@ -3366,7 +3519,7 @@ function tickRest(rdt){
   for(const tk of G.tanks){ syncTank(tk,dt); tankFX(tk,dt); }
   simMissiles(dt); missileVisuals(dt);
   crumbleUpdate(dt); portalUpdate(dt); portalVisual(dt);
-  envTick(); ventUpdate(dt); actUpdate(dt); mapVisual(dt);
+  envTick(); ventUpdate(dt); actUpdate(dt); gemUpdate(dt); mapVisual(dt);
   updateBombs(dt); bombVisuals(dt); powerUpdate(dt); powerVisual(dt); updateStrikes(dt); strikeVisual();
   updateFX(dt);
   smokeP.update(dt); addP.update(dt);
@@ -3425,6 +3578,7 @@ function director(){
   let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9; const add=(x,y)=>{ x0=Math.min(x0,x); x1=Math.max(x1,x); y0=Math.min(y0,y); y1=Math.max(y1,y); };
   const R=world.arena.respawn;
   G.tanks.forEach(t=>{ if(t.onField){ add(t.x,t.y); add(t.x,t.y+2); if(t.aiming){ add(t.aiming.x-3,t.aiming.y-3); add(t.aiming.x+3,t.aiming.y+3); } } else if(!t.out&&t.respawnT<0.8) add(R[0],R[1]); });
+  if(GEM.on&&!GEM.car&&G.phase==='battle') add(GEM.x,GEM.y);
   if(x0>x1){ x0=v[0]; x1=v[1]; y0=v[2]; y1=v[3]; }
   frameBox(x0-10,x1+10,y0-6,y1+7,34);
   CAM.td=Math.min(CAM.td,distFor(v[1]-v[0]+30,v[3]-v[2]+20));
@@ -3666,7 +3820,7 @@ function wireConn(conn){
 // A phone that found the room but never linked is almost always a network problem, so say what to try.
 function joinWarn(on){ const el=$('joinWarn'); if(!el) return; clearTimeout(NET.warnT); el.hidden=!on; if(on){ NET.warnT=setTimeout(()=>{ el.hidden=true; },30000); } }
 function send(p,msg){ const c=p&&p.conn; if(!c) return; try{ if(c.open) c.send(msg); }catch(e){} }
-function buzz(p,pattern,snd){ if(p&&p.src==='phone') send(p,snd?{t:'buzz',p:pattern,s:snd}:{t:'buzz',p:pattern}); }
+function buzz(p,pattern,snd){ if(p&&(p.src==='phone'||p.src==='online')) send(p,snd?{t:'buzz',p:pattern,s:snd}:{t:'buzz',p:pattern}); }
 function tankInfo(){ return TANKS.map(t=>({name:t.name,role:t.role,perk:t.perk,pips:t.pips})); }
 function onMsg(conn,d){
   if(!d||typeof d!=='object') return;
@@ -3714,7 +3868,7 @@ function hostAction(a,dv){
   if(G.phase==='lobby'){
     if(a==='arena') choosePick(currentPick()+step);
     else if(a==='size'){ const A=ARENAS[G.arena]; if(A.family) chooseSize(SIZES[(SIZES.indexOf(A.size)+(step>0?1:2))%3]); }
-    else if(a==='mode'){ G.mode=G.mode==='time'?'stock':'time'; SFX.ui(); syncOpts(); persist(); }
+    else if(a==='mode'){ G.mode=G.mode==='stock'?'time':G.mode==='time'?'gem':'stock'; SFX.ui(); syncOpts(); persist(); }
     else if(a==='count'){ changeCount(step); SFX.ui(); syncOpts(); persist(); }
     else if(a==='teams'){ G.teamsOn=!G.teamsOn; SFX.ui(); syncLobbyTanks(); syncOpts(); persist(); }
     else if(a==='pair'){ balanceTeams(); SFX.ui(); syncLobbyTanks(); syncOpts(); persist(); }
@@ -3724,7 +3878,7 @@ function hostAction(a,dv){
     else if(a==='famset') choosePick(dv);
     else if(a==='sizeset') chooseSize(SIZES[clamp(dv,0,SIZES.length-1)]);
     else if(a==='amode') setAmode(AMODES[clamp(dv,0,AMODES.length-1)].k);
-    else if(a==='modeset'){ G.mode=dv?'time':'stock'; SFX.ui(); syncOpts(); persist(); }
+    else if(a==='modeset'){ G.mode=['stock','time','gem'][clamp(dv,0,2)]; SFX.ui(); syncOpts(); persist(); }
     else if(a==='teamset'){ if(G.teamsOn!==!!dv){ G.teamsOn=!!dv; SFX.ui(); syncLobbyTanks(); syncOpts(); persist(); } }
     else if(a==='pwrset'){ setPwrLevel(clamp(dv,0,4)); SFX.ui(); syncOpts(); persist(); }
     else if(a==='pwrk'){ const k=PWR_KEYS[dv]; if(k){ const on=G.pwrTypes[k]!==false; if(!(on&&PWR_KEYS.filter(x=>G.pwrTypes[x]!==false).length<=1)){ G.pwrTypes[k]=!on; SFX.ui(); syncOpts(); persist(); } } }
@@ -3741,7 +3895,7 @@ function sendPhase(p){
   const ph=G.paused?'paused':G.phase;
   const tk=G.tanks.find(t=>t.p===p);
   send(p,{t:'phase',phase:ph,you:p.pending?'spectate':'play',win:G.winner,winTag:G.winner>=0?SLOTS[G.winner].tag:'',winTank:G.winner>=0&&G.players[G.winner]?TANKS[G.players[G.winner].tank].name:'',
-    winTeam:G.winTeam,winTeamName:G.winTeam>=0?TEAM_NAMES[G.winTeam]:'',winTeamTags:G.winTeam>=0?teamTags(G.winTeam):'',team:tk?tk.team:-1,col:tk?tk.st.color:SLOTS[p.slot].color,timed:G.timed,sudden:G.sudden,host:p.slot===hostSlot(),mk:markerColor(p.slot),lo:normLoadout(p.loadout)});
+    winTeam:G.winTeam,winTeamName:G.winTeam>=0?TEAM_NAMES[G.winTeam]:'',winTeamTags:G.winTeam>=0?teamTags(G.winTeam):'',team:tk?tk.team:-1,col:tk?tk.st.color:SLOTS[p.slot].color,timed:G.timed,gem:!!G.gem,sudden:G.sudden,host:p.slot===hostSlot(),mk:markerColor(p.slot),lo:normLoadout(p.loadout)});
 }
 function broadcastPhase(){ G.rosterDirty=true; G.players.forEach(p=>{ if(isNet(p)) sendPhase(p); }); }
 function netTick(rdt){
@@ -3749,7 +3903,7 @@ function netTick(rdt){
   olTick(rdt);
   G.netT+=rdt; if(G.netT<0.1) return; G.netT=0;
   for(const tk of G.tanks){ const p=tk.p; if(!isNet(p)||!p.conn||(G.phase!=='battle'&&G.phase!=='countdown')) continue;
-    send(p,{t:'hud',hp:Math.ceil(tk.hp),max:tk.maxHp,lives:tk.lives,fuel:+(tk.fuel/tk.fuelMax).toFixed(2),rl:+clamp(tk.reload/((shotDef(tk).reload||1)*CFG.reload*tk.cls.reload),0,1).toFixed(2),st:tk.out?'out':tk.onField?'alive':'dead',resp:+Math.max(0,tk.respawnT).toFixed(1),ang:Math.round(tk.angle),pw:Math.round(tk.power*100),bombs:CFG.mineMax-minesOf(tk),mines:minesOf(tk),bcd:+(tk.bombCd/CFG.bombCd).toFixed(2),wp:tk.weapon,lo:tk.loadout,as:tk.aiming?2:tk.strikes>0?1:0,star:+tk.starT.toFixed(1),pu:pwrLabel(tk),kb:+kbMult(tk).toFixed(1),ml:G.lives,timed:G.timed&&!G.sudden,sc:tk.score,tl:G.timed?Math.ceil(G.timeLeft):0,team:tk.team}); }
+    send(p,{t:'hud',hp:Math.ceil(tk.hp),max:tk.maxHp,lives:tk.lives,fuel:+(tk.fuel/tk.fuelMax).toFixed(2),rl:+clamp(tk.reload/((shotDef(tk).reload||1)*CFG.reload*tk.cls.reload),0,1).toFixed(2),st:tk.out?'out':tk.onField?'alive':'dead',resp:+Math.max(0,tk.respawnT).toFixed(1),ang:Math.round(tk.angle),pw:Math.round(tk.power*100),bombs:CFG.mineMax-minesOf(tk),mines:minesOf(tk),bcd:+(tk.bombCd/CFG.bombCd).toFixed(2),wp:tk.weapon,lo:tk.loadout,as:tk.aiming?2:tk.strikes>0?1:0,star:+tk.starT.toFixed(1),pu:pwrLabel(tk),kb:+kbMult(tk).toFixed(1),ml:G.lives,timed:G.timed&&!G.sudden,sc:tk.score,gm:G.gem?Math.floor(tk.gemT||0):undefined,gc:G.gem&&GEM.car===tk?1:0,tl:G.timed?Math.ceil(G.timeLeft):0,team:tk.team}); }
 }
 function controllerUrl(code){ try{ const u=new URL('controller.html',location.href); u.search='?room='+code; u.hash=''; return u.href; }catch(e){ return 'controller.html?room='+code; } }
 function qrSVG(text){
@@ -3790,13 +3944,13 @@ function pwrLabel(tk){ if(!tk.onField) return ''; const a=[]; if(tk.aiming) a.pu
 function fmtTime(t){ const s=Math.floor(t); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
 function hud(rdt){
   if(G.phase==='countdown'||G.phase==='battle'){
-    setT(hudEls.clock,'text',G.sudden?'SUDDEN DEATH':G.timed?fmtTime(Math.ceil(G.timeLeft)):fmtTime(G.matchT)); hudEls.clock.classList.toggle('urgent',G.sudden||(G.timed&&G.timeLeft<=10));
+    setT(hudEls.clock,'text',G.sudden?'SUDDEN DEATH':GEM.ot?'OVERTIME':G.timed?fmtTime(Math.ceil(G.timeLeft)):fmtTime(G.matchT)); hudEls.clock.classList.toggle('urgent',G.sudden||GEM.ot||(G.timed&&G.timeLeft<=10)); gemLine();
     for(const tk of G.tanks){
       const C=tk.card; if(C){ const hp=Math.max(0,Math.ceil(tk.hp)), pct=(tk.onField?hp/tk.maxHp*100:0).toFixed(1)+'%';
         setT(C.v,'text',tk.out?'—':String(tk.onField?hp:0)); setT(C.fill,'width',pct); setT(C.ghost,'width',pct); setT(C.fuel,'width',(tk.fuel/tk.fuelMax*100).toFixed(0)+'%');
         if(C.stockN){ const t='×'+tk.lives; if(C.stockN._t!==t){ C.stockN._t=t; C.stockN.textContent=t; } } else C.stocks.forEach((s,i)=>{ const lost=i>=tk.lives; if(s._lost!==lost){ s._lost=lost; s.classList.toggle('lost',lost); } });
-        if(C.score) setT(C.score,'text',G.sudden?(tk.out?'OUT':'SD'):(tk.score>0?'+':'')+tk.score);
-        const cls='pc '+colorCls(tk.p.slot,tk.team)+(tk.out?' out':!tk.onField?' dead':'')+(tk.onField&&tk.hp<=tk.maxHp*0.3?' low':'')+(C.el.classList.contains('hit')?' hit':'');
+        if(C.score) setT(C.score,'text',G.gem?'◆ '+fmtTime(tk.gemT||0):G.sudden?(tk.out?'OUT':'SD'):(tk.score>0?'+':'')+tk.score);
+        const cls='pc '+colorCls(tk.p.slot,tk.team)+(G.gem&&GEM.car===tk?' gem':'')+(tk.out?' out':!tk.onField?' dead':'')+(tk.onField&&tk.hp<=tk.maxHp*0.3?' low':'')+(C.el.classList.contains('hit')?' hit':'');
         if(C.el.className!==cls) C.el.className=cls;
         const off=isNet(tk.p)&&!tk.p.connected, W=WEAPONS[tk.weapon], LO=tk.loadout||[0,1], OW=WEAPONS[LO[0]===tk.weapon?LO[1]:LO[0]]; setT(C.src,'html',off?(tk.p.src==='online'?'ONLINE':'PHONE')+' · OFFLINE':'<b>'+W.icon+' '+W.short+'</b><i>⇄ '+OW.icon+'</i>'); C.src.classList.toggle('off',off);
         const km=kbMult(tk); setT(C.kb,'text','×'+km.toFixed(1)); C.kbw.classList.toggle('hot',km>=2);
@@ -3904,7 +4058,7 @@ function showVictory(){
   const cols=G.tanks;
   const row=(label,f)=>'<tr><td>'+label+'</td>'+cols.map(t=>'<td>'+f(t)+'</td>').join('')+'</tr>';
   $('vStats').innerHTML='<thead><tr><th></th>'+cols.map(t=>'<th class="'+colorCls(t.p.slot,t.team)+'">'+t.st.tag+'</th>').join('')+'</tr></thead><tbody>'+
-    row('TANK',t=>'<span style="font-size:18px">'+t.cls.name+'</span>')+(G.teamMode?row('TEAM',t=>'<span style="font-size:18px">'+TEAM_NAMES[t.team]+'</span>'):'')+(G.timed?row('SCORE',t=>(t.score>0?'+':'')+t.score):row('LIVES LEFT',t=>t.lives))+row('KOS',t=>t.p.stats.kos)+row('FALLS',t=>t.p.stats.falls)+
+    row('TANK',t=>'<span style="font-size:18px">'+t.cls.name+'</span>')+(G.teamMode?row('TEAM',t=>'<span style="font-size:18px">'+TEAM_NAMES[t.team]+'</span>'):'')+(G.gem?row('HELD ◆',t=>fmtTime(t.gemT||0)):G.timed?row('SCORE',t=>(t.score>0?'+':'')+t.score):row('LIVES LEFT',t=>t.lives))+row('KOS',t=>t.p.stats.kos)+row('FALLS',t=>t.p.stats.falls)+
     row('DAMAGE DEALT',t=>t.p.stats.dealt)+row('DIRECT HITS',t=>t.p.stats.direct)+row('BOMB HITS',t=>t.p.stats.bombHits)+row('MISSILE HIT RATE',t=>acc(t.p.stats))+(G.pwrOn?row('POWER-UPS GRABBED',t=>t.p.stats.stars):'')+'</tbody>';
   renderRecord(); showScreen('victory');
 }
@@ -3928,13 +4082,13 @@ function syncArenaUI(){
   $('amodeSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.am===G.amode)));
   arenaDesc();
 }
-function countLabel(){ return G.mode==='time'?G.mins+' MIN':G.lives+(G.lives===1?' LIFE':' LIVES'); }
-function changeCount(d){ if(G.mode==='time') G.mins=clamp(G.mins+d,1,10); else G.lives=clamp(G.lives+d,1,9); }
+function countLabel(){ return G.mode!=='stock'?G.mins+' MIN':G.lives+(G.lives===1?' LIFE':' LIVES'); }
+function changeCount(d){ if(G.mode!=='stock') G.mins=clamp(G.mins+d,1,10); else G.lives=clamp(G.lives+d,1,9); }
 function teamSummary(){ const n=TEAMS.map(()=>0); G.players.forEach(p=>{ if(p) n[p.team|0]++; }); return TEAMS.map((t,i)=>n[i]?t.name+' '+n[i]:'').filter(Boolean).join(' · '); }
 // sync every match-setting control on the big screen, then tell the phones (the host phone shows the same settings)
 function syncOpts(){
-  const timed=G.mode==='time';
-  $('modeSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.mode==='time')===timed)));
+  const timed=G.mode!=='stock';
+  $('modeSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===G.mode)));
   $('modeSeg').title=timed?'Unlimited respawns. +1 for each KO, −1 each time you go down. Highest score when time runs out wins; ties go to sudden death.':'Each tank has a set number of lives. Last tank (or team) standing wins.';
   $('cntVal').textContent=countLabel(); $('cntDn').setAttribute('aria-label',timed?'Fewer minutes':'Fewer lives'); $('cntUp').setAttribute('aria-label',timed?'More minutes':'More lives');
   $('teamSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.teams==='1')===G.teamsOn)));
@@ -4116,7 +4270,7 @@ function showRender(rdt){
 // =====================================================================
 function resize(){
   const w=app.clientWidth||innerWidth, h=app.clientHeight||innerHeight;
-  const pr=Math.max(0.75,Math.min(window.devicePixelRatio||1,1.5,Math.sqrt(2.4e6/Math.max(1,w*h))));
+  const pr=Math.max(0.75,Math.min(window.devicePixelRatio||1,OL.touchOn?1.2:1.5,Math.sqrt(2.4e6/Math.max(1,w*h))));
   renderer.setPixelRatio(pr); renderer.setSize(w,h,false);
   camera.aspect=w/h; camera.updateProjectionMatrix();
   if(post.ok) post.setSize(w,h,pr);
@@ -4163,15 +4317,15 @@ const OLFN={};
 // same moment. Effects started inside another effect are only recorded once, by the outermost call.
 function olWrap(){
   const rec=(name,f,self)=>function(...a){ if(olRec&&fxD===0) olEv.push([R3(olClock()),name,a.map(olEnc)]); fxD++; try{ return f.apply(self||this,a); } finally{ fxD--; } };
-  const F={explosionFX,koBlastFX,muzzleFX,dustFX,respawnFX,spawnRing,spawnDebris,shake,popupWorld,banner,notice,portalFX,sizeFX,megaFX,mgFX,sparkFX,recoilFX,bobFX,grabFX,strikeFX,floorFX,cardHit,ventFX,crumbleFX,reformFX};
+  const F={explosionFX,koBlastFX,muzzleFX,dustFX,respawnFX,spawnRing,spawnDebris,shake,popupWorld,banner,notice,portalFX,sizeFX,megaFX,mgFX,sparkFX,recoilFX,bobFX,grabFX,strikeFX,floorFX,cardHit,ventFX,crumbleFX,reformFX,gemFX};
   Object.assign(OLFN,F);
   explosionFX=rec('explosionFX',F.explosionFX); koBlastFX=rec('koBlastFX',F.koBlastFX); muzzleFX=rec('muzzleFX',F.muzzleFX); dustFX=rec('dustFX',F.dustFX);
   respawnFX=rec('respawnFX',F.respawnFX); spawnRing=rec('spawnRing',F.spawnRing); spawnDebris=rec('spawnDebris',F.spawnDebris); shake=rec('shake',F.shake);
   popupWorld=rec('popupWorld',F.popupWorld); banner=rec('banner',F.banner); notice=rec('notice',F.notice); portalFX=rec('portalFX',F.portalFX); sizeFX=rec('sizeFX',F.sizeFX);
   megaFX=rec('megaFX',F.megaFX); mgFX=rec('mgFX',F.mgFX); sparkFX=rec('sparkFX',F.sparkFX); recoilFX=rec('recoilFX',F.recoilFX); bobFX=rec('bobFX',F.bobFX);
   grabFX=rec('grabFX',F.grabFX); strikeFX=rec('strikeFX',F.strikeFX); floorFX=rec('floorFX',F.floorFX); cardHit=rec('cardHit',F.cardHit);
-  ventFX=rec('ventFX',F.ventFX); crumbleFX=rec('crumbleFX',F.crumbleFX); reformFX=rec('reformFX',F.reformFX);
-  for(const k of ['tick','go','join','launch','boom','hit','ko','respawn','land','ui','bombOut','thunk','star','power','bounce','portal','crumble','reform','shieldHit','megaLaunch','megaBoom','starDrop','mg','sniper','bazooka','seekLaunch','strikeCall','strikeIn','win','alarm','rumble','erupt','wind','avalanche','meteor']){
+  ventFX=rec('ventFX',F.ventFX); crumbleFX=rec('crumbleFX',F.crumbleFX); reformFX=rec('reformFX',F.reformFX); gemFX=rec('gemFX',F.gemFX);
+  for(const k of ['tick','go','join','launch','boom','hit','ko','respawn','land','ui','bombOut','thunk','star','power','bounce','portal','crumble','reform','shieldHit','megaLaunch','megaBoom','starDrop','mg','sniper','bazooka','seekLaunch','strikeCall','strikeIn','win','alarm','rumble','erupt','wind','avalanche','meteor','gemGet','gemDrop','gemBack']){
     const f=SFX[k]; if(typeof f!=='function') continue; OLFN['S.'+k]=(...a)=>f.apply(SFX,a); SFX[k]=rec('S.'+k,f,SFX); }
 }
 function olEnc(v){
@@ -4217,17 +4371,18 @@ function olTankRow(tk){
   const W=shotDef(tk), rl=clamp(tk.reload/((W.reload||1)*CFG.reload*tk.cls.reload),0,1);
   return [tk.p.slot,TANKS.indexOf(tk.cls),tk.team,R2(tk.x),R2(tk.y),R1(tk.vx),R1(tk.vy),R1(tk.angle),R2(tk.power),tk.facing,f,
     R1(tk.hp),tk.maxHp,tk.lives,R2(tk.fuel/tk.fuelMax),R2(rl),R1(tk.starT),R1(tk.shieldT),R1(tk.wingsT),R1(tk.tinyT),R2(tk.s),tk.strikes|0,
-    tk.aiming?R2(tk.aiming.x):0,tk.aiming?R2(tk.aiming.y):0,tk.weapon,tk.score|0,tk.bombAim?R2(tk.bombAim.x):0,tk.bombAim?R2(tk.bombAim.y):0,R1(tk.spamT),R1(Math.max(0,tk.respawnT)),tk.mv|0,R2(tk.flash),R2(tk.shieldHit||0)];
+    tk.aiming?R2(tk.aiming.x):0,tk.aiming?R2(tk.aiming.y):0,tk.weapon,tk.score|0,tk.bombAim?R2(tk.bombAim.x):0,tk.bombAim?R2(tk.bombAim.y):0,R1(tk.spamT),R1(Math.max(0,tk.respawnT)),tk.mv|0,R2(tk.flash),R2(tk.shieldHit||0),R1(tk.gemT||0)];
 }
 function olSnap(){
   return {t:'snap',tm:R3(olClock()),ph:G.phase,pa:G.paused?1:0,ar:G.arena,
-    g:[G.timed?1:0,R2(G.timeLeft),G.sudden?1:0,R2(G.matchT),G.teamMode?1:0,G.lives,R2(G.ts),G.koFocus>0?1:0,G.koAt?R2(G.koAt.x):0,G.koAt?R2(G.koAt.y):0,G.winner,G.winTeam,G.mins,G.pwrOn?1:0,Math.max(0,AMODES.findIndex(m=>m.k===G.amode))],
+    g:[G.timed?1:0,R2(G.timeLeft),G.sudden?1:0,R2(G.matchT),G.teamMode?1:0,G.lives,R2(G.ts),G.koFocus>0?1:0,G.koAt?R2(G.koAt.x):0,G.koAt?R2(G.koAt.y):0,G.winner,G.winTeam,G.mins,G.pwrOn?1:0,Math.max(0,AMODES.findIndex(m=>m.k===G.amode)),G.gem?1:0,GEM.ot?1:0],
     tk:G.tanks.map(olTankRow),
     ms:G.missiles.filter(m=>m.alive).map(m=>[m.id|0,m.owner.p.slot,R2(m.x),R2(m.y),R1(m.vx),R1(m.vy),m.mega?5:m.seek?4:Math.max(0,WEAPONS.indexOf(m.w)),(m.gold?1:0)|(m.target?2:0)]),
     bm:G.bombs.filter(b=>b.alive).map(b=>[b.id|0,b.owner.p.slot,R2(b.x),R2(b.y),b.mode==='mine'?1:0,b.ground?1:0,R2(b.groundT),R2(b.fuse),R1(b.vx),R1(b.spin)]),
     pw:G.pwr?[PWR_KEYS.indexOf(G.pwr.type),R2(G.pwr.x),R2(G.pwr.y),G.pwr.state==='ground'?1:0,R1(G.pwr.gt)]:0,
     sk:G.strikes.map(S=>[S.id|0,S.owner.p.slot,R2(S.tx),R2(S.ty),R2(S.t),S.dur,S.i]),
     mp:olMapRow(),
+    gm:GEM.on?[R2(GEM.x),R2(GEM.y),GEM.car?GEM.car.p.slot:-1,R2(GEM.spin)]:0,
     ev:olEv};
 }
 // what an active map is doing: platforms gone or about to go, the lava level, an avalanche, meteors, wind, scrambled portals
@@ -4299,8 +4454,10 @@ function olBoot(){
   G.phase='boot'; $('hud').hidden=true; showScreen('online');
   let role='', code='', msg='';
   try{ role=sessionStorage.getItem('salvo-ol-role')||''; code=sessionStorage.getItem('salvo-ol-code')||''; msg=sessionStorage.getItem('salvo-ol-msg')||''; sessionStorage.removeItem('salvo-ol-msg'); }catch(e){}
-  let j=''; try{ j=(new URLSearchParams(location.search).get('join')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4); }catch(e){}
-  if(j){ try{ history.replaceState(null,'',location.pathname+location.hash); }catch(e){} }
+  let j=''; try{ const q=new URLSearchParams(location.search); j=(q.get('join')||'').toUpperCase().replace(/[^A-Z]/g,'').slice(0,4); OL.forceTouch=q.get('touch')==='1'; }catch(e){}
+  if(touchDevice()||OL.forceTouch) app.classList.add('phone');
+  if(j||OL.forceTouch){ try{ history.replaceState(null,'',location.pathname+location.hash); }catch(e){} }
+  tpWire();
   $('oCode').value=j||(role==='guest'?code:'');
   olMsgLine(msg);
   $('oHost').addEventListener('click',()=>{ SFX.init(); SFX.ui(); startHost(); });
@@ -4339,7 +4496,7 @@ const OL={code:'',mycode:'',peer:null,conn:null,slot:-1,cid:'',status:'',mode:''
 // one id per browser tab (kept through a reload), so two tabs on one computer can both join
 function olCid(){ let c=''; try{ c=sessionStorage.getItem('salvo-ol-cid')||''; }catch(e){} if(!/^[a-z0-9]{8,40}$/.test(c)){ c=''; for(let i=0;i<16;i++) c+='abcdefghijklmnopqrstuvwxyz0123456789'[(Math.random()*36)|0]; try{ sessionStorage.setItem('salvo-ol-cid',c); }catch(e){} } return c; }
 function startGuest(code){
-  G.role='guest'; G.follow=true; OL.code=code; OL.leaving=false; OL.linked=false; OL.welcomed=false; OL.tries=0; OL.mode=''; OL.slot=-1; OL.cid=olCid();
+  G.role='guest'; G.follow=true; OL.touchOn=touchDevice()||!!OL.forceTouch; app.classList.toggle('touch',OL.touchOn); if(OL.touchOn) resize(); OL.code=code; OL.leaving=false; OL.linked=false; OL.welcomed=false; OL.tries=0; OL.mode=''; OL.slot=-1; OL.cid=olCid();
   try{ sessionStorage.setItem('salvo-ol-role','guest'); sessionStorage.setItem('salvo-ol-code',code); }catch(e){}
   app.classList.add('guest'); app.classList.remove('host');
   G.players=G.players.map(()=>null); clearTanks(); G.phase='lobby'; OL.mode='lobby';
@@ -4395,7 +4552,7 @@ function olReset(msg){
   try{ sessionStorage.removeItem('salvo-ol-role'); }catch(e){}
   olClearProjectiles(); clearFX(); clearTanks(); G.players=G.players.map(()=>null);
   Object.assign(OL,{slot:-1,mode:'',linked:false,welcomed:false,snaps:[],ev:[],minD:null,roster:null,welcome:null,lobbyMsg:null,phaseMsg:null,lobbyKey:'',tkKey:'',slotKey:'',status:''});
-  G.role=''; app.classList.remove('guest','host'); G.phase='boot'; G.paused=false; $('hud').hidden=true; $('olLost').hidden=true; $('gmenu').hidden=true;
+  G.role=''; app.classList.remove('guest','host','touch'); OL.touchOn=false; tpReset(); G.phase='boot'; G.paused=false; $('hud').hidden=true; $('olLost').hidden=true; $('gmenu').hidden=true;
   SFX.allQuiet(); SFX.slow(1); showScreen('online'); olMsgLine(msg);
 }
 function olMsg(d){
@@ -4406,7 +4563,8 @@ function olMsg(d){
     case 'snap': olSnapIn(d); break;
     case 'lobby': OL.lobbyMsg=d; padRelay(d); break;
     case 'phase': OL.phaseMsg=d; padRelay(d); break;
-    case 'hud': case 'buzz': padRelay(d); break;
+    case 'hud': padRelay(d); break;
+    case 'buzz': padRelay(d); if(OL.touchOn&&Array.isArray(d.p)) vibe(d.p); break;
     case 'kicked': padRelay(d); olReset('The host removed you from the room.'); break;
     case 'full': olReset('Room '+OL.code+' is full (8 players). Try again when someone leaves.'); break;
   }
@@ -4439,8 +4597,8 @@ function olInput(rdt){
   const m={t:'in',k:{mx:(two('r')?1:0)-(two('l')?1:0),up:two('up'),dn:two('dn'),sw:(two('sl')?1:0)-(two('sr')?1:0),ch:two('fire'),bh:two('bomb'),wt:OL.kq.wt,sk:OL.kq.sk,ft:OL.kq.ft}};
   if(G.mouseFor!=='off'&&live){ const me=myTank(), act=MOUSE.down||MOUSE.rdown||mClock()-MOUSE.moved<2.5, a=me&&me.onField&&act&&mouseLive()?mouseAimFrom(me):null;
     m.mo=[a?R1(a.a):null,MOUSE.down?1:0,a?R2(a.v.x):0,a?R2(a.v.y):0,MOUSE.shots,MOUSE.rdown&&mClock()-MOUSE.rdownT>0.2?1:0,MOUSE.bombs,MOUSE.mine?1:0,a?R1(a.w.x):0,a?R1(a.w.y):0,a?1:0]; }
-  const P=OL.pad.inMsg;
-  if(P){ const fresh=performance.now()-OL.pad.inAt<1500;
+  const P=OL.touchOn?TS:OL.pad.inMsg;
+  if(P){ const fresh=OL.touchOn||performance.now()-OL.pad.inAt<1500;
     for(const f of ['shot','fx','fy','bomb','bx','by','bm','st']) if(P[f]!==undefined) m[f]=P[f];
     if(typeof P.w==='number'&&P.w>=0) m.w=P.w;
     if(fresh){ for(const f of ['mx','my','up','dn','aim','ax','ay','baim']) if(P[f]!==undefined) m[f]=P[f]; } }
@@ -4474,7 +4632,7 @@ function guestReady(){ const p=G.players[OL.slot]; if(!p||OL.mode!=='lobby') ret
 // ---- the room as the host describes it (players, settings, arena) ----
 function olRoster(d){
   OL.roster=d; OL.hostPh=d.ph;
-  G.teamsOn=!!d.teamsOn; G.mode=d.mode==='time'?'time':'stock'; const am=(AMODES[clamp(d.am|0,0,AMODES.length-1)]||AMODES[0]).k, amCh=am!==G.amode; G.amode=am; G.lives=clamp(d.lives|0||3,1,99); G.mins=clamp(d.mins|0||3,1,10); G.pwrOn=!!d.pwrOn;
+  G.teamsOn=!!d.teamsOn; G.mode=['time','gem'].includes(d.mode)?d.mode:'stock'; const am=(AMODES[clamp(d.am|0,0,AMODES.length-1)]||AMODES[0]).k, amCh=am!==G.amode; G.amode=am; G.lives=clamp(d.lives|0||3,1,99); G.mins=clamp(d.mins|0||3,1,10); G.pwrOn=!!d.pwrOn;
   if(Array.isArray(d.wins)){ G.wins=d.wins.slice(0,MAXP); while(G.wins.length<MAXP) G.wins.push(0); }
   const old=G.players;
   G.players=Array.from({length:MAXP},(_,i)=>{ const q=d.ps&&d.ps[i]; if(!q) return null;
@@ -4494,7 +4652,7 @@ function olRoster(d){
 }
 function olEnterLobby(){
   OL.mode='lobby'; OL.snaps=[]; OL.ev=[]; OL.lobbyKey='';
-  olClearProjectiles(); clearFX(); actReset(); G.phase='lobby'; G.paused=false; G.ending=false; G.ts=1; G.koFocus=0;
+  olClearProjectiles(); clearFX(); actReset(); gemStop(); G.phase='lobby'; G.paused=false; G.ending=false; G.ts=1; G.koFocus=0;
   $('hud').hidden=true; showScreen('globby'); syncLobbyTanks(); SFX.allQuiet(); SFX.slow(1);
 }
 function olClearProjectiles(){ clearProjectiles(); OL.ms.clear(); OL.bm.clear(); OL.sk.clear(); }
@@ -4543,7 +4701,7 @@ function olTank(tk,r,rb,k,e){
   tk.aimShow=f&512?0.25:0; tk.bombAimShow=f&1024?0.2:0; tk.bombAim=f&1024?{x:r[26],y:r[27]}:null; tk.hitstun=f&2048?0.2:0; tk.spinDir=f&4096?1:-1;
   const aimB=rb&&(rb[10]&8192); tk.aiming=f&8192?{x:aimB?lerp(r[22],rb[22],k):r[22],y:aimB?lerp(r[23],rb[23],k):r[23],t:0}:null;
   tk.hp=r[11]; tk.maxHp=r[12]; tk.lives=r[13]; tk.fuel=r[14]*tk.fuelMax; tk.reload=r[15]; tk.starT=r[16]; tk.shieldT=r[17]; tk.wingsT=r[18]; tk.tinyT=r[19];
-  tk.s=rb?lerp(r[20],rb[20],k):r[20]; tk.strikes=r[21]; tk.weapon=r[24]|0; tk.p.weapon=tk.weapon; tk.score=r[25]; tk.spamT=r[28]; tk.respawnT=r[29]; tk.flash=r[31]; tk.shieldHit=r[32];
+  tk.s=rb?lerp(r[20],rb[20],k):r[20]; tk.strikes=r[21]; tk.weapon=r[24]|0; tk.p.weapon=tk.weapon; tk.score=r[25]; tk.spamT=r[28]; tk.respawnT=r[29]; tk.flash=r[31]; tk.shieldHit=r[32]; tk.gemT=r[33]||0;
   if(tk.wingsT>0&&!tk.m.wings) addWings(tk);
   tk.m.root.visible=on||wreck;
 }
@@ -4607,6 +4765,9 @@ function olApply(rt){
   for(const [id,s] of OL.sk) if(!seenS.has(id)){ if(s.mesh){ s.mesh.visible=false; s.mesh.userData.busy=false; } OL.sk.delete(id); }
   G.strikes=Array.from(OL.sk.values());
   olMapApply(a.mp,b&&b.mp,k);
+  G.gem=!!g[15]; GEM.ot=!!g[16]; const gm=a.gm, gmb=b&&b.gm;
+  if(gm){ GEM.on=true; GEM.car=gm[2]>=0?G.tanks.find(t=>t.p.slot===gm[2])||null:null; const same=gmb&&gmb[2]===gm[2]&&Math.abs(gmb[0]-gm[0])+Math.abs(gmb[1]-gm[1])<8;
+    GEM.x=same?lerp(gm[0],gmb[0],k):gm[0]; GEM.y=same?lerp(gm[1],gmb[1],k):gm[1]; GEM.spin=same?lerp(gm[3],gmb[3],k):gm[3]; } else { GEM.on=false; GEM.car=null; }
 }
 function olEvents(rt){
   const E=OL.ev;
@@ -4625,7 +4786,7 @@ function guestTick(rdt){
   G.pt+=rdt;
   if(G.phase==='lobby'){ G.tanks.forEach((tk,i)=>{ tk.angle=(tk.x<=0?52:128)+Math.sin(timeNow*0.6+i*1.7)*12; }); }
   for(const tk of G.tanks){ syncTank(tk,dt); tankFX(tk,dt); }
-  missileVisuals(dt); portalVisual(dt); bombVisuals(dt); powerVisual(dt); mapVisual(dt);
+  missileVisuals(dt); portalVisual(dt); bombVisuals(dt); powerVisual(dt); mapVisual(dt); tpSync();
   const S=G.pwr; if(S&&S.state==='fall'&&dt>0&&Math.random()<dt*40){ const P=PWR[S.type]; addP.spawn({x:S.x+rand(-.3,.3),y:S.y+rand(-.3,.3),z:rand(-.3,.3),vx:rand(-.5,.5),vy:rand(1,3),life:rand(.5,1),s0:.32,s1:.05,c0:P.pc,c1:P.pc.map(v=>v*0.3),a0:1,a1:0}); }
   for(const s of G.strikes){ if(!s.done&&strikeFly(s,dt)){ s.done=true; if(s.mesh) s.mesh.visible=false; } }
   strikeVisual();
@@ -4634,6 +4795,93 @@ function guestTick(rdt){
   updatePreviews(); director(); updateCamera(rdt); hud(rdt); audioTick();
 }
 
+
+// ---------- no computer? play on the phone itself: the game fills the screen and the touch controls sit on top ----------
+// It sends exactly what a phone controller sends, so the host treats it like any other phone.
+const TS={mx:0,my:0,up:false,dn:false,aim:false,ax:0,ay:0,shot:0,fx:0,fy:0,bomb:0,bx:0,by:0,bm:0,baim:false,w:-1,st:0,hasShot:false};
+const TP={L:null,R:null,B:null,btn:null,btnId:null,wired:false,shown:false,drawQ:false};
+function touchDevice(){ try{ return matchMedia('(pointer:coarse)').matches&&!matchMedia('(hover:hover)').matches; }catch(e){ return false; } }
+function vibe(p){ try{ if(navigator.vibrate) navigator.vibrate(p); }catch(e){} }
+function tpRadii(){ const m=Math.min(innerWidth,innerHeight); return {r1:clamp(m*0.16,46,74),r2:clamp(m*0.32,90,160)}; }
+function tpIn(el,x,y,pd){ if(!el||el.hidden) return false; const r=el.getBoundingClientRect(), p=pd||0; return x>=r.left-p&&x<=r.right+p&&y>=r.top-p&&y<=r.bottom+p; }
+function tpReset(){ TP.L=TP.R=TP.B=null; TP.btn=null; Object.assign(TS,{mx:0,my:0,up:false,dn:false,aim:false,ax:0,ay:0,baim:false,bx:0,by:0}); if($('tpad')){ $('tpad').hidden=true; $('tpRotate').hidden=true; } TP.shown=false; }
+function tpStartL(id,x,y){ TP.L={id,ox:x,oy:y,r:tpRadii().r1,kx:0,ky:0}; $('tpStick').style.width=$('tpStick').style.height=(TP.L.r*2)+'px'; tpMoveL(x,y); }
+function tpMoveL(x,y){ const L=TP.L; let dx=x-L.ox, dy=y-L.oy; const d=Math.hypot(dx,dy), lim=L.r*1.3;
+  if(d>lim){ const k=(d-lim)/d; L.ox+=dx*k; L.oy+=dy*k; dx=x-L.ox; dy=y-L.oy; }
+  let vx=dx/L.r, vy=dy/L.r; const m=Math.hypot(vx,vy); if(m>1){ vx/=m; vy/=m; }
+  TS.mx=Math.abs(vx)<0.18?0:Math.round(vx*100)/100; TS.my=Math.abs(vy)<0.18?0:-Math.round(vy*100)/100; TS.up=vy<-0.45; TS.dn=vy>0.65; L.kx=vx*L.r; L.ky=vy*L.r; tpDraw(); }
+function tpEndL(){ TP.L=null; TS.mx=0; TS.my=0; TS.up=false; TS.dn=false; tpDraw(); }
+function tpStartR(id,x,y){ TP.R={id,ox:x,oy:y,r:tpRadii().r2,t:performance.now(),moved:false,len:0,ang:0}; TS.aim=false; TS.ax=0; TS.ay=0; tpDraw(); }
+function tpMoveR(x0,y0){ const R=TP.R, dx=x0-R.ox, dy=y0-R.oy; if(Math.hypot(dx,dy)>10) R.moved=true;
+  let x=dx/R.r, y=-dy/R.r; const m=Math.hypot(x,y); if(m>1){ x/=m; y/=m; }
+  TS.ax=Math.round(x*100)/100; TS.ay=Math.round(y*100)/100; R.len=Math.min(1,m); R.ang=Math.atan2(y,x); TS.aim=R.len>0.12; tpDraw(); }
+function tpEndR(released){ const R=TP.R;
+  if(released&&R){ const len=Math.hypot(TS.ax,TS.ay); if(TS.aim&&len>0.15) tpFire(TS.ax,TS.ay); else if(!R.moved&&performance.now()-R.t<300&&TS.hasShot) tpFire(TS.fx,TS.fy); }
+  TP.R=null; TS.aim=false; TS.ax=0; TS.ay=0; tpDraw(); }
+function tpFire(x,y){ TS.fx=Math.round(x*100)/100; TS.fy=Math.round(y*100)/100; TS.shot++; TS.hasShot=true; vibe([12]); }
+const TP_BR=96;
+function tpStartB(id,x,y){ TP.B={id,ox:x,oy:y,r:TP_BR,moved:false,len:0,ang:0}; TS.baim=false; TS.bx=0; TS.by=0; $('tpBomb').classList.add('hit'); tpDraw(); }
+function tpMoveB(x0,y0){ const B=TP.B, dx=x0-B.ox, dy=y0-B.oy; if(Math.hypot(dx,dy)>12) B.moved=true;
+  let x=dx/B.r, y=-dy/B.r; const m=Math.hypot(x,y); if(m>1){ x/=m; y/=m; }
+  TS.bx=Math.round(x*100)/100; TS.by=Math.round(y*100)/100; B.len=Math.min(1,m); B.ang=Math.atan2(y,x); TS.baim=B.moved&&B.len>0.12; tpDraw(); }
+function tpEndB(released){ const B=TP.B;
+  if(released&&B){ if(TS.baim&&B.len>0.15){ TS.bm=0; TS.bomb++; vibe([18]); } else if(!B.moved){ TS.bm=1; TS.bomb++; vibe([12,30,12]); } }
+  TP.B=null; TS.baim=false; $('tpBomb').classList.remove('hit'); tpDraw(); }
+function tpDraw(){ tpPaint(); }
+function tpPaint(){
+  const st=$('tpStick'), kn=$('tpKnob'), aim=$('tpAim'), base=$('tpAimBase'), line=$('tpAimLine'), txt=$('tpAimTxt');
+  if(TP.L){ const L=TP.L; st.hidden=false; st.style.transform='translate('+(L.ox-L.r).toFixed(1)+'px,'+(L.oy-L.r).toFixed(1)+'px)'; kn.style.transform='translate('+L.kx.toFixed(1)+'px,'+L.ky.toFixed(1)+'px)'; st.classList.toggle('jet',TS.up); } else st.hidden=true;
+  const A=TP.R||TP.B, isB=!TP.R&&!!TP.B;
+  if(A){ aim.hidden=false; aim.classList.toggle('bomb',isB); aim.style.transform='translate('+A.ox.toFixed(1)+'px,'+A.oy.toFixed(1)+'px)';
+    const d=A.r*2; if(base._d!==d){ base._d=d; base.style.width=base.style.height=d+'px'; base.style.transform='translate('+(-A.r)+'px,'+(-A.r)+'px)'; }
+    line.style.width=(A.len*A.r).toFixed(1)+'px'; line.style.transform='rotate('+(-A.ang*180/Math.PI).toFixed(1)+'deg)';
+    const vx=isB?TS.bx:TS.ax, vy=isB?TS.by:TS.ay, on=isB?TS.baim:TS.aim;
+    if(on){ const a=vecAngle(vx,vy), elev=a<=90?a:180-a, pw=Math.round((0.15+0.85*clamp((A.len-0.12)/0.83,0,1))*100); txt.textContent=(isB?'BOMB ':'')+Math.round(elev)+'°  '+pw+'%'; }
+    else txt.textContent=isB?'DRAG TO THROW · TAP FOR A MINE':''; }
+  else aim.hidden=true;
+}
+function tpStart(id,x,y){
+  const me=myTank(), aiming=!!(me&&me.aiming);
+  if(aiming){ if(tpIn($('tpLaunch'),x,y,14)){ TP.btn='launch'; TP.btnId=id; $('tpLaunch').classList.add('hit'); return; } if(x<innerWidth/2&&!TP.L) tpStartL(id,x,y); return; }
+  for(const [k,el,pd] of [['strike',$('tpStrike'),8],['wpn',$('tpWpn'),6],['menu',$('tpMenu'),6],['fs',$('tpFs'),6]]) if(tpIn(el,x,y,pd)){ TP.btn=k; TP.btnId=id; el.classList.add('hit'); return; }
+  if(tpIn($('tpBomb'),x,y,10)){ if(!TP.B) tpStartB(id,x,y); return; }
+  if(x<innerWidth/2){ if(!TP.L) tpStartL(id,x,y); } else if(!TP.R) tpStartR(id,x,y);
+}
+function tpMove(id,x,y){ if(TP.L&&id===TP.L.id) tpMoveL(x,y); else if(TP.R&&id===TP.R.id) tpMoveR(x,y); else if(TP.B&&id===TP.B.id) tpMoveB(x,y); }
+function tpEnd(id,x,y,released){
+  if(TP.L&&id===TP.L.id) tpEndL(); else if(TP.R&&id===TP.R.id) tpEndR(released); else if(TP.B&&id===TP.B.id) tpEndB(released);
+  else if(id===TP.btnId&&TP.btn){ const k=TP.btn, el=$({strike:'tpStrike',wpn:'tpWpn',menu:'tpMenu',fs:'tpFs',launch:'tpLaunch'}[k]); TP.btn=null; TP.btnId=null; el.classList.remove('hit');
+    if(!released||!tpIn(el,x,y,16)) return;
+    if(k==='wpn'){ const me=myTank(); if(me){ const L=me.loadout||[0,1], cur=TS.w>=0&&L.includes(TS.w)?TS.w:me.weapon; TS.w=L[L[0]===cur?1:0]; vibe([10]); } }
+    else if(k==='strike'||k==='launch'){ TS.st++; vibe(k==='launch'?[60,30,60]:[30,30,30]); }
+    else if(k==='menu'){ const g=$('gmenu'); g.hidden=false; syncGMenu(); }
+    else if(k==='fs') $('fsBtn').click(); }
+}
+function tpReconcile(list){ const ids=new Set(); for(const t of list) ids.add(t.identifier); if(TP.L&&!ids.has(TP.L.id)) tpEndL(); if(TP.R&&!ids.has(TP.R.id)) tpEndR(false); if(TP.B&&!ids.has(TP.B.id)) tpEndB(false); }
+function tpWire(){
+  if(TP.wired) return; TP.wired=true; const pad=$('tpad');
+  pad.addEventListener('touchstart',e=>{ e.preventDefault(); tpReconcile(e.touches); for(const t of e.changedTouches) tpStart(t.identifier,t.clientX,t.clientY); },{passive:false});
+  pad.addEventListener('touchmove',e=>{ e.preventDefault(); for(const t of e.changedTouches) tpMove(t.identifier,t.clientX,t.clientY); },{passive:false});
+  pad.addEventListener('touchend',e=>{ e.preventDefault(); for(const t of e.changedTouches) tpEnd(t.identifier,t.clientX,t.clientY,true); },{passive:false});
+  pad.addEventListener('touchcancel',e=>{ for(const t of e.changedTouches) tpEnd(t.identifier,t.clientX,t.clientY,false); },{passive:false});
+  // a mouse works too, for trying it on a computer with ?touch=1
+  let md=false; pad.addEventListener('mousedown',e=>{ md=true; tpStart('m',e.clientX,e.clientY); }); addEventListener('mousemove',e=>{ if(md) tpMove('m',e.clientX,e.clientY); }); addEventListener('mouseup',e=>{ if(md){ md=false; tpEnd('m',e.clientX,e.clientY,true); } });
+  addEventListener('blur',()=>{ if(TP.L) tpEndL(); if(TP.R) tpEndR(false); if(TP.B) tpEndB(false); });
+}
+// show the controls during a match, keep the buttons in step with the tank
+function tpSync(){
+  if(!OL.touchOn) return;
+  const live=OL.mode==='match'&&(G.phase==='countdown'||G.phase==='battle')&&!G.paused&&$('gmenu').hidden&&!OL.spect;
+  if(live!==TP.shown){ TP.shown=live; $('tpad').hidden=!live; if(!live){ if(TP.L) tpEndL(); if(TP.R) tpEndR(false); if(TP.B) tpEndB(false); } }
+  $('tpRotate').hidden=!(live&&innerHeight>innerWidth*1.05);
+  if(!live) return;
+  const me=myTank(); if(!me) return;
+  const w=TS.w>=0&&(me.loadout||[0,1]).includes(TS.w)?TS.w:me.weapon, W=WEAPONS[w]||WEAPONS[0];
+  setT($('tpWpnName'),'text',W.icon+' '+W.short);
+  const aiming=!!me.aiming; if($('tpLaunch').hidden===aiming) $('tpLaunch').hidden=!aiming;
+  const st=!aiming&&me.strikes>0&&me.onField; if($('tpStrike').hidden===st) $('tpStrike').hidden=!st;
+  $('tpad').classList.toggle('dead',!me.onField);
+}
 // ---------- guest screens ----------
 function renderGuestLobby(){
   if(G.role!=='guest') return;
@@ -4645,7 +4893,7 @@ function renderGuestLobby(){
     if($('gArenaSvg')._a!==A){ $('gArenaSvg')._a=A; $('gArenaSvg').innerHTML=arenaSvg(A); }
     const tags='<span>'+SIZE_NAMES[A.size]+'</span><span'+(G.amode!=='regular'?' class="hot"':'')+'>'+am.n+'</span>'; if($('gArenaTags')._h!==tags){ $('gArenaTags')._h=tags; $('gArenaTags').innerHTML=tags; }
     $('gArenaDesc').textContent=f.special+(G.amode==='active'?' Active map: '+f.active.toLowerCase()+'.':G.amode==='bounce'?' '+am.d:''); }
-  const sh=cfg?[['Mode',cfg.mode==='time'?'Timed · '+cfg.cnt:cfg.cnt],['Teams',cfg.teams?'Teams':'Free-for-all'],['Power-ups',String(cfg.pwr||'')]].map(r=>'<div class="setrow"><span class="opt-l">'+r[0]+'</span><span class="gval">'+esc(String(r[1]))+'</span></div>').join(''):'';
+  const sh=cfg?[['Mode',cfg.mode==='time'?'Timed · '+cfg.cnt:cfg.mode==='gem'?'Diamond · '+cfg.cnt:cfg.cnt],['Teams',cfg.teams?'Teams':'Free-for-all'],['Power-ups',String(cfg.pwr||'')]].map(r=>'<div class="setrow"><span class="opt-l">'+r[0]+'</span><span class="gval">'+esc(String(r[1]))+'</span></div>').join(''):'';
   if($('gSettings')._h!==sh){ $('gSettings')._h=sh; $('gSettings').innerHTML=sh; }
   const rb=$('gReady'), tb=$('gTeam');
   if(!me){ rb.disabled=true; rb.textContent='Ready up'; tb.hidden=true; $('gNote').textContent=OL.welcomed?'JOINING…':OL.status==='loading'?'LOADING…':'CONNECTING…'; }
@@ -4702,7 +4950,7 @@ G.arena=clamp((saved.arena!==undefined?saved.arena:store.arena)|0,0,ARENAS.lengt
 G.wins=Array.isArray(saved.wins)?saved.wins.slice(0,MAXP):Array.isArray(store.wins)?store.wins.slice(0,MAXP):[];
 while(G.wins.length<MAXP) G.wins.push(0);
 G.pwrOn=saved.pwrOn!==undefined?!!saved.pwrOn:store.pwrOn!==undefined?!!store.pwrOn:!!store.starOn;
-G.amode=['regular','bounce','active'].includes(store.amode)?store.amode:'regular'; loadKeys(store.keys); G.mouseFor=['off','kb1','kb2'].includes(store.mouse)?store.mouse:'kb1'; G.mode=store.mode==='time'?'time':'stock'; G.mins=clamp(store.mins|0||3,1,10); G.lives=clamp(store.lives|0||3,1,9); G.teamsOn=!!store.teamsOn; G.cpuLevel=clamp(store.cpuLevel|0||5,1,10); G.size=SIZES.includes(store.size)?store.size:'regular';
+G.amode=['regular','bounce','active'].includes(store.amode)?store.amode:'regular'; loadKeys(store.keys); G.mouseFor=['off','kb1','kb2'].includes(store.mouse)?store.mouse:'kb1'; G.mode=['time','gem'].includes(store.mode)?store.mode:'stock'; G.mins=clamp(store.mins|0||3,1,10); G.lives=clamp(store.lives|0||3,1,9); G.teamsOn=!!store.teamsOn; G.cpuLevel=clamp(store.cpuLevel|0||5,1,10); G.size=SIZES.includes(store.size)?store.size:'regular';
 G.pwrFreq=clamp(store.pwrFreq|0||2,1,4); if(store.pwrTypes&&typeof store.pwrTypes==='object') PWR_KEYS.forEach(k=>{ G.pwrTypes[k]=store.pwrTypes[k]!==false; }); if(!PWR_KEYS.some(k=>G.pwrTypes[k])) PWR_KEYS.forEach(k=>{ G.pwrTypes[k]=true; });
 loadArena(G.arena);
 buildMenus();
@@ -4710,7 +4958,7 @@ resize();
 olWrap();
 olBoot();
 { const v=world.arena.view; frameBox(v[0]-6,v[1]+6,v[2]+2,v[3]+2,0); CAM.x=CAM.tx; CAM.y=CAM.ty; CAM.d=CAM.td; }
-if(window.__SALVO_TEST__) window.__salvo={G,CFG,world,ARENAS,TANKS,NET,WEAPONS,startStrike,launchStrike,addCpu,removeCpu,cycleTeam,choosePick,chooseSize,currentPick,teamsActive,TEAMS,SLOTS,FAMILIES,openRoom,rtcConfig,loadArena,startCountdown,enterLobby,addPlayer,removePlayer,keys,taps,onMsg,onConnClose,wireConn,useBomb,spawnPower,kbMult,distBoxes,PWR,PWR_FREQ,hostSlot,hostAction,musicPace,pwrLevel,setPwrLevel,selectArena,syncOpts,CAM,SHOW,SFX,setPaused,markerColor,shakeScale,cycleLoadout,normLoadout,LOADOUTS,lobbyKey,ENV,ACT,actStart,actEnd,actUpdate,ventUpdate,envFor,ARENA_LIST,arenaFor,setAmode,lobbyCfg,AMODES,cpuHazard,cpuControls:typeof cpuControls==='function'?cpuControls:null,FAM_COL,KM,MOUSE,mouseAimFrom,mouseControls,pointerWorld,openKeys,closeKeys,assignKey,resetKeys,setMouse,keyName,controlsFor,OL,startHost,startGuest,olReset,myTank,toggleFollow,olSnap,olRosterMsg,onlineList,OLFN,keysSet:keys,showScreen,get olEv(){ return olEv; }};
+if(window.__SALVO_TEST__) window.__salvo={G,CFG,world,ARENAS,TANKS,NET,WEAPONS,startStrike,launchStrike,addCpu,removeCpu,cycleTeam,choosePick,chooseSize,currentPick,teamsActive,TEAMS,SLOTS,FAMILIES,openRoom,rtcConfig,loadArena,startCountdown,enterLobby,addPlayer,removePlayer,keys,taps,onMsg,onConnClose,wireConn,useBomb,spawnPower,kbMult,distBoxes,PWR,PWR_FREQ,hostSlot,hostAction,musicPace,pwrLevel,setPwrLevel,selectArena,syncOpts,CAM,SHOW,SFX,setPaused,markerColor,shakeScale,cycleLoadout,normLoadout,LOADOUTS,lobbyKey,ENV,ACT,actStart,actEnd,actUpdate,ventUpdate,envFor,ARENA_LIST,arenaFor,setAmode,lobbyCfg,AMODES,cpuHazard,cpuControls:typeof cpuControls==='function'?cpuControls:null,FAM_COL,GEM,gemSpawn,gemUpdate,gemLeader,hurt,KM,MOUSE,mouseAimFrom,mouseControls,pointerWorld,openKeys,closeKeys,assignKey,resetKeys,setMouse,keyName,controlsFor,OL,get TS(){ return TS; },tpStart,tpMove,tpEnd,startHost,startGuest,olReset,myTank,toggleFollow,olSnap,olRosterMsg,onlineList,OLFN,keysSet:keys,showScreen,get olEv(){ return olEv; }};
 try{ if(window.claude&&window.claude.hot&&window.claude.hot.snapshot) window.claude.hot.snapshot(()=>({arena:G.arena,wins:G.wins,pwrOn:G.pwrOn})); }catch(e){}
 requestAnimationFrame(t=>{ lastT=t; frame(t); setTimeout(()=>$('boot').classList.add('gone'),250); });
 }
