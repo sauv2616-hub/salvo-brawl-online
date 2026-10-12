@@ -1196,7 +1196,8 @@ const AMODES=[{k:'regular',n:'REGULAR',d:'Fall off the map and you lose a life.'
 const ARENAS=[]; FAMILIES.forEach(f=>SIZES.forEach(sz=>{ const A=ARENA_LIST.find(a=>a.family===f.key&&a.size===sz); if(A) ARENAS.push(A); }));
 // arenas list four hand-placed spawns; eight-player games add more, spread out over the widest open platforms
 function fillSpawns(A){
-  const cand=[]; A.platforms.forEach(p=>{ if(p.x1-p.x0<4.5) return; for(let x=p.x0+2;x<=p.x1-2;x+=2.5) cand.push([+x.toFixed(1),p.top]); });
+  const cand=[], nearPortal=(x,y)=>(A.portals||[]).some(po=>Math.hypot(po.x-x,po.y-y)<5);
+  A.platforms.forEach(p=>{ if(p.x1-p.x0<4.5) return; for(let x=p.x0+2;x<=p.x1-2;x+=2.5) if(!nearPortal(x,p.top)) cand.push([+x.toFixed(1),p.top]); });
   while(A.spawns.length<8&&cand.length){ let bi=0,bd=-1; cand.forEach((c,i)=>{ const d=Math.min(...A.spawns.map(s=>Math.hypot(s[0]-c[0],(s[1]-c[1])*1.5))); if(d>bd){ bd=d; bi=i; } }); A.spawns.push(cand.splice(bi,1)[0]); }
   while(A.spawns.length<8) A.spawns.push(A.spawns[A.spawns.length%4].slice());
 }
@@ -2707,8 +2708,30 @@ const ENV={g:1,grip:1,water:false,cur:0,wind:0};
 function envFor(A){ ENV.g=A.family==='orbit'?0.66:1; ENV.grip=A.family==='frost'?0.16:1; ENV.water=A.family==='deep'; ENV.cur=0; ENV.wind=0; }
 function envTick(){ ENV.cur=ENV.water&&(G.phase==='battle'||G.phase==='countdown')?3.4*Math.sin(G.matchT*0.17+1.3):0; }
 function envPush(){ return ENV.cur+ENV.wind; }
+// Where each player starts. In team games every team starts together on its own side of the map:
+// the spawn points are sorted left to right and each team gets a run of them (red on the left, then blue, green, gold).
+function spawnPlan(){
+  const sp=world.arena.spawns, ps=G.players.filter(Boolean), teams=G.phase==='lobby'?teamsActive():G.teamMode, plan={};
+  if(!teams){ ps.forEach(p=>{ plan[p.slot]=sp[p.slot]||sp[p.slot%4]; }); return plan; }
+  const groups={}; ps.forEach(p=>{ const t=teamOfSlot(p.slot); (groups[t]=groups[t]||[]).push(p); });
+  const order=Object.keys(groups).map(Number).sort((a,b)=>a-b), pts=sp.slice(0,8).map(s=>s.slice()).sort((a,b)=>a[0]-b[0]||b[1]-a[1]);
+  const last=order.length-1; let lo=0, hi=pts.length;
+  order.forEach((t,r)=>{ const g=groups[t];
+    // the last team takes its spots from the right-hand end, so two teams always sit at opposite ends
+    const run=r===last&&r>0?pts.slice(hi-g.length,hi):pts.slice(lo,lo+g.length); if(!(r===last&&r>0)) lo+=g.length; else hi-=g.length;
+    // teammates closest to the middle of their side go nearest the centre
+    run.sort((a,b)=>Math.abs(a[0])-Math.abs(b[0])); g.forEach((p,i)=>{ plan[p.slot]=run[i]||run[0]||sp[p.slot%4]; }); });
+  return plan;
+}
+function spawnFor(p){ return spawnPlan()[p.slot]||world.arena.spawns[p.slot]||world.arena.spawns[p.slot%4]; }
+// respawning drops you in near the top; in team games your team comes in on its own side of the centre
+function respawnX(tk){
+  const R=world.arena.respawn; if(!G.teamMode) return R[0]+(tk.p.slot-3.5)*2.4;
+  const order=[...new Set(G.tanks.map(t=>t.team))].sort((a,b)=>a-b), rank=order.indexOf(tk.team), mates=G.tanks.filter(t=>t.team===tk.team), i=mates.indexOf(tk);
+  return R[0]+(rank-(order.length-1)/2)*7+(i-(mates.length-1)/2)*2.2;
+}
 function makeTank(p){
-  const cls=TANKS[p.tank], teams=G.phase==='lobby'?teamsActive():G.teamMode, st=styleOf(p.slot,teams), sh=SHAPES[cls.shape], sp=world.arena.spawns[p.slot]||world.arena.spawns[p.slot%4];
+  const cls=TANKS[p.tank], teams=G.phase==='lobby'?teamsActive():G.teamMode, st=styleOf(p.slot,teams), sh=SHAPES[cls.shape], sp=spawnFor(p);
   const tk={p,cls,st,sh,s:sh.scale,s0:sh.scale,m:null,parts:[],x:sp[0],y:sp[1],vx:0,vy:0,grounded:true,ground:null,facing:sp[0]<=0?1:-1,bodyYaw:0,turYaw:0,
     angle:sp[0]<=0?50:130,power:0.6,charging:false,swingHeld:0,pending:null,reload:0,hp:cls.hp,maxHp:cls.hp,lives:G.lives,fuel:CFG.jetMax*cls.jet,fuelMax:CFG.jetMax*cls.jet,
     onField:true,out:false,wreck:false,respawnT:0,invuln:0,hitstun:0,dropT:0,knockT:0,hover:0,lastHit:null,tilt:0,spinDir:1,recoil:0,recoilV:0,kick:0,bob:0,bobV:0,flash:0,smokeT:0,wheelRot:0,
@@ -3062,7 +3085,7 @@ function startSudden(leaders){
   G.sudden=true; clearProjectiles();
   G.tanks.forEach(tk=>{
     if(!leaders.includes(groupKey(tk))){ tk.lives=0; tk.out=true; if(tk.onField){ respawnFX(tk); tk.onField=false; tk.wreck=false; tk.m.root.visible=false; } return; }
-    buildTankFor(tk); const sp=world.arena.spawns[tk.p.slot];
+    buildTankFor(tk); const sp=spawnFor(tk.p);
     Object.assign(tk,{x:sp[0],y:sp[1]+0.4,vx:0,vy:0,hp:Math.ceil(tk.maxHp*0.3),fuel:tk.fuelMax,invuln:1.2,onField:true,out:false,wreck:false,lives:1,hover:0,hitstun:0,lastHit:null,reload:0,grounded:false,flash:0,bombCd:0,starT:0,shieldT:0,wingsT:0,tinyT:0,s:tk.s0,mega:false,glowGold:false,spamT:0,seek:false,strikes:0,aiming:null});
     tk.m.root.visible=true; respawnFX(tk); buzz(tk.p,[120,60,120],'sudden');
   });
@@ -3070,7 +3093,7 @@ function startSudden(leaders){
 }
 function respawn(tk){
   buildTankFor(tk); const R=world.arena.respawn;
-  tk.x=R[0]+(tk.p.slot-3.5)*2.4; tk.y=R[1]+(tk.p.slot%2)*0.6; tk.vx=tk.vy=0; tk.hp=tk.maxHp; tk.fuel=tk.fuelMax; tk.invuln=CFG.invuln;
+  tk.x=respawnX(tk); tk.y=R[1]+(tk.p.slot%2)*0.6; tk.vx=tk.vy=0; tk.hp=tk.maxHp; tk.fuel=tk.fuelMax; tk.invuln=CFG.invuln;
   tk.onField=true; tk.wreck=false; tk.hover=1.8; tk.hitstun=0; tk.lastHit=null; tk.reload=0; tk.tilt=0; tk.grounded=false; tk.flash=0; tk.bombCd=0; tk.starT=0; tk.shieldT=0; tk.wingsT=0; tk.tinyT=0; tk.s=tk.s0; tk.mega=false; tk.glowGold=false; dropPowers(tk);
   tk.m.root.visible=true; respawnFX(tk); SFX.respawn();
 }
@@ -4958,7 +4981,7 @@ resize();
 olWrap();
 olBoot();
 { const v=world.arena.view; frameBox(v[0]-6,v[1]+6,v[2]+2,v[3]+2,0); CAM.x=CAM.tx; CAM.y=CAM.ty; CAM.d=CAM.td; }
-if(window.__SALVO_TEST__) window.__salvo={G,CFG,world,ARENAS,TANKS,NET,WEAPONS,startStrike,launchStrike,addCpu,removeCpu,cycleTeam,choosePick,chooseSize,currentPick,teamsActive,TEAMS,SLOTS,FAMILIES,openRoom,rtcConfig,loadArena,startCountdown,enterLobby,addPlayer,removePlayer,keys,taps,onMsg,onConnClose,wireConn,useBomb,spawnPower,kbMult,distBoxes,PWR,PWR_FREQ,hostSlot,hostAction,musicPace,pwrLevel,setPwrLevel,selectArena,syncOpts,CAM,SHOW,SFX,setPaused,markerColor,shakeScale,cycleLoadout,normLoadout,LOADOUTS,lobbyKey,ENV,ACT,actStart,actEnd,actUpdate,ventUpdate,envFor,ARENA_LIST,arenaFor,setAmode,lobbyCfg,AMODES,cpuHazard,cpuControls:typeof cpuControls==='function'?cpuControls:null,FAM_COL,GEM,gemSpawn,gemUpdate,gemLeader,hurt,KM,MOUSE,mouseAimFrom,mouseControls,pointerWorld,openKeys,closeKeys,assignKey,resetKeys,setMouse,keyName,controlsFor,OL,get TS(){ return TS; },tpStart,tpMove,tpEnd,startHost,startGuest,olReset,myTank,toggleFollow,olSnap,olRosterMsg,onlineList,OLFN,keysSet:keys,showScreen,get olEv(){ return olEv; }};
+if(window.__SALVO_TEST__) window.__salvo={G,CFG,world,ARENAS,TANKS,NET,WEAPONS,startStrike,launchStrike,addCpu,removeCpu,cycleTeam,choosePick,chooseSize,currentPick,teamsActive,TEAMS,SLOTS,FAMILIES,openRoom,rtcConfig,loadArena,startCountdown,enterLobby,addPlayer,removePlayer,keys,taps,onMsg,onConnClose,wireConn,useBomb,spawnPower,kbMult,distBoxes,PWR,PWR_FREQ,hostSlot,hostAction,musicPace,pwrLevel,setPwrLevel,selectArena,syncOpts,CAM,SHOW,SFX,setPaused,markerColor,shakeScale,cycleLoadout,normLoadout,LOADOUTS,lobbyKey,ENV,ACT,actStart,actEnd,actUpdate,ventUpdate,envFor,ARENA_LIST,arenaFor,setAmode,lobbyCfg,AMODES,cpuHazard,cpuControls:typeof cpuControls==='function'?cpuControls:null,FAM_COL,spawnPlan,respawnX,GEM,gemSpawn,gemUpdate,gemLeader,hurt,KM,MOUSE,mouseAimFrom,mouseControls,pointerWorld,openKeys,closeKeys,assignKey,resetKeys,setMouse,keyName,controlsFor,OL,get TS(){ return TS; },tpStart,tpMove,tpEnd,startHost,startGuest,olReset,myTank,toggleFollow,olSnap,olRosterMsg,onlineList,OLFN,keysSet:keys,showScreen,get olEv(){ return olEv; }};
 try{ if(window.claude&&window.claude.hot&&window.claude.hot.snapshot) window.claude.hot.snapshot(()=>({arena:G.arena,wins:G.wins,pwrOn:G.pwrOn})); }catch(e){}
 requestAnimationFrame(t=>{ lastT=t; frame(t); setTimeout(()=>$('boot').classList.add('gone'),250); });
 }
