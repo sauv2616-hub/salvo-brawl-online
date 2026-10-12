@@ -124,6 +124,7 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 .hfam button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:54px;padding:8px 9px;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--edge);border-left:4px solid var(--fc);min-width:0;}
 .hfam b{font-family:var(--display);font-weight:600;font-size:18px;line-height:.9;padding-top:.06em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .hfam small{font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--fc);}
+.hfam button:last-child:nth-child(3n+1){grid-column:1/-1;}
 .hfam button[aria-pressed="true"]{border-color:var(--fc);background:rgba(255,255,255,.14);background:color-mix(in srgb,var(--fc) 24%,transparent);}
 .hdesc{margin:0;font-size:12px;line-height:1.45;color:var(--ink-dim);}
 .hseg{display:flex;border:1px solid var(--edge);min-width:0;}
@@ -290,7 +291,7 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
       <div class="hsec"><div class="hh"><span>ARENA SIZE</span></div>
         <div class="hseg" id="hSize"><button type="button" data-a="sizeset" data-d="0">SMALL</button><button type="button" data-a="sizeset" data-d="1">BIG</button><button type="button" data-a="sizeset" data-d="2">MEGA</button></div></div>
       <div class="hsec"><div class="hh"><span>ARENA TYPE</span></div>
-        <div class="hseg" id="hAm"><button type="button" data-a="amode" data-d="0">REGULAR</button><button type="button" data-a="amode" data-d="1">BOUNCE</button><button type="button" data-a="amode" data-d="2">ACTIVE</button></div></div>
+        <div class="hseg" id="hAm"><button type="button" data-a="amode" data-d="0">REGULAR</button><button type="button" data-a="amode" data-d="1">BOUNCE</button><button type="button" data-a="amode" data-d="2">ACTIVE</button><button type="button" data-a="amode" data-d="3">RISING</button></div></div>
       <div class="hsec"><div class="hh"><span>POWER-UPS</span></div><div class="hseg" id="hPwr"></div><div class="hchips" id="hPk"></div></div>
       <div class="hsec"><div class="hh"><span>BOTS</span></div>
         <div class="hrow"><span class="hstep"><small class="hlab">HOW MANY</small><button class="hbtn sq" type="button" data-a="cpu" data-d="-1" aria-label="Fewer bots">−</button><b id="hCpu">0</b><button class="hbtn sq" type="button" data-a="cpu" data-d="1" aria-label="More bots">+</button></span>

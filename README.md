@@ -84,7 +84,7 @@ The leave icon (top right of your lobby) or **LEAVE ROOM** in the Esc menu takes
 
 ### The lobby
 
-- **Left:** the match setup. Pick one of the six arena types, its size (**Small**, **Big** or **Mega**) and the map type (**Regular**, **Bounce** or **Active**), then the match rules underneath. The arena you pick is shown live behind the lobby.
+- **Left:** the match setup. Pick one of the seven arena types, its size (**Small**, **Big** or **Mega**) and the map type (**Regular**, **Bounce**, **Active** or **Rising**), then the match rules underneath. The arena you pick is shown live behind the lobby.
 - **Middle:** every player's tank, big, turning slowly on a show platform with its driver standing beside it. The driver waves once that player is ready. Under each tank is the player's name plate: their tank, their two weapons and how they're playing (keys, controller or phone). Keyboard and controller players can click their tank's name or weapons to change them. Click the team badge to move a player to another team, and **×** to remove them.
 - **Right:** the room code and QR code for phones, the CPU players, and **Start match**.
 - **Top right:** three icons. The gear opens the sound settings (music and effects volume), the keyboard opens the controls, and the last one goes full screen.
@@ -96,7 +96,7 @@ Click **+ Add CPU** in the CPUs panel on the right to add a computer-controlled 
 ### Match settings
 
 - **Mode · Lives / Timed / Diamond:** a set number of lives each, last one standing wins; or a timed match. The **− / +** buttons set the lives (1 to 9) or the minutes (1 to 10). In a timed match you respawn every time, score **+1 for every tank you knock out and −1 each time you go down** (including falling off), and the highest score when time runs out wins. If it's tied, the tied players go into **sudden death**: low health, and the next knockout wins.
-- **Mode · Diamond:** hold the diamond for as long as you can. A glowing diamond drops in at the top of the arena; drive into it to grab it, and your clock (on your card) runs for as long as you carry it. Getting knocked out drops it: it pops out and rolls around until someone else picks it up. If it falls off the map (or into rising lava), it comes back at the top. Every attack does **double damage** in this mode, so the diamond changes hands a lot. You respawn every time, and the **− / +** buttons set the length (1 to 10 minutes). When time runs out, the player (or team, adding up its players' times) who held it the longest wins. If it's tied, the match goes to **overtime** and the next one to take the lead wins. CPUs go after the diamond and its carrier too.
+- **Mode · Diamond:** hold the diamond for as long as you can. A glowing diamond drops in at the top of the arena; drive into it to grab it, and your clock (on your card) runs for as long as you carry it. Getting knocked out drops it: it pops out and rolls around until someone else picks it up. If it falls off the map (or into lava or a rising hazard), it comes back at the top. Every attack does **double damage** in this mode, so the diamond changes hands a lot. You respawn every time, and the **− / +** buttons set the length (1 to 10 minutes). When time runs out, the player (or team, adding up its players' times) who held it the longest wins. If it's tied, the match goes to **overtime** and the next one to take the lead wins. CPUs go after the diamond and its carrier too.
 - **Teams · Free-for-all / Teams:** with Teams on, each player is on the red, blue, green or gold team, and everyone on a team drives that colour. Teams can be any size (1 against 3 is fine). New players join the smaller of red and blue; click the team badge on a player's card to move them, or players can tap **TEAM · SWITCH** on their phone. **Auto** splits everyone evenly between red and blue. Teammates can't hurt each other, and in every mode each team starts together on its own side of the map (red on the left, blue on the right, then green and gold in between when there are more teams). In timed and diamond games your team also respawns on its own side of the centre. When two or more real players (not CPUs) are on the same team, each one gets a coloured dot and their tag in their own player colour (on their card, above their tank and on the phone), so teammates can tell each other apart while their tanks stay the team colour.
 - **Power-ups:** click it to open a small panel: how often power-ups fall (Off, Low, Normal, High or Chaos) and which kinds can drop (at least one stays on). See *Power-ups*.
 - **Sound:** the gear icon at the top right has the music and effects volume. They're also on the pause screen, and M mutes everything.
@@ -106,7 +106,7 @@ Click **+ Add CPU** in the CPUs panel on the right to add a computer-controlled 
 The first phone to join is the host (its name plate says HOST). Once everyone has joined, nobody needs to touch the computer. The host's phone has two tabs so it never gets crowded:
 
 - **1 · Your tank:** pick your two weapons and your tank, like every other phone. **Next · Match setup** at the bottom takes you to the second tab.
-- **2 · Match setup:** the arena type, the arena size, the map type (Regular, Bounce or Active), how often power-ups drop and which kinds, how many bots and how hard they are, the mode (lives, timed or diamond), and teams.
+- **2 · Match setup:** the arena type, the arena size, the map type (Regular, Bounce, Active or Rising), how often power-ups drop and which kinds, how many bots and how hard they are, the mode (lives, timed or diamond), and teams.
 - **Start match** starts right away, even if not everyone has tapped ready.
 - **During a match**, the host has a **MENU** button in the top-right corner. It pauses the game and offers **RESUME** or **END MATCH · MAIN MENU**.
 - **After a match**, the host gets **REMATCH** and **MAIN MENU** buttons.
@@ -228,18 +228,19 @@ Pick how often they fall with the **POWER-UPS** button in the lobby: **LOW** (ev
 
 ### Arenas
 
-There are six arena types, and each one comes in three sizes: **Small**, **Big** (about double) and **Mega** (huge, for up to 8 players). Every type changes the game in its own way.
+There are seven arena types, and each one comes in three sizes: **Small**, **Big** (about double) and **Mega** (huge, for up to 8 players). Every type changes the game in its own way.
 
 | Type | Small | Big | Mega | What's special |
 |---|---|---|---|---|
-| Skyforge (grass) | Skyforge Isles | Skyforge Archipelago | Skyforge Expanse | Classic floating islands. No tricks, just solid ground. |
+| Skyforge (grass) | Skyforge Isles | Skyforge Archipelago | Skyforge Expanse | **Earthquakes:** every so often the ground rumbles, then the islands shake for a few seconds and bounce the tanks around. Careful near the edges. |
 | Frostpeak (ice) | Frostpeak Basin | Glacier Fortress | Frostfall Citadel | Slippery ice: tanks slide and take a moment to stop or turn round. |
-| Magma (fire) | Magma Foundry | Magma Refinery | Magma Inferno | Lava vents in the decks rumble, then erupt every few seconds, launching (and burning) whoever is standing on them. |
+| Magma (fire) | Magma Foundry | Magma Refinery | Magma Inferno | **Volcano bounce pads** (glowing pads with arrows rising out of them) throw any tank that drives or lands on them sky-high, with a full jetpack. Every few seconds a pad also rumbles and erupts in a column of fire that burns and launches whoever is on top. |
 | Titan (space) | Titan Outpost | Titan Orbital | Titan Megastation | Low gravity: tanks jump and fall slower, and shells fly in longer, floatier arcs. |
 | Warp (portals) | Warp Junction | Warp Nexus | Warp Labyrinth | Linked portals (shown by colour) teleport tanks, missiles and bombs. The camera holds still so teleports don't make it jump. |
 | Abyss (underwater) | Coral Reef | Sunken Ruins | Abyssal Trench | Tanks sink slowly, and a current slowly drifts back and forth, pushing tanks and shots with it. |
+| Neon City (city) | Neon Rooftops | Neon Boulevard | Neon Megacity | **Fog** rolls in every so often and hides the platforms for a few seconds. They're still there, so remember where they were. Tanks, bombs and power-ups stay visible. |
 
-**Map type** (pick one; the bounce floor and active map can't be on together):
+**Map type** (pick one; only one can be on at a time):
 
 - **Regular:** the arena as it is.
 - **Bounce:** a glowing energy net stretches under the arena. Fall into it and it throws you back up with a full jetpack, but every bounce costs 12 health (and can knock you out if you're low). Fly off the sides past the net and you still fall. Bombs and missiles explode on the net.
@@ -253,8 +254,21 @@ There are six arena types, and each one comes in three sizes: **Small**, **Big**
 | Titan | **Meteor shower:** meteors rain down and explode where they land. |
 | Warp | **Portals haywire:** every portal leads somewhere random for a few seconds. |
 | Abyss | **Tidal surge:** a powerful current pushes everything one way. |
+| Neon City | **Hover traffic:** a stream of flying cars sweeps across the high or low half of the map, hitting and shoving every tank in its way. |
 
-CPU players see the warnings too and try to get off dropping platforms and away from rising lava.
+- **Rising:** the whole map keeps climbing. A few seconds into the match a hazard that matches the arena starts rising from the bottom, and the view (and the edge you fall off) climbs with it. New platforms keep appearing at the top; the lowest ones flash, then the hazard swallows them, so keep climbing. The camera always keeps the hazard in view, and it rises a little faster the longer the match goes on.
+
+| Type | What rises |
+|---|---|
+| Skyforge | **Earthquake:** the islands shake apart from the bottom up. The lowest ones shake hard, then crumble away. There's nothing underneath, so falling below them knocks you out. |
+| Frostpeak | **Snow:** a snowdrift buries the lowest ledges. Touching it hurts and throws you back up. |
+| Magma | **Lava:** lava swallows the lowest decks. Touching it burns and throws you back up. Some of the new platforms have volcano bounce pads. |
+| Titan | **Meteor belt:** a band of tumbling rocks climbs through the station. Touching it hurts and knocks you up and sideways. |
+| Warp | **Warp storm:** touching it costs health and throws you back to the top of the map. Portals it swallows switch off. |
+| Abyss | **Riptide:** the tide floods the lowest shelves. Touching it hurts and pushes you back up. |
+| Neon City | **Toxic fog:** the fog swallows the lowest rooftops, and you can't see platforms inside it. Touching it hurts and throws you back up. |
+
+CPU players see the warnings too: they get off dropping platforms, away from rising lava, and on a rising map they keep climbing.
 
 Mega maps are wide, so with everyone spread out the camera pulls back a long way and tanks look small. They play best on a big TV.
 
