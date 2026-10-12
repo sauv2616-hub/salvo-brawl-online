@@ -64,6 +64,12 @@ Guests need a keyboard, so join from a computer. A phone can't be a full guest o
 | Menu (volume, camera, leave) | Esc | |
 | Mute | M | |
 
+### Change any key, or aim with the mouse
+
+Guests can change every key too: open settings (the gear in your lobby) or **KEYS** in the Esc menu, click **Customize keys**, click a key and press the new one. Your keys are saved on your computer.
+
+**Mouse aims** in the same settings is on to start with: point to aim (the farther from your tank, the more power), click to fire (hold to see the shot first; hold with the machine gun to keep firing), right-click (two-finger click on a trackpad) for a mine or hold it to throw a bomb, and during an air strike the target follows the pointer. Your keys keep working alongside it.
+
 ### Your phone as your controller (guests)
 
 Once you're in a room, the right side of your lobby shows a QR code and a code of its own. Scan it with your phone and the phone becomes your controller, with the same touch controls as the local version (see *Phone controls*). The phone talks to your computer, and your computer passes everything on to the host. Your keyboard keeps working too.
@@ -124,7 +130,7 @@ Even without full screen, the controller blocks pinch and double-tap zoom while 
 
 | | Keys 1 | Keys 2 |
 |---|---|---|
-| Join in the lobby / ready up | G | K |
+| Join in the lobby / ready up (the fire key) | G | K |
 | Change tank in the lobby | F / H | J / L |
 | Drive | A / D | ← / → |
 | Jetpack (hold) | W | ↑ |
@@ -136,6 +142,23 @@ Even without full screen, the controller blocks pinch and double-tap zoom while 
 | Air strike (when you have one) | E to aim, W A S D move the target, G or E to launch | O to aim, arrows move the target, K or O to launch |
 
 Bombs fly the way your barrel points, so aim with the barrel keys while you hold the bomb key. A quick tap of the bomb key drops a mine. With the machine gun, hold the fire key to keep firing. Esc pauses, M mutes.
+
+### Change any key
+
+Every keyboard key can be changed. Open settings (the gear at the top right of the lobby, or **KEYS** on the pause screen) and click **Customize keys**. Click the key you want to change, then press the new one. If another action already uses that key, the two swap, so nothing ends up on two jobs. Esc cancels, and **Reset to default** puts everything back. Your keys are saved on this computer, and the lobby hints and the controls list (the keyboard icon) always show the keys you picked. Esc (pause), M (mute) and Enter (start) can't be used.
+
+### Mouse or trackpad aiming
+
+One keyboard player can aim with the mouse or trackpad. It's Keys 1 to start with; change it (Keys 1, Keys 2 or Off) under **Mouse aims** in settings or in the Customize keys window.
+
+- **Point** to aim: the barrel follows the pointer. The farther the pointer is from your tank, the more power.
+- **Click** to fire. Hold the click to see where the shot will go, then let go to fire. With the machine gun, hold the click to keep firing.
+- **Right-click** (a two-finger click on most trackpads) drops a mine. Hold the right button to throw a bomb toward the pointer instead. The bomb key still throws along the barrel too.
+- **Air strike:** the big target follows the pointer; click to launch.
+
+The keyboard keys keep working alongside the mouse, and the pointer turns into a crosshair during a match.
+
+### Game controllers
 
 Game controllers join with A. Left stick drives (A or LB for jetpack), right stick aims and sets power, RT or RB fires (hold it with the machine gun). B throws bombs: hold the right stick in the direction you want and hold B, then let go of B to throw, or tap B with the stick centred for a mine. Y swaps between your two weapons (in the lobby it changes which two). X calls an air strike: move the target with the left stick, then press X or RT to launch.
 

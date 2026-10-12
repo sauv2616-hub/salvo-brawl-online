@@ -355,6 +355,29 @@ span.s-team{cursor:default;}
 .boothelp .bootdetail:empty{display:none;}
 #glLost{position:absolute;left:50%;top:20px;transform:translateX(-50%);z-index:8;max-width:min(560px,calc(100% - 32px));padding:12px 16px;background:var(--panel);border-top:2px solid var(--alert);font-size:14px;line-height:1.45;color:var(--ink);}
 
+/* custom keys and mouse aiming */
+.keysdlg{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:16px;background:rgba(4,6,12,.74);}
+.keysdlg[hidden]{display:none;}
+.kd-box{display:flex;flex-direction:column;gap:12px;width:min(640px,100%);max-height:calc(100vh - 32px);overflow-y:auto;box-sizing:border-box;padding:18px 20px;background:rgba(10,13,26,.98);border-top:2px solid var(--alert);box-shadow:0 20px 60px rgba(0,0,0,.6);}
+.kd-head{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.kd-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(90px,130px) minmax(90px,130px);gap:6px 10px;align-items:center;}
+.kd-grid .kh{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);}
+.kd-grid .kl{font-size:12.5px;font-weight:600;color:var(--ink);}
+.kd-grid .kl small{display:block;font-size:10.5px;font-weight:500;color:var(--ink-dim);}
+.kbtn{min-height:36px;padding:5px 8px 3px;background:rgba(255,255,255,.06);border:1px solid var(--edge);border-bottom-width:3px;border-radius:4px;cursor:pointer;font-family:var(--display);font-weight:500;font-size:19px;letter-spacing:.03em;line-height:1;color:var(--ink);}
+.kbtn:hover{background:rgba(255,255,255,.12);}
+.kbtn.cap{border-color:var(--alert);color:var(--alert);font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.12em;animation:kblink 1s infinite;}
+.kbtn.flash{border-color:var(--alert);background:rgba(255,208,74,.18);}
+@keyframes kblink{50%{background:rgba(255,208,74,.16);}}
+.kd-mouse{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-top:10px;border-top:1px solid var(--edge);}
+.kd-mouse .opt-l{width:auto;}
+.kd-msg{margin:0;min-height:1.3em;font-size:12px;color:var(--alert);}
+.kd-foot{justify-content:space-between;}
+.btn.go{background:var(--alert);color:#1a1300;border-color:var(--alert);}
+.btn.go:hover{background:#ffe07e;}
+[data-keys]{justify-content:center;}
+#app.maim #gl{cursor:crosshair;}
+@media (max-height:780px){ .kd-box{gap:8px;padding:14px 18px;} .kd-grid{gap:4px 10px;} .kbtn{min-height:30px;font-size:17px;padding:4px 8px 2px;} .kd-grid .kl small{display:inline;margin-left:6px;} .kd-box .pop-note{font-size:11.5px;line-height:1.4;} }
 
 #online{background:linear-gradient(90deg,rgba(6,8,15,.9) 0%,rgba(6,8,15,.7) 55%,rgba(6,8,15,.55) 100%);}
 .pc.me .pc-tag::after{content:" · YOU";color:var(--alert);}
@@ -520,29 +543,17 @@ span.s-team{cursor:default;}
         <label class="vol"><span>Music</span><input type="range" min="0" max="100" step="5" data-vol="music" aria-label="Music volume"><b data-volv="music">70</b></label>
         <label class="vol"><span>Effects</span><input type="range" min="0" max="100" step="5" data-vol="sfx" aria-label="Sound effects volume"><b data-volv="sfx">85</b></label>
         <p class="pop-note"><kbd class="kc">M</kbd> mutes everything at any time.</p>
+        <div class="pop-h">Keyboard and mouse</div>
+        <div class="setrow"><span class="opt-l">Mouse aims</span><div class="seg full" role="group" aria-label="Mouse or trackpad aims for"><button type="button" data-mouse="off">Off</button><button type="button" data-mouse="kb1">Keys 1</button><button type="button" data-mouse="kb2">Keys 2</button></div></div>
+        <button class="btn" type="button" data-keys="1">Customize keys</button>
       </div>
 
       <div class="popover wide" id="helpPop" hidden role="dialog" aria-label="Controls">
         <div class="controls">
-          <div class="ctl"><h3>Keys 1</h3><dl>
-            <dt><kbd class="kc">A</kbd><kbd class="kc">D</kbd></dt><dd>Drive</dd>
-            <dt><kbd class="kc">W</kbd></dt><dd>Jetpack (hold)</dd>
-            <dt><kbd class="kc">S</kbd></dt><dd>Drop through a ledge</dd>
-            <dt><kbd class="kc">F</kbd><kbd class="kc">H</kbd></dt><dd>Aim the barrel</dd>
-            <dt><kbd class="kc">G</kbd></dt><dd>Hold to charge, release to fire (machine gun: hold)</dd>
-            <dt><kbd class="kc">T</kbd></dt><dd>Bomb: hold to throw along the barrel, tap for a mine</dd>
-            <dt><kbd class="kc">R</kbd></dt><dd>Swap between your two weapons</dd>
-            <dt><kbd class="kc">E</kbd></dt><dd>Air strike: aim with W A S D, G or E to launch</dd></dl></div>
-          <div class="ctl"><h3>Keys 2</h3><dl>
-            <dt><kbd class="kc">←</kbd><kbd class="kc">→</kbd></dt><dd>Drive</dd>
-            <dt><kbd class="kc">↑</kbd></dt><dd>Jetpack (hold)</dd>
-            <dt><kbd class="kc">↓</kbd></dt><dd>Drop through a ledge</dd>
-            <dt><kbd class="kc">J</kbd><kbd class="kc">L</kbd></dt><dd>Aim the barrel</dd>
-            <dt><kbd class="kc">K</kbd></dt><dd>Hold to charge, release to fire (machine gun: hold)</dd>
-            <dt><kbd class="kc">I</kbd></dt><dd>Bomb: hold to throw along the barrel, tap for a mine</dd>
-            <dt><kbd class="kc">U</kbd></dt><dd>Swap between your two weapons</dd>
-            <dt><kbd class="kc">O</kbd></dt><dd>Air strike: aim with the arrows, K or O to launch</dd></dl></div>
+          <div class="ctl"><h3>Keys 1</h3><dl id="ctlK1"></dl></div>
+          <div class="ctl"><h3>Keys 2</h3><dl id="ctlK2"></dl></div>
         </div>
+        <p class="pop-note" id="mouseHelp"></p>
         <p class="pop-note">Game controllers: left stick drives, <kbd class="kc">A</kbd> jets, right stick aims, <kbd class="kc">RT</kbd> fires, <kbd class="kc">B</kbd> bombs, <kbd class="kc">Y</kbd> swaps weapons, <kbd class="kc">X</kbd> air strike. In the lobby, <kbd class="kc">Y</kbd> changes weapons. <kbd class="kc">Esc</kbd> pauses a match.</p>
       </div>
 
@@ -565,6 +576,7 @@ span.s-team{cursor:default;}
       </div>
       <div class="row">
         <button class="btn primary" id="resumeBtn">RESUME</button>
+        <button class="btn" type="button" data-keys="1">KEYS</button>
         <button class="btn" id="lobbyBtn">BACK TO LOBBY</button>
       </div>
       <div class="gnote">THE HOST PAUSED THE MATCH</div>
@@ -585,6 +597,17 @@ span.s-team{cursor:default;}
     </div>
   </div>
 
+  <div class="keysdlg" id="keysDlg" hidden role="dialog" aria-modal="true" aria-labelledby="kdTitle">
+    <div class="kd-box">
+      <div class="kd-head"><h2 class="sec-h" id="kdTitle">Customize keys</h2><button class="s-x" type="button" id="kdClose" aria-label="Close">×</button></div>
+      <p class="pop-note">Click a key, then press the key you want instead. If another action already uses it, the two swap. <kbd class="kc">Esc</kbd> cancels.</p>
+      <div class="kd-grid" id="kdGrid"></div>
+      <div class="kd-mouse"><span class="opt-l">Mouse / trackpad aims for</span><div class="seg" role="group" aria-label="Mouse or trackpad aims for"><button type="button" data-mouse="off">Off</button><button type="button" data-mouse="kb1">Keys 1</button><button type="button" data-mouse="kb2">Keys 2</button></div></div>
+      <p class="pop-note" id="kdMouseNote"></p>
+      <p class="kd-msg" id="kdMsg" role="status"></p>
+      <div class="row kd-foot"><button class="btn" type="button" id="kdReset">Reset to default</button><button class="btn go" type="button" id="kdDone">Done</button></div>
+    </div>
+  </div>
 
   <div class="screen" id="online" hidden>
     <div class="online-wrap">
@@ -648,29 +671,23 @@ span.s-team{cursor:default;}
           <span class="start-note" id="gNote">Connecting…</span>
         </div>
       </aside>
-      <p class="small-note lb-foot">In the lobby, <kbd class="kc">A</kbd> <kbd class="kc">D</kbd> change your tank, <kbd class="kc">R</kbd> changes your two weapons and <kbd class="kc">G</kbd> or <kbd class="kc">Enter</kbd> readies up. You can also click your tank’s name or weapons. The host starts the match.</p>
+      <p class="small-note lb-foot">In the lobby, your drive keys change your tank, your swap-weapon key changes your two weapons and your fire key or <kbd class="kc">Enter</kbd> readies up. You can also click your tank’s name or weapons. Change any key in settings (the gear). The host starts the match.</p>
 
       <div class="popover" id="gSetPop" hidden role="dialog" aria-label="Settings">
         <div class="pop-h">Sound</div>
         <label class="vol"><span>Music</span><input type="range" min="0" max="100" step="5" data-vol="music" aria-label="Music volume"><b data-volv="music">70</b></label>
         <label class="vol"><span>Effects</span><input type="range" min="0" max="100" step="5" data-vol="sfx" aria-label="Sound effects volume"><b data-volv="sfx">85</b></label>
         <p class="pop-note"><kbd class="kc">M</kbd> mutes everything at any time.</p>
+        <div class="pop-h">Keyboard and mouse</div>
+        <div class="setrow"><span class="opt-l">Mouse aims</span><div class="seg full" role="group" aria-label="Aim with the mouse or trackpad"><button type="button" data-mouse="off">Off</button><button type="button" data-mouse="kb1">On</button></div></div>
+        <button class="btn" type="button" data-keys="1">Customize keys</button>
       </div>
       <div class="popover wide" id="gHelpPop" hidden role="dialog" aria-label="Controls">
         <div class="controls">
-          <div class="ctl"><h3>Your keys</h3><dl>
-            <dt><kbd class="kc">A</kbd><kbd class="kc">D</kbd></dt><dd>Drive (or ← →)</dd>
-            <dt><kbd class="kc">W</kbd></dt><dd>Jetpack, hold (or ↑)</dd>
-            <dt><kbd class="kc">S</kbd></dt><dd>Drop through a ledge (or ↓)</dd>
-            <dt><kbd class="kc">F</kbd><kbd class="kc">H</kbd></dt><dd>Aim the barrel (or J L)</dd>
-            <dt><kbd class="kc">G</kbd></dt><dd>Hold to charge, release to fire (or K). Machine gun: hold</dd></dl></div>
-          <div class="ctl"><h3>More</h3><dl>
-            <dt><kbd class="kc">T</kbd></dt><dd>Bomb: hold to throw, tap for a mine (or I)</dd>
-            <dt><kbd class="kc">R</kbd></dt><dd>Swap between your two weapons (or U)</dd>
-            <dt><kbd class="kc">E</kbd></dt><dd>Air strike: aim with W A S D, G or E to launch (or O)</dd>
-            <dt><kbd class="kc">V</kbd></dt><dd>Camera: follow your tank or see everything</dd>
-            <dt><kbd class="kc">Esc</kbd></dt><dd>Menu · <kbd class="kc">M</kbd> mute</dd></dl></div>
+          <div class="ctl"><h3>Your keys</h3><dl id="gCtl1"></dl></div>
+          <div class="ctl"><h3>More</h3><dl id="gCtl2"></dl></div>
         </div>
+        <p class="pop-note" id="gMouseHelp"></p>
       </div>
     </div>
   </div>
@@ -686,6 +703,7 @@ span.s-team{cursor:default;}
       <div class="row">
         <button class="btn primary" id="gmClose" type="button">BACK TO THE GAME</button>
         <button class="btn" id="gmCam" type="button">CAMERA · FOLLOW MY TANK</button>
+        <button class="btn" type="button" data-keys="1">KEYS</button>
         <button class="btn" id="gmLeave" type="button">LEAVE ROOM</button>
       </div>
     </div>
@@ -2578,6 +2596,7 @@ function applyControls(tk,c,dt){
   if(c.strike&&tk.strikes>0){ startStrike(tk); return; }
   const auto=WEAPONS[tk.weapon].auto&&!tk.mega&&!tk.seek;
   if(c.vec&&setAimVec(tk,c.vec.x,c.vec.y)) tk.aimShow=0.25;
+  else if(typeof c.aimAng==='number'&&!c.swing) tk.angle=c.aimAng;
   if(auto&&(c.autoAim||c.charge)){ tk.autoFire=true; tk.aimShow=0.25; c.charge=false; } // machine gun: fires as long as you aim / hold
   if(c.swing){ tk.swingHeld+=dt; const rate=Math.min(120,32+tk.swingHeld*140); tk.angle=clamp(tk.angle+c.swing*rate*dt,-40,220); tk.aimShow=0.6; } else tk.swingHeld=0;
   if(c.charge){ if(!tk.charging){ tk.charging=true; tk.power=0.15; } tk.power=Math.min(1,tk.power+dt/0.8*(tk.starT>0?2:1)); tk.aimShow=0.25; }
@@ -3100,6 +3119,7 @@ function startStrike(tk){
 }
 function aimStrike(tk,c,dt){
   const A=tk.aiming, v=world.arena.view, sp=30, my=typeof c.my==='number'?c.my:(c.up?1:0)-(c.down?1:0);
+  if(c.strikeAt){ A.x=clamp(c.strikeAt.x,v[0]+2,v[1]-2); A.y=clamp(c.strikeAt.y,v[2]+2,v[3]+2); }
   A.x=clamp(A.x+(c.mx||0)*sp*dt,v[0]+2,v[1]-2); A.y=clamp(A.y+my*sp*dt,v[2]+2,v[3]+2); A.t+=dt;
   if(c.strike||c.fire||c.fireTap||A.t>12) launchStrike(tk);
 }
@@ -3223,7 +3243,7 @@ function controlsFor(p){
   const c={mx:0,up:false,down:false,vec:null,swing:0,charge:false,fire:null,bomb:null,bombAim:null};
   const dirOf=v=>v>0.3?1:v<-0.3?-1:0;
   if(p.src==='kb1'||p.src==='kb2'){ const k=KM[p.src]; c.mx=(keys.has(k.r)?1:0)-(keys.has(k.l)?1:0); c.up=keys.has(k.up); c.down=keys.has(k.dn); c.swing=(keys.has(k.sl)?1:0)-(keys.has(k.sr)?1:0); c.charge=keys.has(k.fire); c.bombHold=keys.has(k.bomb);
-    c.weaponTap=taps.has(k.wpn); c.strike=taps.has(k.strike); c.fireTap=taps.has(k.fire); }
+    c.weaponTap=taps.has(k.wpn); c.strike=taps.has(k.strike); c.fireTap=taps.has(k.fire); if(G.mouseFor===p.src) mouseControls(p,c); }
   else if(p.src==='pad'){ const g=padState[p.pad]; if(g){ c.mx=g.lx; c.my=-g.ly; c.up=g.jet||g.ly<-0.6; c.down=g.ly>0.7; const stick=Math.hypot(g.rx,g.ry)>0.3?{x:g.rx,y:-g.ry}:null; if(stick) c.vec=stick; if(g.fireEdge) c.fire={};
     c.autoAim=g.fireHeld; c.weaponTap=g.yEdge; c.strike=g.xEdge;
     // pad: press B with the right stick held to aim a throw (release to throw); press it with no aim for a mine
@@ -3237,7 +3257,7 @@ function controlsFor(p){
     if(p.lastShot!==null){ if(I.shot>p.lastShot) c.fire={vec:{x:I.fx,y:I.fy}}; p.lastShot=I.shot; }
     if(!(p.inAge>1.5)&&I.baim) c.bombAim={x:I.bx,y:I.by};
     if(p.lastBomb!==null){ if(I.bomb>p.lastBomb) c.bomb=I.bm?{mine:true}:{vec:{x:I.bx,y:I.by}}; p.lastBomb=I.bomb; }
-    if(p.src==='online') onlineKeys(p,c); }
+    if(p.src==='online'){ onlineKeys(p,c); onlineMouse(p,c); } }
   return c;
 }
 
@@ -3431,7 +3451,118 @@ function updateCamera(rdt){
 const keys=new Set();
 const KM={kb1:{l:'KeyA',r:'KeyD',up:'KeyW',dn:'KeyS',sl:'KeyF',sr:'KeyH',fire:'KeyG',bomb:'KeyT',wpn:'KeyR',strike:'KeyE'},kb2:{l:'ArrowLeft',r:'ArrowRight',up:'ArrowUp',dn:'ArrowDown',sl:'KeyJ',sr:'KeyL',fire:'KeyK',bomb:'KeyI',wpn:'KeyU',strike:'KeyO'}};
 const taps=new Set();
+const KM_DEF=JSON.parse(JSON.stringify(KM));
+const KEY_ACTS=[['l','Drive left'],['r','Drive right'],['up','Jetpack','hold'],['dn','Drop down','through a ledge'],['sl','Aim left','turn the barrel'],['sr','Aim right','turn the barrel'],
+  ['fire','Fire','hold to charge · joins and readies up in the lobby'],['bomb','Bomb','hold to throw · tap for a mine'],['wpn','Swap weapon','changes your pair in the lobby'],['strike','Air strike']];
+const KEY_BLOCK=['Escape','KeyM','KeyV','Enter','NumpadEnter','Tab','MetaLeft','MetaRight','ContextMenu','F11','F5'];
+const KEY_SYM={ArrowLeft:'←',ArrowRight:'→',ArrowUp:'↑',ArrowDown:'↓',Space:'Space',Comma:',',Period:'.',Slash:'/',Semicolon:';',Quote:"'",BracketLeft:'[',BracketRight:']',Backslash:'\\',Minus:'-',Equal:'=',Backquote:'`',
+  ShiftLeft:'L Shift',ShiftRight:'R Shift',ControlLeft:'L Ctrl',ControlRight:'R Ctrl',AltLeft:'L Alt',AltRight:'R Alt',Backspace:'Bksp',CapsLock:'Caps',IntlBackslash:'\\',NumpadAdd:'Num +',NumpadSubtract:'Num −',NumpadMultiply:'Num *',NumpadDivide:'Num /',NumpadDecimal:'Num .',PageUp:'PgUp',PageDown:'PgDn',Insert:'Ins',Delete:'Del'};
+function keyName(c){ c=String(c||''); if(KEY_SYM[c]) return KEY_SYM[c]; let m=/^Key([A-Z])$/.exec(c); if(m) return m[1]; m=/^Digit(\d)$/.exec(c); if(m) return m[1]; m=/^Numpad(\d)$/.exec(c); if(m) return 'Num '+m[1]; return c.replace(/(Left|Right)$/,'')||'?'; }
+function kbd(c){ return '<kbd class="kc">'+esc(keyName(c))+'</kbd>'; }
+function loadKeys(saved){
+  try{ for(const src of ['kb1','kb2']){ const v=saved&&saved[src]; if(!v||typeof v!=='object') continue; for(const [a] of KEY_ACTS) if(typeof v[a]==='string'&&/^[A-Za-z0-9]{2,24}$/.test(v[a])&&!KEY_BLOCK.includes(v[a])) KM[src][a]=v[a]; }
+    const all=[]; for(const src of ['kb1','kb2']) for(const [a] of KEY_ACTS) all.push(KM[src][a]);
+    if(new Set(all).size!==all.length) resetKeys(true); }catch(e){ resetKeys(true); }
+}
+function resetKeys(quiet){ for(const src of ['kb1','kb2']) Object.assign(KM[src],KM_DEF[src]); if(!quiet){ persist(); keysChanged(); } }
+let keyCap=null;
+function openKeys(){ closePops(); keyCap=null; $('keysDlg').hidden=false; $('kdMsg').textContent=''; renderKeys(); keys.clear(); try{ $('kdDone').focus({preventScroll:true}); }catch(e){} $('keysDlg').querySelector('.kd-box').scrollTop=0; }
+function closeKeys(){ keyCap=null; $('keysDlg').hidden=true; keys.clear(); }
+function keysOpen(){ return !$('keysDlg').hidden; }
+// while the keys window is open every key goes to it (so nothing joins or fires by accident)
+function keyCapture(e){
+  if(!keysOpen()) return false;
+  if(!keyCap){ if(e.code==='Escape'){ e.preventDefault(); closeKeys(); } else if(!['Tab','Enter','NumpadEnter','Space'].includes(e.code)) e.preventDefault(); return true; }
+  e.preventDefault(); if(e.repeat) return true;
+  if(e.code==='Escape'){ keyCap=null; renderKeys(); return true; }
+  if(KEY_BLOCK.includes(e.code)){ $('kdMsg').textContent=keyName(e.code)+' is kept for '+(e.code==='KeyM'?'mute':e.code==='Escape'?'pause':'the menus')+'. Pick another key.'; return true; }
+  assignKey(keyCap.src,keyCap.a,e.code); return true;
+}
+function assignKey(src,a,code){
+  const old=KM[src][a]; let msg='';
+  for(const t of ['kb1','kb2']) for(const [b,label] of KEY_ACTS) if(KM[t][b]===code&&!(t===src&&b===a)){ KM[t][b]=old; msg=keyName(code)+' was '+(t==='kb1'?'Keys 1':'Keys 2')+' '+label.toLowerCase()+', so that is now '+keyName(old)+'.'; }
+  KM[src][a]=code; keyCap=null; $('kdMsg').textContent=msg; SFX.ui(); persist(); keysChanged();
+}
+function renderKeys(){
+  if(!keysOpen()) return;
+  let h='<span class="kh">Action</span><span class="kh">Keys 1</span><span class="kh">Keys 2</span>';
+  for(const [a,label,sub] of KEY_ACTS){ h+='<span class="kl">'+label+(sub?'<small>'+sub+'</small>':'')+'</span>';
+    for(const src of ['kb1','kb2']){ const cap=keyCap&&keyCap.src===src&&keyCap.a===a; h+='<button type="button" class="kbtn'+(cap?' cap':'')+'" data-src="'+src+'" data-a="'+a+'" aria-label="'+(src==='kb1'?'Keys 1':'Keys 2')+' '+label+': '+esc(keyName(KM[src][a]))+'">'+(cap?'PRESS A KEY':esc(keyName(KM[src][a])))+'</button>'; } }
+  $('kdGrid').innerHTML=h;
+  $('kdMouseNote').innerHTML=mouseNote();
+}
+function mouseNote(){ return G.mouseFor==='off'?'Mouse aiming is off.':'For '+(G.mouseFor==='kb1'?'Keys 1':'Keys 2')+': point to aim, click to fire (hold the click to see the shot; the machine gun fires while you hold). Right-click (two-finger click on a trackpad) drops a mine, or hold it to throw a bomb. During an air strike the target follows the pointer; click to launch.'; }
+function setMouse(m){ if(!['off','kb1','kb2'].includes(m)) return; G.mouseFor=m; SFX.ui(); persist(); keysChanged(); }
+function keysChanged(){
+  document.querySelectorAll('[data-mouse]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mouse===G.mouseFor)));
+  renderKeys(); renderControlsHelp(); renderLbNote(); if(G.phase==='lobby'&&typeof renderSlots==='function') renderSlots();
+}
+function renderControlsHelp(){
+  for(const src of ['kb1','kb2']){ const k=KM[src], el=$(src==='kb1'?'ctlK1':'ctlK2'); if(!el) continue;
+    el.innerHTML=[[kbd(k.l)+kbd(k.r),'Drive'],[kbd(k.up),'Jetpack (hold)'],[kbd(k.dn),'Drop through a ledge'],[kbd(k.sl)+kbd(k.sr),'Aim the barrel'],[kbd(k.fire),'Hold to charge, release to fire (machine gun: hold)'],
+      [kbd(k.bomb),'Bomb: hold to throw along the barrel, tap for a mine'],[kbd(k.wpn),'Swap between your two weapons'],[kbd(k.strike),'Air strike: steer with the drive and jetpack keys, '+esc(keyName(k.fire))+' or '+esc(keyName(k.strike))+' to launch']]
+      .map(r=>'<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>').join(''); }
+  const mh=$('mouseHelp'); if(mh) mh.innerHTML=(G.mouseFor==='off'?'Mouse aiming is off. Turn it on in settings (the gear).':'<b>Mouse or trackpad</b> · '+mouseNote())+' Change any key in settings.';
+}
+function openSlotText(){ return 'Online players join with the room code. Phones scan the QR code, keyboards press '+keyName(KM.kb1.fire)+' or '+keyName(KM.kb2.fire)+', controllers press A.'; }
+function lbNoteExtra(){ return 'Online players see the match on their own screen, with a camera that follows their tank. Press <kbd class=kc>V</kbd> in a match to make this screen follow your tank too.'; }
+function renderLbNote(){ const el=$('lbNote'); if(!el) return; const a=KM.kb1, b=KM.kb2;
+  el.innerHTML='Keyboards join with '+kbd(a.fire)+' or '+kbd(b.fire)+', change tank with the aim keys, weapons with '+kbd(a.wpn)+' or '+kbd(b.wpn)+', and press the join key again to ready up'+(G.mouseFor!=='off'?' ('+(G.mouseFor==='kb1'?'Keys 1':'Keys 2')+' can aim with the mouse or trackpad)':'')+'. Controllers join with <kbd class="kc">A</kbd>. '+lbNoteExtra(); }
+
+// ---------------- mouse / trackpad aiming ----------------
+// The pointer sets the barrel angle; how far it is from the tank sets the power, like dragging on a phone.
+const MOUSE={x:0,y:0,moved:-99,down:false,rdown:false,rdownT:0,shots:0,bombs:0,mine:false};
+const mClock=()=>performance.now()/1000;
+const _mv=new T.Vector3();
+function mouseLive(){ return G.mouseFor!=='off'&&(G.phase==='battle'||G.phase==='countdown')&&!G.paused&&!keysOpen(); }
+addEventListener('pointermove',e=>{ if(e.pointerType==='touch') return; MOUSE.x=e.clientX; MOUSE.y=e.clientY; MOUSE.moved=mClock(); },{passive:true});
+addEventListener('pointerdown',e=>{
+  if(e.pointerType==='touch'||!mouseLive()) return;
+  const t=e.target; if(t&&t.closest&&t.closest('button,input,a,label,select,.popover,.keysdlg,.dialog')) return;
+  MOUSE.x=e.clientX; MOUSE.y=e.clientY; MOUSE.moved=mClock();
+  if(e.button===0) MOUSE.down=true; else if(e.button===2){ MOUSE.rdown=true; MOUSE.rdownT=mClock(); }
+});
+addEventListener('pointerup',e=>{
+  if(e.button===0&&MOUSE.down){ MOUSE.down=false; MOUSE.moved=mClock(); if(mouseLive()) MOUSE.shots++; }
+  else if(e.button===2&&MOUSE.rdown){ MOUSE.rdown=false; if(mouseLive()){ MOUSE.mine=mClock()-MOUSE.rdownT<=0.2; MOUSE.bombs++; } }
+});
+addEventListener('pointercancel',()=>{ MOUSE.down=false; MOUSE.rdown=false; });
+addEventListener('blur',()=>{ MOUSE.down=false; MOUSE.rdown=false; });
+addEventListener('contextmenu',e=>{ if(mouseLive()){ const t=e.target; if(!(t&&t.closest&&t.closest('input,textarea'))) e.preventDefault(); } });
+// where the pointer is in the arena (on the plane the tanks drive in)
+function pointerWorld(){
+  const r=canvas.getBoundingClientRect(); if(!r.width||!r.height) return null;
+  _mv.set((MOUSE.x-r.left)/r.width*2-1,-((MOUSE.y-r.top)/r.height)*2+1,0.5).unproject(camera).sub(camera.position);
+  if(Math.abs(_mv.z)<1e-6) return null; const t=-camera.position.z/_mv.z; if(!(t>0)) return null;
+  return {x:camera.position.x+_mv.x*t,y:camera.position.y+_mv.y*t};
+}
+// aim from a tank to the pointer: barrel angle, a shot vector (length = power) and the world point
+function mouseAimFrom(tk){
+  if(window.__SALVO_TEST__&&window.__mouseAim) return window.__mouseAim(tk);
+  const W=pointerWorld(); if(!W) return null;
+  const px=tk.x, py=tk.y+1.36*tk.s, dx=W.x-px, dy=W.y-py, d=Math.hypot(dx,dy); if(d<0.05) return null;
+  const r=canvas.getBoundingClientRect(); _mv.set(px,py,0).project(camera);
+  const sx=(_mv.x+1)/2*r.width+r.left, sy=(1-_mv.y)/2*r.height+r.top, pd=Math.hypot(MOUSE.x-sx,MOUSE.y-sy);
+  const L=clamp(pd/(0.36*Math.min(r.width,r.height)),0.13,1);
+  return {a:vecAngle(dx,dy),v:{x:dx/d*L,y:dy/d*L},w:W};
+}
+function mouseControls(p,c){
+  const tk=G.tanks.find(t=>t.p===p), sync=()=>{ p.mShots=MOUSE.shots; p.mBombs=MOUSE.bombs; };
+  if(p.mShots===undefined) sync();
+  if(!tk||!tk.onField||!mouseLive()){ sync(); return; }
+  const live=MOUSE.down||MOUSE.rdown||MOUSE.shots>p.mShots||MOUSE.bombs>p.mBombs||mClock()-MOUSE.moved<2.5, m=live?mouseAimFrom(tk):null;
+  if(tk.aiming){ if(m) c.strikeAt=m.w; if(MOUSE.shots>p.mShots) c.fire={}; sync(); return; }
+  if(m){ const auto=WEAPONS[tk.weapon].auto&&!tk.mega&&!tk.seek;
+    if(!c.swing) c.aimAng=m.a;
+    if(MOUSE.down){ c.vec=m.v; c.autoAim=true; }
+    if(MOUSE.shots>p.mShots&&!auto) c.fire={vec:m.v};
+    if(MOUSE.rdown&&mClock()-MOUSE.rdownT>0.2) c.bombAim=m.v;
+    if(MOUSE.bombs>p.mBombs) c.bomb=MOUSE.mine?{mine:true}:{vec:m.v}; }
+  sync();
+}
+function mouseCursor(){ const on=mouseLive()&&G.tanks.some(t=>t.p.src===G.mouseFor||(G.role==='guest'&&t.p.slot===(typeof OL!=='undefined'?OL.slot:-1))); if(on!==app.classList.contains('maim')) app.classList.toggle('maim',on); }
 addEventListener('keydown',e=>{
+  if(keyCapture(e)) return;
   SFX.init();
   if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) e.preventDefault();
   if(e.repeat) return;
@@ -3543,7 +3674,8 @@ function onMsg(conn,d){
   const p=G.players.find(x=>x&&x.conn===conn); if(!p) return;
   if(d.t==='in'){ if(typeof d.q==='number'){ if(d.q<=p.lastQ) return; p.lastQ=d.q; } p.inAge=0; const I=p.input; I.mx=num(d.mx,-1,1); I.up=!!d.up; I.dn=!!d.dn; I.aim=!!d.aim; I.ax=num(d.ax,-1,1); I.ay=num(d.ay,-1,1); I.shot=d.shot|0; I.fx=num(d.fx,-1,1); I.fy=num(d.fy,-1,1); I.bomb=d.bomb|0; I.baim=!!d.baim; I.bx=num(d.bx,-1,1); I.by=num(d.by,-1,1); I.bm=!!d.bm; I.my=num(d.my,-1,1); I.w=typeof d.w==='number'?clamp(d.w|0,0,WEAPONS.length-1):-1; I.st=d.st|0;
     if(p.lastShot===null) p.lastShot=I.shot; if(p.lastBomb===null) p.lastBomb=I.bomb; if(p.lastSt===null) p.lastSt=I.st;
-    if(p.src==='online'&&d.k&&typeof d.k==='object'){ const k=d.k; const Q=p.kq||(p.kq=[]); Q.push({mx:num(k.mx,-1,1),up:!!k.up,dn:!!k.dn,sw:num(k.sw,-1,1),ch:!!k.ch,bh:!!k.bh,wt:k.wt|0,sk:k.sk|0,ft:k.ft|0}); if(Q.length>60) Q.splice(0,Q.length-60); } }
+    if(p.src==='online'&&d.k&&typeof d.k==='object'){ const k=d.k; const Q=p.kq||(p.kq=[]); Q.push({mx:num(k.mx,-1,1),up:!!k.up,dn:!!k.dn,sw:num(k.sw,-1,1),ch:!!k.ch,bh:!!k.bh,wt:k.wt|0,sk:k.sk|0,ft:k.ft|0}); if(Q.length>60) Q.splice(0,Q.length-60); }
+    if(p.src==='online'){ const o=d.mo; p.mo=Array.isArray(o)?{a:typeof o[0]==='number'?num(o[0],-90,270):null,h:!!o[1],v:{x:num(o[2],-1,1),y:num(o[3],-1,1)},s:o[4]|0,rh:!!o[5],b:o[6]|0,m:!!o[7],w:{x:num(o[8],-600,600),y:num(o[9],-600,600)},ok:!!o[10]}:null; } }
   else if(d.t==='pick'){ if(G.phase==='lobby'){ p.tank=clamp(d.tank|0,0,TANKS.length-1); p.ready=false; sendLobby(p); onPlayersChanged(); } }
   else if(d.t==='ready'){ if(G.phase==='lobby'){ p.ready=!!d.ready; broadcastLobby(); renderSlots(); } }
   else if(d.t==='team'){ cycleTeam(p); }
@@ -3711,7 +3843,6 @@ function updateStartUI(n,allReady){
   if(note.textContent!==txt) note.textContent=txt; note.classList.toggle('go',allReady);
 }
 // The open-slot card says how to join (the online version has its own wording)
-function openSlotText(){ return 'Online players join with the room code. Phones scan the QR code, keyboards press G or K, controllers press A.'; }
 // A person's card: their tank turning on a show platform with its driver, and a name plate underneath
 function heroCard(i,p,o){
   o=o||{}; const st=SLOTS[i], t=TANKS[p.tank], teams=teamsActive(), tm=G.teamsOn?teamOfSlot(i):-1, lo=normLoadout(p.loadout), mk=markerColor(i);
@@ -3778,7 +3909,7 @@ function showVictory(){
   renderRecord(); showScreen('victory');
 }
 function setMuted(m){ SFX.setMuted(m); syncVol(); persist(); }
-function persist(){ try{ localStorage.setItem('salvo-ol-brawl',JSON.stringify({arena:G.arena,wins:G.wins,cpuLevel:G.cpuLevel,size:G.size,muted:SFX.muted,pwrOn:G.pwrOn,pwrFreq:G.pwrFreq,pwrTypes:G.pwrTypes,lives:G.lives,mode:G.mode,mins:G.mins,teamsOn:G.teamsOn,amode:G.amode,musicVol:SFX.musicVol,sfxVol:SFX.sfxVol})); }catch(e){} }
+function persist(){ try{ localStorage.setItem('salvo-ol-brawl',JSON.stringify({arena:G.arena,wins:G.wins,cpuLevel:G.cpuLevel,size:G.size,muted:SFX.muted,pwrOn:G.pwrOn,pwrFreq:G.pwrFreq,pwrTypes:G.pwrTypes,lives:G.lives,mode:G.mode,mins:G.mins,teamsOn:G.teamsOn,amode:G.amode,keys:KM,mouse:G.mouseFor,musicVol:SFX.musicVol,sfxVol:SFX.sfxVol})); }catch(e){} }
 const FAM_COL={isles:'#8fdc5a',frost:'#8fe6ff',foundry:'#ff7a32',orbit:'#b58cff',rift:'#3dffd0',deep:'#3db4ff'};
 function arenaDesc(){ const A=ARENAS[G.arena], f=FAMILIES[currentPick()], m=AMODES.find(x=>x.k===G.amode)||AMODES[0];
   $('arenaDesc').innerHTML='<b>'+A.name+'</b> · '+f.special+(G.amode==='active'?' <em>Active map: '+f.active.toLowerCase()+'.</em>':G.amode==='bounce'?' <em>'+m.d+'</em>':''); }
@@ -3863,6 +3994,12 @@ function buildMenus(){
   $('startBtn').addEventListener('click',()=>{ SFX.init(); startCountdown(); });
   $('retryBtn').addEventListener('click',()=>{ if(NET.P) openRoom(); });
   $('resumeBtn').addEventListener('click',()=>setPaused(false));
+  document.querySelectorAll('[data-mouse]').forEach(b=>b.addEventListener('click',()=>setMouse(b.dataset.mouse)));
+  document.querySelectorAll('[data-keys]').forEach(b=>b.addEventListener('click',()=>{ SFX.init(); SFX.ui(); openKeys(); }));
+  $('kdGrid').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('.kbtn'); if(!b) return; keyCap={src:b.dataset.src,a:b.dataset.a}; $('kdMsg').textContent=''; renderKeys(); });
+  $('kdClose').addEventListener('click',closeKeys); $('kdDone').addEventListener('click',closeKeys); $('kdReset').addEventListener('click',()=>{ SFX.ui(); resetKeys(); $('kdMsg').textContent='Back to the original keys.'; });
+  $('keysDlg').addEventListener('click',e=>{ if(e.target===$('keysDlg')) closeKeys(); });
+  keysChanged();
   $('lobbyBtn').addEventListener('click',()=>{ G.paused=false; enterLobby(); });
   $('rematchBtn').addEventListener('click',()=>{ SFX.ui(); startCountdown(); });
   $('vLobbyBtn').addEventListener('click',()=>enterLobby());
@@ -3990,6 +4127,7 @@ addEventListener('resize',resize);
 if(window.ResizeObserver) new ResizeObserver(resize).observe(app);
 const flashEl=$('flashfx');
 function render(rdt){
+  mouseCursor();
   G.ab=Math.max(0,G.ab-rdt*0.04); G.flash=Math.max(0,G.flash-rdt*1.8);
   for(const a of world.anim){ if(a.type==='bob') a.o.position.y=a.y+Math.sin(timeNow*0.4+a.ph)*a.amp; else if(a.type==='drift'){ a.o.position.x+=a.sp*0.016; if(a.o.position.x>260) a.o.position.x=-260; }
     else if(a.type==='lava'||a.type==='aurora') a.o.material.uniforms.uT.value=timeNow;
@@ -4119,6 +4257,21 @@ function onlineKeys(p,c){
   const L=p.kLast||K;
   if(K.wt>L.wt) c.weaponTap=Math.min(WEAPONS.length,K.wt-L.wt); if(K.sk>L.sk) c.strike=true; if(K.ft>L.ft) c.fireTap=true;
   p.kLast={wt:K.wt,sk:K.sk,ft:K.ft};
+}
+// mouse / trackpad aiming sent by an online player: barrel angle, hold-to-aim, clicks, right-clicks, strike target
+function onlineMouse(p,c){
+  const m=p.mo; if(!m) return; const tk=G.tanks.find(t=>t.p===p);
+  if(p.moS===undefined||p.moS>m.s||p.moB>m.b){ p.moS=m.s; p.moB=m.b; }
+  const sync=()=>{ p.moS=m.s; p.moB=m.b; };
+  if(!tk||!tk.onField||p.inAge>1.5){ sync(); return; }
+  if(tk.aiming){ if(m.ok) c.strikeAt=m.w; if(m.s>p.moS) c.fire={}; sync(); return; }
+  if(m.ok){ const auto=WEAPONS[tk.weapon].auto&&!tk.mega&&!tk.seek;
+    if(typeof m.a==='number'&&!c.swing&&!c.vec) c.aimAng=m.a;
+    if(m.h){ c.vec=m.v; c.autoAim=true; }
+    if(m.s>p.moS&&!auto) c.fire={vec:m.v};
+    if(m.rh) c.bombAim=m.v;
+    if(m.b>p.moB) c.bomb=m.m?{mine:true}:{vec:m.v}; }
+  sync();
 }
 function inviteUrl(code){ try{ const u=new URL('index.html',location.href); u.search='?join='+code; u.hash=''; return u.href; }catch(e){ return 'index.html?join='+code; } }
 
@@ -4284,6 +4437,8 @@ function olInput(rdt){
   const typing=document.activeElement&&document.activeElement.tagName==='INPUT'&&document.activeElement.type==='text';
   const h=c=>!typing&&live&&keys.has(c), A=KM.kb1, B=KM.kb2, two=k=>h(A[k])||h(B[k]);
   const m={t:'in',k:{mx:(two('r')?1:0)-(two('l')?1:0),up:two('up'),dn:two('dn'),sw:(two('sl')?1:0)-(two('sr')?1:0),ch:two('fire'),bh:two('bomb'),wt:OL.kq.wt,sk:OL.kq.sk,ft:OL.kq.ft}};
+  if(G.mouseFor!=='off'&&live){ const me=myTank(), act=MOUSE.down||MOUSE.rdown||mClock()-MOUSE.moved<2.5, a=me&&me.onField&&act&&mouseLive()?mouseAimFrom(me):null;
+    m.mo=[a?R1(a.a):null,MOUSE.down?1:0,a?R2(a.v.x):0,a?R2(a.v.y):0,MOUSE.shots,MOUSE.rdown&&mClock()-MOUSE.rdownT>0.2?1:0,MOUSE.bombs,MOUSE.mine?1:0,a?R1(a.w.x):0,a?R1(a.w.y):0,a?1:0]; }
   const P=OL.pad.inMsg;
   if(P){ const fresh=performance.now()-OL.pad.inAt<1500;
     for(const f of ['shot','fx','fy','bomb','bx','by','bm','st']) if(P[f]!==undefined) m[f]=P[f];
@@ -4297,9 +4452,10 @@ function guestKey(code){
   if(code==='Escape'){ const g=$('gmenu'); g.hidden=!g.hidden; if(!g.hidden) syncGMenu(); return; }
   if(!$('gmenu').hidden) return;
   if(OL.mode==='lobby'){
-    if(['KeyA','KeyF','ArrowLeft','KeyJ'].includes(code)) guestPick(-1);
-    else if(['KeyD','KeyH','ArrowRight','KeyL'].includes(code)) guestPick(1);
-    else if(['KeyG','KeyK','Enter','NumpadEnter','Space'].includes(code)) guestReady();
+    const A=KM.kb1, B=KM.kb2;
+    if([A.l,A.sl,B.l,B.sl].includes(code)) guestPick(-1);
+    else if([A.r,A.sr,B.r,B.sr].includes(code)) guestPick(1);
+    else if([A.fire,B.fire,'Enter','NumpadEnter'].includes(code)) guestReady();
     else if(code===KM.kb1.wpn||code===KM.kb2.wpn) guestLoadout();
     return; }
   if(code==='KeyV'){ toggleFollow(); return; }
@@ -4519,6 +4675,16 @@ function renderGuestPad(){
   else { qr._url=''; qr.className='qr empty'; qr.textContent=ok?'SCAN UNAVAILABLE':'GETTING READY'; }
   $('gPadStatus').textContent=OL.pad.conn?'Your phone is connected. Use it to drive and aim, or keep using the keys.':'Optional: scan with your phone camera to use it as your controller instead of the keys.';
 }
+function renderGuestHelp(){
+  const a=KM.kb1, b=KM.kb2, el1=$('gCtl1'), el2=$('gCtl2'); if(!el1||!el2) return;
+  const or=(x,y)=>' (or '+x+')';
+  el1.innerHTML=[[kbd(a.l)+kbd(a.r),'Drive'+or(esc(keyName(b.l))+' '+esc(keyName(b.r)))],[kbd(a.up),'Jetpack, hold'+or(esc(keyName(b.up)))],[kbd(a.dn),'Drop through a ledge'+or(esc(keyName(b.dn)))],
+    [kbd(a.sl)+kbd(a.sr),'Aim the barrel'+or(esc(keyName(b.sl))+' '+esc(keyName(b.sr)))],[kbd(a.fire),'Hold to charge, release to fire'+or(esc(keyName(b.fire)))+'. Machine gun: hold']].map(r=>'<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>').join('');
+  el2.innerHTML=[[kbd(a.bomb),'Bomb: hold to throw, tap for a mine'+or(esc(keyName(b.bomb)))],[kbd(a.wpn),'Swap between your two weapons'+or(esc(keyName(b.wpn)))],[kbd(a.strike),'Air strike: steer with the drive keys, fire to launch'+or(esc(keyName(b.strike)))],
+    ['<kbd class="kc">V</kbd>','Camera: follow your tank or see everything'],['<kbd class="kc">Esc</kbd>','Menu · <kbd class="kc">M</kbd> mute']].map(r=>'<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>').join('');
+  const mh=$('gMouseHelp'); if(mh) mh.innerHTML=G.mouseFor==='off'?'Mouse aiming is off. Turn it on in settings (the gear).':'<b>Mouse or trackpad</b> · point to aim, click to fire (hold the click to see the shot; the machine gun fires while you hold). Right-click (two-finger click) drops a mine, or hold it to throw a bomb. During an air strike the target follows the pointer; click to launch.';
+}
+{ const base=renderControlsHelp; renderControlsHelp=function(){ base(); renderGuestHelp(); }; }
 function syncGMenu(){ $('gmCam').textContent='CAMERA · '+(G.follow?'FOLLOW MY TANK':'WHOLE BATTLE'); $('gmRoom').textContent=OL.code; }
 
 // Browsers stop animation frames in a hidden tab. The host's tab keeps the match running anyway (a worker's timer
@@ -4536,7 +4702,7 @@ G.arena=clamp((saved.arena!==undefined?saved.arena:store.arena)|0,0,ARENAS.lengt
 G.wins=Array.isArray(saved.wins)?saved.wins.slice(0,MAXP):Array.isArray(store.wins)?store.wins.slice(0,MAXP):[];
 while(G.wins.length<MAXP) G.wins.push(0);
 G.pwrOn=saved.pwrOn!==undefined?!!saved.pwrOn:store.pwrOn!==undefined?!!store.pwrOn:!!store.starOn;
-G.amode=['regular','bounce','active'].includes(store.amode)?store.amode:'regular'; G.mode=store.mode==='time'?'time':'stock'; G.mins=clamp(store.mins|0||3,1,10); G.lives=clamp(store.lives|0||3,1,9); G.teamsOn=!!store.teamsOn; G.cpuLevel=clamp(store.cpuLevel|0||5,1,10); G.size=SIZES.includes(store.size)?store.size:'regular';
+G.amode=['regular','bounce','active'].includes(store.amode)?store.amode:'regular'; loadKeys(store.keys); G.mouseFor=['off','kb1','kb2'].includes(store.mouse)?store.mouse:'kb1'; G.mode=store.mode==='time'?'time':'stock'; G.mins=clamp(store.mins|0||3,1,10); G.lives=clamp(store.lives|0||3,1,9); G.teamsOn=!!store.teamsOn; G.cpuLevel=clamp(store.cpuLevel|0||5,1,10); G.size=SIZES.includes(store.size)?store.size:'regular';
 G.pwrFreq=clamp(store.pwrFreq|0||2,1,4); if(store.pwrTypes&&typeof store.pwrTypes==='object') PWR_KEYS.forEach(k=>{ G.pwrTypes[k]=store.pwrTypes[k]!==false; }); if(!PWR_KEYS.some(k=>G.pwrTypes[k])) PWR_KEYS.forEach(k=>{ G.pwrTypes[k]=true; });
 loadArena(G.arena);
 buildMenus();
@@ -4544,7 +4710,7 @@ resize();
 olWrap();
 olBoot();
 { const v=world.arena.view; frameBox(v[0]-6,v[1]+6,v[2]+2,v[3]+2,0); CAM.x=CAM.tx; CAM.y=CAM.ty; CAM.d=CAM.td; }
-if(window.__SALVO_TEST__) window.__salvo={G,CFG,world,ARENAS,TANKS,NET,WEAPONS,startStrike,launchStrike,addCpu,removeCpu,cycleTeam,choosePick,chooseSize,currentPick,teamsActive,TEAMS,SLOTS,FAMILIES,openRoom,rtcConfig,loadArena,startCountdown,enterLobby,addPlayer,removePlayer,keys,taps,onMsg,onConnClose,wireConn,useBomb,spawnPower,kbMult,distBoxes,PWR,PWR_FREQ,hostSlot,hostAction,musicPace,pwrLevel,setPwrLevel,selectArena,syncOpts,CAM,SHOW,SFX,setPaused,markerColor,shakeScale,cycleLoadout,normLoadout,LOADOUTS,lobbyKey,ENV,ACT,actStart,actEnd,actUpdate,ventUpdate,envFor,ARENA_LIST,arenaFor,setAmode,lobbyCfg,AMODES,cpuHazard,cpuControls:typeof cpuControls==='function'?cpuControls:null,FAM_COL,OL,startHost,startGuest,olReset,myTank,toggleFollow,olSnap,olRosterMsg,onlineList,OLFN,keysSet:keys,showScreen,get olEv(){ return olEv; }};
+if(window.__SALVO_TEST__) window.__salvo={G,CFG,world,ARENAS,TANKS,NET,WEAPONS,startStrike,launchStrike,addCpu,removeCpu,cycleTeam,choosePick,chooseSize,currentPick,teamsActive,TEAMS,SLOTS,FAMILIES,openRoom,rtcConfig,loadArena,startCountdown,enterLobby,addPlayer,removePlayer,keys,taps,onMsg,onConnClose,wireConn,useBomb,spawnPower,kbMult,distBoxes,PWR,PWR_FREQ,hostSlot,hostAction,musicPace,pwrLevel,setPwrLevel,selectArena,syncOpts,CAM,SHOW,SFX,setPaused,markerColor,shakeScale,cycleLoadout,normLoadout,LOADOUTS,lobbyKey,ENV,ACT,actStart,actEnd,actUpdate,ventUpdate,envFor,ARENA_LIST,arenaFor,setAmode,lobbyCfg,AMODES,cpuHazard,cpuControls:typeof cpuControls==='function'?cpuControls:null,FAM_COL,KM,MOUSE,mouseAimFrom,mouseControls,pointerWorld,openKeys,closeKeys,assignKey,resetKeys,setMouse,keyName,controlsFor,OL,startHost,startGuest,olReset,myTank,toggleFollow,olSnap,olRosterMsg,onlineList,OLFN,keysSet:keys,showScreen,get olEv(){ return olEv; }};
 try{ if(window.claude&&window.claude.hot&&window.claude.hot.snapshot) window.claude.hot.snapshot(()=>({arena:G.arena,wins:G.wins,pwrOn:G.pwrOn})); }catch(e){}
 requestAnimationFrame(t=>{ lastT=t; frame(t); setTimeout(()=>$('boot').classList.add('gone'),250); });
 }
