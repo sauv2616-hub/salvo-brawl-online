@@ -1,7 +1,7 @@
 {
-  "name": "Salvo Brawl Online Controller",
+  "name": "Salvo Online Controller",
   "short_name": "Salvo Pad",
-  "description": "Phone controller for Salvo Brawl Online.",
+  "description": "Phone controller for Salvo Online.",
   "start_url": "./controller.html",
   "scope": "./",
   "display": "fullscreen",

@@ -12,7 +12,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="icon-192.png">
-<title>Salvo Brawl Online Controller</title>
+<title>Salvo Online Controller</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Teko:wght@400;500;600;700&display=swap">
@@ -78,6 +78,15 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 .lob-actions .ghost{min-height:36px;padding:7px 10px;font-size:11px;letter-spacing:.12em;}
 .lob-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;display:flex;flex-direction:column;gap:8px;}
 .tanklist{display:flex;flex-direction:column;gap:8px;}
+.wpnpick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:6px;}
+.wcard{position:relative;display:flex;flex-direction:column;gap:3px;text-align:left;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid var(--edge);border-left:4px solid transparent;}
+.wcard b{font-family:var(--display);font-weight:600;font-size:24px;line-height:.85;padding-top:.08em;letter-spacing:.04em;}
+.wcard b i{font-style:normal;color:var(--ink-dim);margin-right:6px;}
+.wcard small{font-size:11.5px;line-height:1.35;color:var(--ink-dim);}
+.wcard[aria-pressed="true"]{border-left-color:var(--pc);background:rgba(255,255,255,.1);}
+.wcard[aria-pressed="true"] b i{color:var(--pc);}
+.wcard em{order:-1;align-self:flex-start;margin-bottom:2px;padding:2px 6px 1px;font-style:normal;font-size:8.5px;font-weight:700;letter-spacing:.18em;background:var(--pc);color:var(--night);}
+@media (max-width:480px){ .wcard b{font-size:20px;} .wcard{padding:9px 10px;} }
 .tcard{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;text-align:left;padding:12px 14px 12px 12px;background:rgba(255,255,255,.04);border:1px solid var(--edge);border-left:4px solid transparent;}
 .tcard[aria-pressed="true"]{border-left-color:var(--pc);background:rgba(255,255,255,.1);}
 .tn{font-family:var(--display);font-weight:600;font-size:30px;line-height:.85;padding-top:.08em;letter-spacing:.04em;}
@@ -99,7 +108,34 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 }
 
 /* host: match setup on the first phone */
-.hostbox{display:flex;flex-direction:column;gap:8px;padding:12px;background:rgba(255,255,255,.04);border:1px solid var(--edge);border-top:2px solid var(--pc);}
+.hostbox{display:flex;flex-direction:column;gap:14px;padding:12px;background:rgba(255,255,255,.04);border:1px solid var(--edge);border-top:2px solid var(--pc);}
+.ltabs{position:sticky;top:0;z-index:2;flex:none;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--edge);background:var(--night);}
+.ltabs button{min-height:46px;padding:6px 4px;background:none;border:0;font-weight:700;font-size:11.5px;letter-spacing:.14em;color:var(--ink-dim);}
+.ltabs button+button{border-left:1px solid var(--edge);}
+.ltabs button[aria-selected="true"]{background:var(--alert);color:#1a1300;}
+.lpane{display:flex;flex-direction:column;gap:8px;}
+.lpane[hidden]{display:none;}
+.nextbtn{margin-top:4px;min-height:48px;}
+.hsec{display:flex;flex-direction:column;gap:7px;}
+.hh{display:flex;align-items:baseline;gap:10px;min-width:0;}
+.hh span{flex:none;font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--ink-dim);}
+.hh b{font-family:var(--display);font-weight:600;font-size:22px;line-height:.9;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hfam{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;}
+.hfam button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:54px;padding:8px 9px;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--edge);border-left:4px solid var(--fc);min-width:0;}
+.hfam b{font-family:var(--display);font-weight:600;font-size:18px;line-height:.9;padding-top:.06em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hfam small{font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--fc);}
+.hfam button[aria-pressed="true"]{border-color:var(--fc);background:rgba(255,255,255,.14);background:color-mix(in srgb,var(--fc) 24%,transparent);}
+.hdesc{margin:0;font-size:12px;line-height:1.45;color:var(--ink-dim);}
+.hseg{display:flex;border:1px solid var(--edge);min-width:0;}
+.hseg button{flex:1;min-width:0;min-height:44px;padding:6px 4px;background:none;border:0;font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--ink-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hseg button+button{border-left:1px solid var(--edge);}
+.hseg button[aria-pressed="true"]{background:var(--alert);color:#1a1300;}
+.hrow{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;}
+.hrow .hseg{flex:1 1 190px;}
+.hchips{display:flex;flex-wrap:wrap;gap:6px;}
+.hchips button{min-height:38px;padding:6px 10px;background:rgba(255,255,255,.04);border:1px solid var(--edge);font-weight:700;font-size:11px;letter-spacing:.08em;color:var(--ink-dim);}
+.hchips button[aria-pressed="true"]{color:var(--ink);border-color:var(--alert);background:rgba(255,208,74,.12);}
+.hchips.off button{opacity:.4;}
 .harena{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;}
 .hav{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;min-width:0;}
 .hav b{font-family:var(--display);font-weight:600;font-size:30px;line-height:.85;padding-top:.08em;letter-spacing:.03em;}
@@ -210,7 +246,7 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 <body>
 <section class="view" id="vJoin" hidden>
   <div class="kicker">PHONE CONTROLLER</div>
-  <div class="logo">SALVO BRAWL</div>
+  <div class="logo">SALVO</div>
   <form id="joinForm" autocomplete="off">
     <label for="codeIn">ROOM CODE</label>
     <input id="codeIn" inputmode="text" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="4" placeholder="····" aria-label="Room code">
@@ -236,29 +272,33 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
     <div class="lob-actions"><button class="ghost" id="teamPick" type="button" hidden>TEAM</button><button class="ghost" id="sndBtn" type="button" aria-pressed="true">SOUND · ON</button><button class="ghost fsbtn" type="button">FULL SCREEN</button><button class="ghost" id="leaveBtn" type="button">LEAVE</button></div>
   </div>
   <div class="lob-body">
-    <div class="hostbox" id="hostBox" hidden>
-      <div class="kicker">YOU'RE THE HOST · MATCH SETUP</div>
-      <div class="harena">
-        <button class="hbtn arrow" type="button" data-a="arena" data-d="-1" aria-label="Previous arena">◀</button>
-        <div class="hav"><b id="hArena">ARENA</b><small id="hArenaTag"></small></div>
-        <button class="hbtn arrow" type="button" data-a="arena" data-d="1" aria-label="Next arena">▶</button>
-      </div>
-      <div class="hopts">
-        <button class="hbtn" type="button" data-a="size" id="hSize" hidden>SIZE · REGULAR</button>
-        <button class="hbtn" type="button" data-a="mode" id="hMode">MODE · LIVES</button>
-        <span class="hstep"><button class="hbtn sq" type="button" data-a="count" data-d="-1" aria-label="Less">−</button><b id="hCount">3 LIVES</b><button class="hbtn sq" type="button" data-a="count" data-d="1" aria-label="More">+</button></span>
-        <button class="hbtn" type="button" data-a="teams" id="hTeams">FREE-FOR-ALL</button>
-        <button class="hbtn" type="button" data-a="pair" id="hPair" hidden>AUTO TEAMS</button>
-        <button class="hbtn" type="button" data-a="pwr" id="hPwr">POWER-UPS · NORMAL</button>
-      </div>
-      <div class="hopts">
-        <span class="hstep"><small class="hlab">CPUS</small><button class="hbtn sq" type="button" data-a="cpu" data-d="-1" aria-label="Fewer CPUs">−</button><b id="hCpu">0</b><button class="hbtn sq" type="button" data-a="cpu" data-d="1" aria-label="More CPUs">+</button></span>
-        <span class="hstep"><small class="hlab">LEVEL</small><button class="hbtn sq" type="button" data-a="cpulvl" data-d="-1" aria-label="Easier CPUs">−</button><b id="hLv">5</b><button class="hbtn sq" type="button" data-a="cpulvl" data-d="1" aria-label="Harder CPUs">+</button></span>
-      </div>
-      <div class="hteams" id="hTeamsSum"></div>
+    <div class="ltabs" id="lTabs" role="tablist" hidden>
+      <button type="button" role="tab" data-tab="tank" aria-selected="true">1 · YOUR TANK</button>
+      <button type="button" role="tab" data-tab="setup" aria-selected="false">2 · MATCH SETUP</button>
     </div>
-    <div class="kicker">PICK YOUR TANK</div>
-    <div class="tanklist" id="tankList"></div>
+    <div class="lpane" id="paneTank">
+      <div class="kicker">PICK 2 WEAPONS · SWAP BETWEEN THEM IN THE MATCH</div>
+      <div class="wpnpick" id="wpnPick"></div>
+      <div class="kicker">PICK YOUR TANK</div>
+      <div class="tanklist" id="tankList"></div>
+      <button class="ghost nextbtn" id="toSetup" type="button" hidden>NEXT · MATCH SETUP →</button>
+    </div>
+    <div class="lpane hostbox" id="hostBox" hidden>
+      <div class="hsec"><div class="hh"><span>ARENA</span><b id="hArena">—</b></div><div class="hfam" id="hFam"></div><p class="hdesc" id="hDesc"></p></div>
+      <div class="hsec"><div class="hh"><span>ARENA SIZE</span></div>
+        <div class="hseg" id="hSize"><button type="button" data-a="sizeset" data-d="0">SMALL</button><button type="button" data-a="sizeset" data-d="1">BIG</button><button type="button" data-a="sizeset" data-d="2">MEGA</button></div></div>
+      <div class="hsec"><div class="hh"><span>ARENA TYPE</span></div>
+        <div class="hseg" id="hAm"><button type="button" data-a="amode" data-d="0">REGULAR</button><button type="button" data-a="amode" data-d="1">BOUNCE</button><button type="button" data-a="amode" data-d="2">ACTIVE</button></div></div>
+      <div class="hsec"><div class="hh"><span>POWER-UPS</span></div><div class="hseg" id="hPwr"></div><div class="hchips" id="hPk"></div></div>
+      <div class="hsec"><div class="hh"><span>BOTS</span></div>
+        <div class="hrow"><span class="hstep"><small class="hlab">HOW MANY</small><button class="hbtn sq" type="button" data-a="cpu" data-d="-1" aria-label="Fewer bots">−</button><b id="hCpu">0</b><button class="hbtn sq" type="button" data-a="cpu" data-d="1" aria-label="More bots">+</button></span>
+          <span class="hstep"><small class="hlab">DIFFICULTY</small><button class="hbtn sq" type="button" data-a="cpulvl" data-d="-1" aria-label="Easier bots">−</button><b id="hLv">5</b><button class="hbtn sq" type="button" data-a="cpulvl" data-d="1" aria-label="Harder bots">+</button></span></div></div>
+      <div class="hsec"><div class="hh"><span>MATCH</span></div>
+        <div class="hrow"><div class="hseg" id="hMode"><button type="button" data-a="modeset" data-d="0">LIVES</button><button type="button" data-a="modeset" data-d="1">TIMED</button></div>
+          <span class="hstep"><button class="hbtn sq" type="button" data-a="count" data-d="-1" aria-label="Less">−</button><b id="hCount">3 LIVES</b><button class="hbtn sq" type="button" data-a="count" data-d="1" aria-label="More">+</button></span></div>
+        <div class="hrow"><div class="hseg" id="hTeams"><button type="button" data-a="teamset" data-d="0">FREE-FOR-ALL</button><button type="button" data-a="teamset" data-d="1">TEAMS</button></div><button class="hbtn" type="button" data-a="pair" id="hPair" hidden>AUTO TEAMS</button></div>
+        <div class="hteams" id="hTeamsSum"></div></div>
+    </div>
   </div>
   <div class="lob-side">
     <p class="lob-note" id="lobNote">The brawl starts when everyone is ready, or when the host starts it. Turn your phone sideways and go full screen to play.</p>
@@ -275,7 +315,7 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
   <div class="bombbtn" id="bombBtn" role="button" aria-label="Bomb"><b>BOMB</b><span class="bp" id="bombPips" title="Mines planted"><i></i><i></i></span><small>DRAG TO THROW<br>TAP: MINE</small></div>
   <div class="fschip" id="fsChip" role="button" aria-label="Full screen">⤢</div>
   <div class="menuchip" id="menuChip" role="button" aria-label="Pause" hidden><b>❚❚</b>MENU</div>
-  <div class="wpnbtn" id="wpnBtn" role="button" aria-label="Switch weapon"><b id="wpnName">◆ MISSILE</b><small>TAP TO SWITCH</small></div>
+  <div class="wpnbtn" id="wpnBtn" role="button" aria-label="Switch weapon"><b id="wpnName">◆ MISSILE</b><small>TAP TO SWAP</small></div>
   <div class="strikebtn" id="strikeBtn" role="button" aria-label="Air strike" hidden><i>◎</i><b>AIR<br>STRIKE</b></div>
   <div class="launchbtn" id="launchBtn" role="button" aria-label="Launch air strike" hidden><b>LAUNCH</b><small>3 MISSILES</small></div>
   <div class="striketip" id="strikeTip" hidden>MOVE THE RED TARGET WITH THE LEFT STICK · TAP LAUNCH</div>
@@ -330,6 +370,7 @@ const $=id=>document.getElementById(id);
 const PREFIX='salvobrawlol-';
 const LABELS=['SPEED','ARMOR','BLAST','RELOAD','JET'];
 const WPN=['◆ MISSILE','≡ MACHINE GUN','⊕ SNIPER','⬤ BAZOOKA'];
+const WINFO=['Arcing shot. Hold longer for more power','Rapid fire. Keep aiming to spray','Very fast and hard-hitting, slow reload','Huge blast, slowest shot and reload'];
 const TEAMN=['RED','BLUE','GREEN','GOLD'];
 const COLORS=['#3fd8ff','#ff8a3d','#9dff4a','#ff5ce1','#ffe14a','#a98bff','#ff5a5a','#49f2c2'];
 const PEER_URLS=['https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js','https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js','https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js'];
@@ -339,7 +380,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const store={ get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
 let cid=store.get('salvo-ol-cid-pad'); if(!cid){ cid=Math.random().toString(36).slice(2,12); store.set('salvo-ol-cid-pad',cid); }
 const S={code:'',peer:null,conn:null,welcomed:false,leaving:false,slot:-1,tag:'',tanks:[],tank:0,ready:false,phase:'',you:'play',hud:null,
-  mx:0,my:0,up:false,dn:false,aim:false,ax:0,ay:0,shot:0,fx:0,fy:0,bomb:0,baim:false,bx:0,by:0,bm:0,w:0,st:0,as:0,seq:0,hasShot:false,lastKey:'',lastSend:0,lastRx:0,timer:null,tok:0,attempt:0,stage:'',reconnecting:false,altCode:'',host:false,cfg:null};
+  mx:0,my:0,up:false,dn:false,aim:false,ax:0,ay:0,shot:0,fx:0,fy:0,bomb:0,baim:false,bx:0,by:0,bm:0,w:0,lo:[0,1],mk:'',st:0,as:0,seq:0,hasShot:false,lastKey:'',lastSend:0,lastRx:0,timer:null,tok:0,attempt:0,stage:'',reconnecting:false,altCode:'',host:false,cfg:null,tab:'tank'};
 const VIEWS=['vJoin','vMsg','vLobby','vPad','vResult'];
 let current='';
 function show(id){ if(current===id) return; current=id; VIEWS.forEach(v=>{ $(v).hidden=v!==id; }); setPlaying(id==='vPad'); }
@@ -516,19 +557,21 @@ function onData(d){
       $('meTag').textContent=S.tag; $('pTag').textContent=S.tag;
       renderLobby(); keepAwake(); trapBack(); vib([20,40,20]);
       break; }
-    case 'lobby': S.tank=d.tank|0; S.ready=!!d.ready; S.lteam=typeof d.team==='number'?d.team:-1; S.lmode=d.mode==='time'?'time':'stock'; S.lmins=d.mins|0; S.llives=d.lives|0; S.host=!!d.host; S.cfg=d.cfg&&typeof d.cfg==='object'?d.cfg:null; S.teamsOn=!!d.teamsOn; S.myTeam=d.myTeam|0; setCol(d.col); renderLobby(); break;
+    case 'lobby': setLo(d.lo); setMk(d.mk); S.tank=d.tank|0; S.ready=!!d.ready; S.lteam=typeof d.team==='number'?d.team:-1; S.lmode=d.mode==='time'?'time':'stock'; S.lmins=d.mins|0; S.llives=d.lives|0; S.host=!!d.host; S.cfg=d.cfg&&typeof d.cfg==='object'?d.cfg:null; S.teamsOn=!!d.teamsOn; S.myTeam=d.myTeam|0; setCol(d.col); renderLobby(); break;
     case 'phase': setPhase(d); break;
     case 'hud': S.hud=d; renderHud(); break;
     case 'buzz': if(Array.isArray(d.p)) vib(d.p.slice(0,10)); if(d.s) phoneSound(String(d.s)); break;
     case 'ping': break;
-    case 'full': S.leaving=true; cleanup(); msg('GAME IS FULL','All four player slots are taken. Try again when someone leaves.','TRY AGAIN',retryNow,'CHANGE CODE',changeCode); break;
+    case 'full': S.leaving=true; cleanup(); msg('GAME IS FULL','All 8 player slots are taken. Try again when someone leaves.','TRY AGAIN',retryNow,'CHANGE CODE',changeCode); break;
     case 'kicked': S.leaving=true; cleanup(); msg('REMOVED','The game screen took this controller out of the lobby.','JOIN AGAIN',retryNow); break;
   }
 }
 // the game screen tells each phone its colour (its team's colour in team games)
 function setCol(c){ if(typeof c!=='string'||!/^#[0-9a-f]{6}$/i.test(c)||S.col===c) return; S.col=c; document.body.style.setProperty('--pc',c); const tc=document.querySelector('meta[name="theme-color"]'); if(tc) tc.setAttribute('content',c); }
+function setLo(a){ if(Array.isArray(a)&&a.length===2){ const x=a[0]|0, y=a[1]|0; if(x!==y&&x>=0&&y>=0&&x<WPN.length&&y<WPN.length) S.lo=[x,y]; } }
+function setMk(c){ S.mk=typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c)?c:''; $('meTag').style.color=S.mk; $('pTag').style.color=S.mk; }
 function setPhase(d){
-  setCol(d.col);
+  setCol(d.col); setLo(d.lo); if('mk' in d) setMk(d.mk);
   S.phase=String(d.phase||''); S.you=d.you==='spectate'?'spectate':'play'; if(typeof d.host==='boolean') S.host=d.host;
   $('pauseSheet').hidden=!(S.host&&S.phase==='paused'); $('menuChip').hidden=!S.host; $('resHost').hidden=!S.host; $('rNote').hidden=S.host;
   if(S.phase==='lobby'){ S.hud=null; renderLobby(); show('vLobby'); }
@@ -593,27 +636,44 @@ function renderLobby(){
       LABELS.map((L,k)=>'<span>'+L+'</span><span class="pv">'+[1,2,3,4,5].map(n=>'<i class="'+(n<=(pips[k]|0)?'on':'')+'"></i>').join('')+'</span>').join('')+'</span></button>';
   });
   if(list._h!==h){ list._h=h; list.innerHTML=h; }
+  const wl=$('wpnPick'), wh=WPN.map((n,i)=>'<button type="button" class="wcard" data-w="'+i+'" aria-pressed="'+S.lo.includes(i)+'"><b><i>'+n.split(' ')[0]+'</i>'+esc(n.slice(n.indexOf(' ')+1))+'</b><small>'+WINFO[i]+'</small>'+(S.lo[0]===i?'<em>START</em>':'')+'</button>').join('');
+  if(wl._h!==wh){ wl._h=wh; wl.innerHTML=wh; }
   const rb=$('readyBtn'); rb.textContent=S.ready?'READY ✓ · TAP TO UNDO':'READY UP'; rb.classList.toggle('on',S.ready);
   const C=S.cfg, cnt=C&&C.cnt?String(C.cnt):S.lmode==='time'?(S.lmins||3)+' MIN':(S.llives||3)+' LIVES';
   const info=[S.lteam>=0?TEAMN[S.lteam]+' TEAM':'',C&&C.an?String(C.an).toUpperCase():'',S.lmode==='time'?'TIMED · '+cnt:cnt].filter(Boolean).join(' · '); setTxt($('lobInfo'),info);
-  const host=S.host&&!!C; $('hostBox').hidden=!host; $('hostStart').hidden=!host;
+  const host=S.host&&!!C; if(!host) S.tab='tank'; const setup=host&&S.tab==='setup';
+  $('lTabs').hidden=!host; $('lTabs').querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===S.tab)));
+  $('paneTank').hidden=setup; $('hostBox').hidden=!setup; $('toSetup').hidden=!host; $('hostStart').hidden=!host;
   const tp=$('teamPick'); tp.hidden=!S.teamsOn; if(S.teamsOn) setTxt(tp,'TEAM '+(TEAMN[S.myTeam]||'?')+' · SWITCH');
-  setTxt($('lobNote'),host?((C.n|0)+((C.n|0)===1?' player':' players')+' in, '+(C.rd|0)+' ready. You pick the arena and settings, and START MATCH begins right away. Turn your phone sideways to play.'):'The brawl starts when everyone is ready, or when the host starts it. Turn your phone sideways and go full screen to play.');
-  if(host){ setTxt($('hArena'),String(C.an||'')); setTxt($('hArenaTag'),String(C.at||'')+(C.na?((C.at?' · ':'')+((C.ai|0)+1)+' OF '+(C.na|0)):''));
-    $('hSize').hidden=!C.sz; if(C.sz) setTxt($('hSize'),'SIZE · '+String(C.sz));
-    setTxt($('hMode'),'MODE · '+(C.mode==='time'?'TIMED':'LIVES')); setTxt($('hCount'),cnt); setTxt($('hTeams'),C.teams?'TEAMS':'FREE-FOR-ALL');
-    $('hPair').hidden=!C.teams; setTxt($('hPwr'),'POWER-UPS · '+String(C.pwr||'')); setTxt($('hCpu'),String(C.cpu|0)); setTxt($('hLv'),String(C.lv|0||5)); setTxt($('hTeamsSum'),C.teams?String(C.pair||''):'');
+  setTxt($('lobNote'),host?((C.n|0)+((C.n|0)===1?' player':' players')+' in, '+(C.rd|0)+' ready. Pick your tank, then set up the match. START MATCH begins right away. Turn your phone sideways to play.'):'The brawl starts when everyone is ready, or when the host starts it. Turn your phone sideways and go full screen to play.');
+  if(host){
+    const fams=Array.isArray(C.fams)?C.fams:[], fc=Array.isArray(C.fc)?C.fc:[];
+    const fh=fams.map((f,k)=>{ const p=String(f).split(' · '); return '<button type="button" data-a="famset" data-d="'+k+'" style="--fc:'+esc(fc[k]||'#ffd04a')+'" aria-pressed="'+((C.ai|0)===k)+'"><b>'+esc(p[0]||'')+'</b><small>'+esc(p[1]||'')+'</small></button>'; }).join('');
+    const hf=$('hFam'); if(hf._h!==fh){ hf._h=fh; hf.innerHTML=fh; }
+    setTxt($('hArena'),String(C.an||'')); setTxt($('hDesc'),String(C.ad||''));
+    const press=(id,i)=>$(id).querySelectorAll('button').forEach((b,k)=>b.setAttribute('aria-pressed',String(k===i)));
+    press('hSize',C.szi|0); press('hAm',C.am|0); press('hMode',C.mode==='time'?1:0); press('hTeams',C.teams?1:0);
+    const pn=Array.isArray(C.pwn)?C.pwn:[], ph=pn.map((n,k)=>'<button type="button" data-a="pwrset" data-d="'+k+'" aria-pressed="'+((C.pwl|0)===k)+'">'+esc(n)+'</button>').join('');
+    const hp=$('hPwr'); if(hp._h!==ph){ hp._h=ph; hp.innerHTML=ph; } press('hPwr',C.pwl|0);
+    const pk=Array.isArray(C.pk)?C.pk:[], pkn=Array.isArray(C.pkn)?C.pkn:[], kh=pkn.map((n,k)=>'<button type="button" data-a="pwrk" data-d="'+k+'" aria-pressed="'+(!!pk[k])+'">'+esc(n)+'</button>').join('');
+    const hk=$('hPk'); if(hk._h!==kh){ hk._h=kh; hk.innerHTML=kh; } hk.classList.toggle('off',(C.pwl|0)===0);
+    setTxt($('hCount'),cnt); $('hPair').hidden=!C.teams; setTxt($('hCpu'),String(C.cpu|0)); setTxt($('hLv'),String(C.lv|0||5)); setTxt($('hTeamsSum'),C.teams?String(C.pair||''):'');
     const n=C.n|0, hs=$('hostStart'); hs.disabled=n<2; setTxt(hs,n<2?'NEED 2 PLAYERS':'START MATCH'); }
 }
 function hostSend(a,d){ if(!S.host) return; send(d?{t:'host',a,d}:{t:'host',a}); vib([10]); }
 $('hostBox').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-a]'); if(!b) return; hostSend(b.dataset.a,b.dataset.d?+b.dataset.d:0); });
 $('hostStart').addEventListener('click',()=>hostSend('start'));
+$('lTabs').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-tab]'); if(!b||S.tab===b.dataset.tab) return; S.tab=b.dataset.tab; vib([8]); renderLobby(); $('vLobby').querySelector('.lob-body').scrollTop=0; });
+$('toSetup').addEventListener('click',()=>{ S.tab='setup'; vib([8]); renderLobby(); $('vLobby').querySelector('.lob-body').scrollTop=0; });
 $('teamPick').addEventListener('click',()=>{ send({t:'team'}); vib([10]); });
 $('pResume').addEventListener('click',()=>hostSend('resume'));
 $('pMenu').addEventListener('click',()=>hostSend('menu'));
 $('rRematch').addEventListener('click',()=>hostSend('rematch'));
 $('rMenu').addEventListener('click',()=>hostSend('menu'));
 $('tankList').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('.tcard'); if(!b) return; const i=+b.dataset.i; if(i===S.tank) return; S.tank=i; S.ready=false; send({t:'pick',tank:i}); vib([10]); renderLobby(); });
+$('wpnPick').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('.wcard'); if(!b) return; const i=+b.dataset.w;
+  if(S.lo.includes(i)){ if(S.lo[0]!==i){ S.lo=[i,S.lo[0]]; } else { vib([6]); renderLobby(); return; } } else S.lo=[S.lo[0],i];
+  send({t:'loadout',w:S.lo}); vib([10]); renderLobby(); });
 $('readyBtn').addEventListener('click',()=>{ S.ready=!S.ready; send({t:'ready',ready:S.ready}); vib(S.ready?[25]:[10]); renderLobby(); });
 
 // ---------- pad input (touch events first, mouse for desktop testing) ----------
@@ -686,7 +746,7 @@ function routeEnd(id,x,y,released){
   if(L&&id===L.id) endL(); else if(R&&id===R.id) endR(released); else if(Bm&&id===Bm.id) endB(released);
   else if(id===fsTouch){ fsTouch=null; if(released&&inRect(fsChip,x,y,10)) toggleFull(); }
   else if(id===menuTouch){ menuTouch=null; if(released&&inRect(menuChip,x,y,10)) hostSend('pause'); }
-  else if(id===wpnTouch){ wpnTouch=null; wpnBtn.classList.remove('hit'); if(released&&inRect(wpnBtn,x,y,14)){ S.w=(S.w+1)%WPN.length; setTxt($('wpnName'),WPN[S.w]); vib([10]); sendInput(true); } }
+  else if(id===wpnTouch){ wpnTouch=null; wpnBtn.classList.remove('hit'); if(released&&inRect(wpnBtn,x,y,14)){ S.w=S.lo.includes(S.w)?S.lo[(S.lo.indexOf(S.w)+1)%2]:S.lo[0]; setTxt($('wpnName'),WPN[S.w]); vib([10]); sendInput(true); } }
   else if(id===strikeTouch){ strikeTouch=null; strikeBtn.classList.remove('hit'); if(released&&inRect(strikeBtn,x,y,14)){ S.st++; S.as=2; syncStrike(); vib([30,30,30]); sendInput(true); } }
   else if(id===launchTouch){ launchTouch=null; launchBtn.classList.remove('hit'); if(released&&inRect(launchBtn,x,y,20)){ S.st++; S.as=0; syncStrike(); vib([60,30,60]); sendInput(true); } }
 }
@@ -737,6 +797,7 @@ function renderHud(){
     if(h.mines!==undefined){ const mn=h.mines|0; H.bombs.forEach((el,i)=>setCls(el,'used',i>=mn)); setCls(bombBtn,'empty',(+h.bcd||0)>0.02); } // lit dots = your mines planted (2 max)
     else { const bn=h.bombs===undefined?2:(h.bombs|0); H.bombs.forEach((el,i)=>setCls(el,'used',i>=bn)); setCls(bombBtn,'empty',bn<1); }
     const kb=+h.kb||1; setTxt(H.kbv,'×'+kb.toFixed(1)); setCls(H.kbv,'hot',kb>=2);
+    setLo(h.lo);
     if(typeof h.wp==='number'&&h.wp>=0&&h.wp<WPN.length&&!wpnTouch){ if(S.wAck!==h.wp){ S.wAck=h.wp; S.w=h.wp; } setTxt($('wpnName'),WPN[S.w]); }
     if(typeof h.as==='number'&&!launchTouch&&!strikeTouch){ const a=alive?h.as|0:0; if(S.as!==a){ S.as=a; syncStrike(); } }
     const pu=typeof h.pu==='string'?h.pu:((+h.star||0)>0?'★ 2× FIRE '+Math.ceil(+h.star):''); if(H.star.hidden===!!pu) H.star.hidden=!pu; if(pu) setTxt(H.star,pu);
