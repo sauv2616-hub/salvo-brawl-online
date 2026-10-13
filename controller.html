@@ -364,6 +364,56 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
   .harena2{min-height:260px;top:50px;}
   .wcard small{display:none;}
 }
+/* loadout bay: three reels (tank, weapon 1, weapon 2) under the turntable; ? opens the stats */
+.stagewrap{min-height:0;}
+.stage{aspect-ratio:auto;height:clamp(170px,30vh,300px);cursor:grab;}
+.specbtn{position:absolute;top:8px;right:8px;z-index:6;width:38px;height:38px;padding:0;border-radius:50%;border:0;background:var(--alert);color:#1a1300;font-family:var(--display);font-weight:700;font-size:24px;line-height:1;box-shadow:0 3px 0 rgba(0,0,0,.45),0 0 0 3px rgba(0,0,0,.25);}
+.specbtn[aria-expanded="true"]{background:var(--ink);}
+.stage canvas{z-index:0;}
+.statcard{position:absolute;inset:8px 8px 8px 8px;z-index:5;justify-content:flex-start;gap:6px;padding:12px 54px 12px 14px;background:rgba(8,11,22,.9);border:1px solid var(--edge);border-top:2px solid var(--pc);overflow:auto;}
+.statcard[hidden]{display:none;}
+.statcard .sp-name{font-size:clamp(22px,11cqw,44px);}
+.statcard .sp-bars{gap:6px;margin-top:4px;}
+.sp-wpn{font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--ink);}
+.sp-wpn b{color:var(--pc);font-weight:700;}
+.stname{position:absolute;left:10px;bottom:9px;z-index:2;display:flex;flex-direction:column;gap:3px;pointer-events:none;}
+.stname b{font-family:var(--display);font-weight:700;font-size:clamp(24px,7vw,38px);line-height:.8;padding-top:.08em;letter-spacing:.02em;transform:skewX(-6deg);transform-origin:left bottom;text-shadow:0 2px 0 rgba(0,0,0,.5);}
+.stname small{font-size:9.5px;font-weight:700;letter-spacing:.24em;color:var(--pc);}
+.stage .sdots{left:auto;right:12px;bottom:14px;}
+.reels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;--ih:clamp(62px,9.4vh,86px);}
+.reels[hidden]{display:none;}
+.reel{position:relative;display:flex;flex-direction:column;min-width:0;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--edge);border-top:2px solid var(--pc);}
+.rl-h{padding:6px 4px 4px;font-size:9.5px;font-weight:700;letter-spacing:.2em;text-align:center;color:var(--ink-dim);white-space:nowrap;}
+.rl-h em{font-style:normal;margin-left:5px;padding:1px 4px;background:var(--pc);color:var(--night);font-size:7.5px;letter-spacing:.12em;vertical-align:1px;}
+.rl-arr{position:relative;z-index:2;flex:none;height:26px;min-height:0;padding:0;background:rgba(255,255,255,.04);border:0;border-radius:0;color:var(--ink-dim);font-size:11px;line-height:1;}
+.rl-arr:active{background:rgba(255,255,255,.14);color:var(--ink);}
+.rl-win{position:relative;flex:none;height:calc(var(--ih)*2.15);overflow:hidden;touch-action:none;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 76%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 76%,transparent 100%);}
+.rl-win::after{content:"";position:absolute;left:5px;right:5px;top:50%;height:var(--ih);transform:translateY(-50%);border:3px solid var(--alert);box-shadow:0 0 16px rgba(255,208,74,.35),inset 0 0 18px rgba(255,208,74,.16);pointer-events:none;}
+.ri{position:absolute;left:8px;right:8px;top:50%;height:var(--ih);margin-top:calc(var(--ih) / -2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  transform:translateY(calc(var(--k,0) * var(--ih) * 0.9)) scale(.78);opacity:.38;transition:transform .28s cubic-bezier(.2,.9,.3,1),opacity .28s;pointer-events:none;}
+.ri.cur{transform:translateY(0) scale(1);opacity:1;}
+.ri.far{opacity:0;}
+.ri b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--display);font-weight:600;font-size:clamp(12px,3.6vw,16px);letter-spacing:.06em;line-height:1;padding-top:.06em;}
+.ri.cur b{color:var(--ink);}
+.reel[data-reel="1"] .ri b,.reel[data-reel="2"] .ri b{white-space:normal;text-align:center;line-height:.92;}
+.ri-img{display:flex;align-items:center;justify-content:center;height:calc(var(--ih)*0.6);}
+.ri-img img{display:block;max-height:100%;max-width:100%;}
+.ri-fb{font-style:normal;font-family:var(--display);font-weight:700;font-size:calc(var(--ih)*0.4);color:var(--pc);}
+.ri-ico{display:flex;align-items:center;justify-content:center;height:calc(var(--ih)*0.56);color:var(--pc);}
+.ri-ico svg{display:block;height:100%;width:auto;filter:drop-shadow(0 2px 0 rgba(0,0,0,.45));}
+.reels .waitbox{grid-column:1/-1;}
+.waitbox{padding:12px 4px;}
+@media (orientation:landscape) and (max-height:600px){
+  #vLobby{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:8px 16px;}
+  .lob-head{grid-area:1/2/2/3;} .stagewrap{grid-area:2/2/3/3;display:flex;} .lob-body{grid-area:1/1/4/2;} .lob-side{grid-area:3/2/4/3;}
+  .stage{height:auto;flex:1;min-height:120px;}
+  .reels{--ih:clamp(54px,17vh,84px);height:100%;}
+  .reel{justify-content:center;}
+  .lob-body{justify-content:center;}
+  .stname b{font-size:clamp(20px,6.5vh,32px);}
+  #ctlBtn span{display:none;} #ctlBtn{padding-left:10px;padding-right:10px;}
+}
 </style>
 </head>
 <body>
@@ -395,47 +445,29 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 <section class="view" id="vLobby" hidden>
   <div class="lob-head">
     <div class="you"><b id="meTag">P1</b><small id="meSlot" class="meslot"></small><small id="lobInfo" class="lobinfo"></small></div>
-    <div class="lob-actions"><button class="ghost ctlbtn" id="ctlBtn" type="button" aria-label="Control settings" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6a8 8 0 0 1 1.9 1.1l2.5-.9 1.7 3-2 1.7a8 8 0 0 1 0 2.2l2 1.7-1.7 3-2.5-.9a8 8 0 0 1-1.9 1.1l-.5 2.6h-3.4l-.5-2.6a8 8 0 0 1-1.9-1.1l-2.5.9-1.7-3 2-1.7a8 8 0 0 1 0-2.2l-2-1.7 1.7-3 2.5.9a8 8 0 0 1 1.9-1.1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>CONTROLS</span></button><button class="ghost" id="teamPick" type="button" hidden>TEAM</button><button class="ghost menubtn" id="menuBtn" type="button" aria-label="Menu"><i></i><i></i><i></i></button></div>
+    <div class="lob-actions"><button class="ghost ctlbtn" id="ctlBtn" type="button" aria-label="Control settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6a8 8 0 0 1 1.9 1.1l2.5-.9 1.7 3-2 1.7a8 8 0 0 1 0 2.2l2 1.7-1.7 3-2.5-.9a8 8 0 0 1-1.9 1.1l-.5 2.6h-3.4l-.5-2.6a8 8 0 0 1-1.9-1.1l-2.5.9-1.7-3 2-1.7a8 8 0 0 1 0-2.2l-2-1.7 1.7-3 2.5.9a8 8 0 0 1 1.9-1.1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>CONTROLS</span></button><button class="ghost" id="teamPick" type="button" hidden>TEAM</button><button class="ghost menubtn" id="menuBtn" type="button" aria-label="Menu"><i></i><i></i><i></i></button></div>
+  </div>
+  <div class="stagewrap">
+    <div class="stage" id="tankStage"><canvas id="tankCv" aria-hidden="true"></canvas><div class="nogl" id="noGl" hidden></div>
+      <button class="sarrow l" id="tPrev" type="button" aria-label="Previous tank">‹</button><button class="sarrow r" id="tNext" type="button" aria-label="Next tank">›</button>
+      <button class="specbtn" id="specBtn" type="button" aria-label="Tank stats" aria-expanded="false">?</button>
+      <div class="specs statcard" id="pickBox" hidden><div class="sp-role" id="spRole"></div><div class="sp-name" id="spName"></div><div class="sp-bars" id="spBars"></div><p class="sp-perk" id="spPerk"></p><div class="sp-wpn" id="spWpn"></div></div>
+      <div class="stname"><b id="stName"></b><small id="stRole"></small></div>
+      <div class="sdots" id="tDots"></div>
+    </div>
   </div>
   <div class="lob-body">
-    <div class="ltabs" id="lTabs" role="tablist" hidden>
-      <button type="button" role="tab" data-tab="tank" aria-selected="true">1 · YOUR TANK</button>
-      <button type="button" role="tab" data-tab="setup" aria-selected="false">2 · MATCH SETUP</button>
-    </div>
     <div class="lpane" id="paneTank">
-      <div class="garage">
-        <div class="stage" id="tankStage"><canvas id="tankCv" aria-hidden="true"></canvas><div class="nogl" id="noGl" hidden></div>
-          <button class="sarrow l" id="tPrev" type="button" aria-label="Previous tank">‹</button><button class="sarrow r" id="tNext" type="button" aria-label="Next tank">›</button>
-          <div class="sdots" id="tDots"></div><div class="swipehint" id="swipeHint">SWIPE TO CHANGE TANK</div></div>
-        <div class="specs" id="pickBox"><div class="sp-role" id="spRole"></div><div class="sp-name" id="spName"></div><div class="sp-bars" id="spBars"></div><p class="sp-perk" id="spPerk"></p></div>
-        <div class="specs waitbox" id="waitBox" hidden><div class="wb-ok">READY ✓</div><div class="wb-t">WAITING FOR GAME START</div><p class="wb-sub" id="wbSub"></p><button class="ghost wb-back" id="unready" type="button">← CHANGE TANK</button></div>
+      <div class="reels" id="reels">
+        <div class="reel" data-reel="0"><div class="rl-h">TANK</div><button class="rl-arr" type="button" data-rd="-1" aria-label="Previous tank">▲</button><div class="rl-win" aria-live="polite"><div class="rl-strip"></div></div><button class="rl-arr" type="button" data-rd="1" aria-label="Next tank">▼</button></div>
+        <div class="reel" data-reel="1"><div class="rl-h">WEAPON 1<em>START</em></div><button class="rl-arr" type="button" data-rd="-1" aria-label="Previous first weapon">▲</button><div class="rl-win" aria-live="polite"><div class="rl-strip"></div></div><button class="rl-arr" type="button" data-rd="1" aria-label="Next first weapon">▼</button></div>
+        <div class="reel" data-reel="2"><div class="rl-h">WEAPON 2</div><button class="rl-arr" type="button" data-rd="-1" aria-label="Previous second weapon">▲</button><div class="rl-win" aria-live="polite"><div class="rl-strip"></div></div><button class="rl-arr" type="button" data-rd="1" aria-label="Next second weapon">▼</button></div>
       </div>
-      <div class="wpnbox" id="wpnBox"><div class="kicker">PICK 2 WEAPONS · SWAP BETWEEN THEM IN THE MATCH</div><div class="wpnpick" id="wpnPick"></div></div>
-      <button class="ghost nextbtn" id="toSetup" type="button" hidden>NEXT · MATCH SETUP →</button>
-    </div>
-    <div class="lpane hostbox" id="hostBox" hidden>
-      <div class="hsplit">
-        <div class="hopts2">
-          <label class="hsel"><span>ARENA SIZE</span><select id="hSizeSel" data-a="sizeset"></select></label>
-          <label class="hsel"><span>MAP TYPE</span><select id="hAmSel" data-a="amode"></select><small class="hsub" id="hAmDesc"></small></label>
-          <label class="hsel"><span>POWER-UPS</span><select id="hPwrSel" data-a="pwrset"></select></label>
-          <details class="hkinds" id="hKinds"><summary>PICK POWER-UPS</summary><div class="hchips" id="hPk"></div></details>
-          <label class="hsel"><span>MODE</span><select id="hModeSel" data-a="modeset"></select></label>
-          <label class="hsel"><span id="hCountL">LIVES</span><select id="hCountSel" data-a="countset"></select></label>
-          <label class="hsel"><span>TEAMS</span><select id="hTeamSel" data-a="teamset"></select></label>
-          <button class="hbtn" type="button" data-a="pair" id="hPair" hidden>AUTO TEAMS</button><div class="hteams" id="hTeamsSum"></div>
-          <label class="hsel"><span>BOTS</span><select id="hCpuSel" data-a="cpuset"></select></label>
-          <label class="hsel"><span>BOT LEVEL</span><select id="hLvSel" data-a="cpulvlset"></select></label>
-        </div>
-        <div class="harena2" id="hArenaCard"><div class="ha-bg" id="haBg"></div>
-          <div class="ha-in" id="haIn"><div class="ha-txt"><small id="haKind"></small><b id="haName"></b><span id="haArena"></span></div><svg class="ha-map" id="haMap" viewBox="0 0 120 48" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg><p class="ha-desc" id="haDesc"></p></div>
-          <button class="sarrow l" type="button" data-hfam="-1" aria-label="Previous arena">‹</button><button class="sarrow r" type="button" data-hfam="1" aria-label="Next arena">›</button>
-          <div class="sdots" id="haDots"></div><div class="swipehint">SWIPE TO CHANGE ARENA</div></div>
-      </div>
+      <div class="specs waitbox" id="waitBox" hidden><div class="wb-ok">READY ✓</div><div class="wb-t">WAITING FOR GAME START</div><p class="wb-sub" id="wbSub"></p><button class="ghost wb-back" id="unready" type="button">← CHANGE TANK</button></div>
     </div>
   </div>
   <div class="lob-side">
-    <p class="lob-note" id="lobNote">The brawl starts when everyone is ready, or when the host starts it. Turn your phone sideways and go full screen to play.</p>
+    <p class="lob-note" id="lobNote">Pick your tank and two weapons, then ready up.</p>
     <div class="btnrow"><button class="primary" id="readyBtn" type="button">READY UP</button><button class="primary" id="hostStart" type="button" hidden>START</button></div>
   </div>
 </section>
@@ -769,7 +801,7 @@ function setPhase(d){
     S.wasSudden=false;
     const win=typeof d.win==='number'?d.win:-1, me=win===S.slot, wt=typeof d.winTeam==='number'?d.winTeam:-1;
     if(wt>=0){ const mine=d.team===wt; $('rTitle').textContent=mine?'YOUR TEAM WINS!':String(d.winTeamName||'TEAM')+' WINS'; $('rSub').textContent=String(d.winTeamTags||'')+(mine?' · Nice teamwork.':''); }
-    else { $('rTitle').textContent=win<0?'DRAW':me?'YOU WIN!':(String(d.winTag||'')+' WINS'); $('rSub').textContent=win<0?'Nobody left standing.':me?(d.gem?'Held the diamond the longest.':d.timed?'Top score.':'Last tank standing.'):(d.winTank?'Piloting '+d.winTank+'.':''); }
+    else { $('rTitle').textContent=win<0?'DRAW':me?'YOU WIN!':(String(d.winTag||'')+' WINS'); $('rSub').textContent=win<0?'Nobody left standing.':me?(d.gem?'Held the core the longest.':d.timed?'Top score.':'Last tank standing.'):(d.winTank?'Piloting '+d.winTank+'.':''); }
     show('vResult');
   }
 }
@@ -1097,8 +1129,8 @@ function srInit(){
     const fill=new T.DirectionalLight(col('#7f95ff'),0.35); fill.position.set(6,1.5,6); sc.add(fill);
     SR.rim=new T.DirectionalLight(col('#ffffff'),4.2); SR.rim.position.set(4,3.5,-7); sc.add(SR.rim);
     const rim2=new T.DirectionalLight(col('#a9c8ff'),2.6); rim2.position.set(-6,4,-6); sc.add(rim2);
-    const disc=new T.Mesh(new T.CylinderGeometry(2.3,2.36,0.08,64),new T.MeshLambertMaterial({color:col('#0e1016')})); disc.position.y=-0.04; sc.add(disc);
-    SR.ringM=new T.MeshStandardMaterial({color:col('#050505'),emissive:col('#ffffff'),emissiveIntensity:3.4}); const ring=new T.Mesh(new T.TorusGeometry(2.34,0.02,6,100),SR.ringM); ring.rotation.x=Math.PI/2; sc.add(ring);
+    const disc=new T.Mesh(new T.CylinderGeometry(2.3,2.36,0.08,64),new T.MeshLambertMaterial({color:col('#0e1016')})); disc.position.y=-0.04; sc.add(disc); SR.disc=disc;
+    SR.ringM=new T.MeshStandardMaterial({color:col('#050505'),emissive:col('#ffffff'),emissiveIntensity:3.4}); const ring=new T.Mesh(new T.TorusGeometry(2.34,0.02,6,100),SR.ringM); ring.rotation.x=Math.PI/2; sc.add(ring); SR.ring=ring;
     SR.r=r; SR.sc=sc; SR.cam=cam; SR.ok=true;
   }catch(e){ SR.ok=false; try{ console.warn(e); }catch(_){} }
   return SR.ok;
@@ -1113,11 +1145,11 @@ function srSync(){
   if(SR.cur){ if(same) srDrop(SR.cur); else { if(SR.old) srDrop(SR.old); SR.old=SR.cur; SR.anim=0; if(!SR.dirSet){ const n=S.tanks.length, d=(S.tank-SR.idx+n)%n; SR.dir=d<=n/2?1:-1; } } }
   SR.dirSet=false; SR.cur=g; SR.idx=S.tank; SR.key=key; SR.ringM.emissive.copy(SR.kit.col(st.color)); SR.rim.color.copy(SR.kit.col(st.color));
 }
-function srVisible(){ return current==='vLobby'&&!$('paneTank').hidden&&document.visibilityState!=='hidden'; }
+function srVisible(){ return current==='vLobby'&&document.visibilityState!=='hidden'; }
 function srWake(){ if(!SR.raf&&srVisible()&&srInit()) SR.raf=requestAnimationFrame(srFrame); }
 function srFrame(ts){
   SR.raf=0; if(!srVisible()||!SR.ok) return; SR.raf=requestAnimationFrame(srFrame);
-  const dt=Math.min(0.1,SR.last?Math.max(0,ts-SR.last)/1000:0.016); SR.last=ts; srSync();
+  const dt=Math.min(0.1,SR.last?Math.max(0,ts-SR.last)/1000:0.016); SR.last=ts; thumbsMake(); srSync();
   const cv=$('tankCv'), w=cv.clientWidth, h=cv.clientHeight; if(w<10||h<10) return;
   if(w!==SR.w||h!==SR.h){ SR.w=w; SR.h=h; SR.r.setSize(w,h,false); const a=w/h, tv=Math.tan(13*Math.PI/180), d=Math.max(2.85/(tv*a),1.85/tv); SR.cam.aspect=a; SR.cam.position.set(0,0.95+d*0.26,d); SR.cam.lookAt(0,0.72,0); SR.cam.updateProjectionMatrix(); }
   SR.spin+=dt*0.55; SR.anim=Math.min(1,SR.anim+dt/0.55); const e=1-Math.pow(1-SR.anim,3), D=7;
@@ -1126,6 +1158,19 @@ function srFrame(ts){
   SR.r.render(SR.sc,SR.cam);
 }
 document.addEventListener('visibilitychange',()=>srWake());
+const TH={img:[],key:'',q:[]};
+// one thumbnail a frame, so joining never stalls the phone
+function thumbsMake(){
+  const st=srStyle(), key=S.tanks.map(t=>t.shape).join(',')+':'+st.color+':'+st.paint; if(!SR.ok||!S.tanks.length) return;
+  if(TH.key!==key){ TH.key=key; TH.q=S.tanks.map((_,i)=>i); }
+  if(!TH.q.length) return; const i=TH.q.shift();
+  try{ const T=window.THREE, r=SR.r, cv=r.domElement, W=180, H=120, cam=TH.cam||(TH.cam=new T.PerspectiveCamera(24,W/H,0.5,60)); cam.position.set(5.0,2.5,6.3); cam.lookAt(0,0.62,0);
+    const vis=[SR.cur,SR.old,SR.disc,SR.ring].filter(Boolean).map(o=>[o,o.visible]); vis.forEach(([o])=>{ o.visible=false; });
+    r.setSize(W,H,false); const c2=TH.cv||(TH.cv=document.createElement('canvas')); c2.width=W*2; c2.height=H*2; const x=c2.getContext('2d');
+    const g=srMake(i); g.rotation.y=-0.42; r.render(SR.sc,cam); x.clearRect(0,0,c2.width,c2.height); x.drawImage(cv,0,0,c2.width,c2.height); TH.img[i]=c2.toDataURL('image/png'); srDrop(g);
+    vis.forEach(([o,v])=>{ o.visible=v; }); SR.w=0; SR.h=0;
+    const it=document.querySelector('.reel[data-reel="0"] .ri[data-i="'+i+'"]'); if(it) it.innerHTML=reelItem(0,i);
+  }catch(e){ TH.q.length=0; } }
 // swipe left or right on an element (vertical drags still scroll the page)
 function swipe(el,on,drag){ let id=null,sx=0,sy=0,t0=0,act=false;
   el.addEventListener('pointerdown',e=>{ if(e.target.closest&&e.target.closest('button,select,summary,label')) return; id=e.pointerId; sx=e.clientX; sy=e.clientY; t0=now(); act=false; });
@@ -1142,77 +1187,77 @@ $('spBars').innerHTML=LABELS.map(L=>'<div class="sb"><span>'+L+'</span><i><b></b
 function renderGarage(){
   const t=S.tanks[S.tank]; if(!t) return;
   setTxt($('spName'),String(t.name||'')); setTxt($('spRole'),String(t.role||'')); setTxt($('spPerk'),String(t.perk||''));
+  setTxt($('stName'),String(t.name||'')); setTxt($('stRole'),String(t.role||''));
+  const wh='WEAPONS <b>'+esc(WSHORT[S.lo[0]])+'</b> + <b>'+esc(WSHORT[S.lo[1]])+'</b>', sw=$('spWpn'); if(sw._h!==wh){ sw._h=wh; sw.innerHTML=wh; }
   const pips=Array.isArray(t.pips)?t.pips:[]; $('spBars').querySelectorAll('.sb b').forEach((b,k)=>{ const w=(clamp(pips[k]|0,0,5)*20)+'%'; if(b.style.width!==w) b.style.width=w; });
   const dh=S.tanks.map((_,i)=>'<i class="'+(i===S.tank?'on':'')+'"></i>').join(''), dots=$('tDots'); if(dots._h!==dh){ dots._h=dh; dots.innerHTML=dh; }
   setTxt($('wbSub'),String(t.name||'')+' · '+WPN[S.lo[0]].slice(2)+' + '+WPN[S.lo[1]].slice(2)+'. The match starts when everyone is ready.');
   const gl=threeState==='fail'||SR.ok===false; $('noGl').hidden=!gl; if(gl) setTxt($('noGl'),String(t.name||''));
 }
 function renderLobby(){
-  const C=S.cfg, host=S.host&&!!C; if(!host) S.tab='tank'; const setup=host&&S.tab==='setup';
-  const wl=$('wpnPick'), wh=WPN.map((n,i)=>'<button type="button" class="wcard" data-w="'+i+'" aria-pressed="'+S.lo.includes(i)+'"><b><i>'+n.split(' ')[0]+'</i>'+esc(n.slice(n.indexOf(' ')+1))+'</b><small>'+WINFO[i]+'</small>'+(S.lo[0]===i?'<em>START</em>':'')+'</button>').join('');
-  if(wl._h!==wh){ wl._h=wh; wl.innerHTML=wh; }
+  const C=S.cfg, host=S.host&&!!C;
   const cnt=C&&C.cnt?String(C.cnt):S.lmode!=='stock'?(S.lmins||3)+' MIN':(S.llives||3)+' LIVES';
-  const info=[S.lteam>=0?TEAMN[S.lteam]+' TEAM':'',C&&C.an?String(C.an).toUpperCase():'',S.lmode==='time'?'TIMED · '+cnt:S.lmode==='gem'?'DIAMOND · '+cnt:cnt].filter(Boolean).join(' · '); setTxt($('lobInfo'),info);
-  $('lTabs').hidden=!host; $('lTabs').querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===S.tab)));
-  $('paneTank').hidden=setup; $('hostBox').hidden=!setup; $('toSetup').hidden=!host||S.ready; $('hostStart').hidden=!host;
+  const info=[S.lteam>=0?TEAMN[S.lteam]+' TEAM':'',C&&C.an?String(C.an).toUpperCase():'',S.lmode==='time'?'TIMED · '+cnt:S.lmode==='gem'?'KEEP AWAY · '+cnt:cnt].filter(Boolean).join(' · '); setTxt($('lobInfo'),info);
+  $('hostStart').hidden=!host;
   const tp=$('teamPick'); tp.hidden=!S.teamsOn; if(S.teamsOn) setTxt(tp,'TEAM '+(TEAMN[S.myTeam]||'?')+' · SWITCH');
   // ready: the garage turns into the waiting screen, with a way back and the control settings
-  const wait=!!S.ready; $('pickBox').hidden=wait; $('waitBox').hidden=!wait; $('wpnBox').hidden=wait; $('tPrev').hidden=wait; $('tNext').hidden=wait; $('swipeHint').hidden=wait; $('ctlBtn').hidden=!wait;
+  // ready: the reels turn into the waiting card (with a way back); the control settings are always one tap away
+  const wait=!!S.ready; $('reels').hidden=wait; $('waitBox').hidden=!wait; $('tPrev').hidden=wait; $('tNext').hidden=wait; $('ctlBtn').hidden=false;
   const rb=$('readyBtn'); rb.hidden=wait; rb.textContent='READY UP';
-  renderGarage();
-  setTxt($('lobNote'),host?((C.n|0)+((C.n|0)===1?' player':' players')+' in · '+(C.rd|0)+' ready · START begins the match right away'):wait?(matchMedia('(orientation:portrait)').matches?'Turn your phone sideways to play':'Ready · the match starts when everyone is'):'Swipe to pick a tank · pick two weapons · ready up');
-  if(host) renderHost(C);
+  renderGarage(); renderReels();
+  if(host){ const n=C.n|0, hs=$('hostStart'); hs.disabled=n<2; setTxt(hs,n<2?'NEED 2':'START'); }
+  setTxt($('lobNote'),host?((C.n|0)+((C.n|0)===1?' player':' players')+' in · '+(C.rd|0)+' ready · START begins the match right away'):wait?(matchMedia('(orientation:portrait)').matches?'Turn your phone sideways to play':'Ready · the match starts when everyone is'):'Scroll the reels: your tank and two weapons · then ready up');
   srWake();
 }
-// ---------- host match setup ----------
-function fillSel(id,opts,val){ const s=$(id), key=opts.map(o=>o[0]+':'+o[1]).join('|'); if(s._k!==key){ s._k=key; s.innerHTML=opts.map(o=>'<option value="'+o[0]+'">'+esc(o[1])+'</option>').join(''); }
-  if(document.activeElement!==s&&String(s.value)!==String(val)) s.value=String(val); }
-function renderHost(C){
-  fillSel('hSizeSel',(Array.isArray(C.szn)?C.szn:['SMALL','BIG','MEGA']).map((n,i)=>[i,n]),C.szi|0);
-  fillSel('hAmSel',(Array.isArray(C.ams)?C.ams:[String(C.amn||'REGULAR')]).map((n,i)=>[i,n]),C.am|0); setTxt($('hAmDesc'),Array.isArray(C.amd)?String(C.amd[C.am|0]||''):'');
-  fillSel('hPwrSel',(Array.isArray(C.pwn)?C.pwn:[]).map((n,i)=>[i,n]),C.pwl|0);
-  fillSel('hModeSel',[[0,'LIVES'],[1,'TIMED'],[2,'DIAMOND']],Math.max(0,['stock','time','gem'].indexOf(C.mode)));
-  fillSel('hCountSel',Array.isArray(C.cno)?C.cno:[[C.cntv|0,String(C.cnt||'')]],C.cntv|0); setTxt($('hCountL'),C.mode==='gem'?'HOLD TO WIN':C.mode==='time'?'MATCH LENGTH':'LIVES');
-  fillSel('hTeamSel',[[0,'FREE-FOR-ALL'],[1,'TEAMS']],C.teams?1:0);
-  fillSel('hCpuSel',Array.from({length:(C.maxcpu|0||5)+1},(_,i)=>[i,i===0?'NO BOTS':i+(i===1?' BOT':' BOTS')]),C.cpu|0);
-  fillSel('hLvSel',Array.from({length:10},(_,i)=>[i+1,'LEVEL '+(i+1)]),C.lv|0||5);
-  const pk=Array.isArray(C.pk)?C.pk:[], pkn=Array.isArray(C.pkn)?C.pkn:[], kh=pkn.map((n,k)=>'<button type="button" data-a="pwrk" data-d="'+k+'" aria-pressed="'+(!!pk[k])+'">'+esc(n)+'</button>').join('');
-  const hk=$('hPk'); if(hk._h!==kh){ hk._h=kh; hk.innerHTML=kh; } hk.classList.toggle('off',(C.pwl|0)===0); $('hKinds').hidden=(C.pwl|0)===0;
-  $('hPair').hidden=!C.teams; setTxt($('hTeamsSum'),C.teams?String(C.pair||''):'');
-  if(!HA.busy) haPaint(HA.want>=0&&HA.want!==(C.ai|0)&&now()-HA.at<1500?HA.want:C.ai|0);
-  const n=C.n|0, hs=$('hostStart'); hs.disabled=n<2; setTxt(hs,n<2?'NEED 2':'START');
-}
-// the arena theme card: swipe it (or tap the arrows) to change the arena on the big screen
-const HA={idx:-1,busy:false,want:-1,at:0,t:0};
-function haPaint(k){ const C=S.cfg; if(!C) return; const fams=Array.isArray(C.fams)?C.fams:[]; if(!fams.length) return; k=clamp(k|0,0,fams.length-1);
-  const fam=String(fams[k]||'').split(' · '), fc=(C.fc||[])[k]||'#ffd04a', sky=Array.isArray(C.fsk)&&Array.isArray(C.fsk[k])?C.fsk[k]:['#111522','#1d2440','#3a3f66','#0b0d16'];
-  const card=$('hArenaCard'); card.style.setProperty('--fc',fc);
-  const bg='linear-gradient(180deg,'+sky.map((c,i)=>esc(c)+' '+[0,42,78,100][i]+'%').join(',')+')'; if(card._bg!==bg){ card._bg=bg; $('haBg').style.background=bg; }
-  const mp=Array.isArray(C.fmap)?String(C.fmap[k]||''):'', mh=mp.split(';').filter(Boolean).map(p=>'<polygon points="'+esc(p)+'"></polygon>').join(''); const m=$('haMap'); if(m._h!==mh){ m._h=mh; m.innerHTML=mh; }
-  setTxt($('haName'),fam[0]||''); setTxt($('haKind'),fam[1]||''); setTxt($('haArena'),Array.isArray(C.fan)?String(C.fan[k]||''):k===(C.ai|0)?String(C.an||''):'');
-  setTxt($('haDesc'),k===(C.ai|0)?String(C.ad||''):Array.isArray(C.fsp)?String(C.fsp[k]||''):'');
-  const dh=fams.map((_,i)=>'<i class="'+(i===k?'on':'')+'"></i>').join(''), dots=$('haDots'); if(dots._h!==dh){ dots._h=dh; dots.innerHTML=dh; }
-  HA.idx=k; }
-function haGo(d){ const C=S.cfg; if(!C||!S.host) return; const n=(C.fams||[]).length; if(!n) return; const base=HA.want>=0&&now()-HA.at<1500?HA.want:HA.idx<0?C.ai|0:HA.idx, k=((base+d)%n+n)%n;
-  HA.want=k; HA.at=now(); const inn=$('haIn'); clearTimeout(HA.t); HA.busy=true; inn.classList.remove('pre-l','pre-r'); inn.classList.add(d>0?'out-l':'out-r');
-  HA.t=setTimeout(()=>{ haPaint(k); inn.classList.remove('out-l','out-r'); inn.classList.add(d>0?'pre-r':'pre-l'); void inn.offsetWidth; inn.classList.remove('pre-l','pre-r'); HA.busy=false; },170);
-  hostSend('famset',k); }
-swipe($('hArenaCard'),d=>haGo(d));
-$('hArenaCard').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-hfam]'); if(b) haGo(+b.dataset.hfam); });
+// ---------- host phone: start the match (the match setup itself stays on the big screen) ----------
 function hostSend(a,d){ if(!S.host) return; send(d?{t:'host',a,d}:{t:'host',a}); vib([10]); }
-$('hostBox').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-a]'); if(!b||b.tagName==='SELECT') return; hostSend(b.dataset.a,b.dataset.d?+b.dataset.d:0); });
-$('hostBox').addEventListener('change',e=>{ const s=e.target; if(!s||s.tagName!=='SELECT'||!s.dataset.a) return; hostSend(s.dataset.a,+s.value); });
 $('hostStart').addEventListener('click',()=>hostSend('start'));
-$('lTabs').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-tab]'); if(!b||S.tab===b.dataset.tab) return; S.tab=b.dataset.tab; vib([8]); renderLobby(); $('vLobby').querySelector('.lob-body').scrollTop=0; });
-$('toSetup').addEventListener('click',()=>{ S.tab='setup'; vib([8]); renderLobby(); $('vLobby').querySelector('.lob-body').scrollTop=0; });
 $('teamPick').addEventListener('click',()=>{ send({t:'team'}); vib([10]); });
 $('pResume').addEventListener('click',()=>hostSend('resume'));
 $('pMenu').addEventListener('click',()=>hostSend('menu'));
 $('rRematch').addEventListener('click',()=>hostSend('rematch'));
 $('rMenu').addEventListener('click',()=>hostSend('menu'));
-$('wpnPick').addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('.wcard'); if(!b) return; const i=+b.dataset.w;
-  if(S.lo.includes(i)){ if(S.lo[0]!==i){ S.lo=[i,S.lo[0]]; } else { vib([6]); renderLobby(); return; } } else S.lo=[S.lo[0],i];
-  send({t:'loadout',w:S.lo}); vib([10]); renderLobby(); });
+// ---------- the loadout reels: tank, weapon 1 (the one you start with) and weapon 2 ----------
+const WSHORT=['MISSILE','MACHINE GUN','SNIPER','BAZOOKA'];
+const WICON=[
+  '<svg viewBox="0 0 40 32" aria-hidden="true"><path fill="currentColor" d="M8 12.5h20l9 3.5-9 3.5H8z"/><path fill="currentColor" d="M9 12.5 4.5 6H9l5.5 6.5zM9 19.5 4.5 26H9l5.5-6.5z" opacity=".8"/><path fill="#fff" d="M28 12.5l9 3.5-9 3.5z" opacity=".5"/><path fill="#ffb040" d="M8 14l-6 2 6 2z"/></svg>',
+  '<svg viewBox="0 0 40 32" aria-hidden="true"><g fill="currentColor"><path d="M6 5h17l6 3.5-6 3.5H6z"/><path d="M6 14.5h17l6 3.5-6 3.5H6z" opacity=".85"/><path d="M6 24h17l6 3.5-6 3.5H6z" opacity=".7"/></g><g fill="#fff" opacity=".45"><rect x="6" y="5" width="3" height="7"/><rect x="6" y="14.5" width="3" height="7"/><rect x="6" y="24" width="3" height="7"/></g></svg>',
+  '<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.8"><circle cx="16" cy="16" r="10"/><path d="M16 1.5v9M16 21.5v9M1.5 16h9M21.5 16h9"/></g><circle cx="16" cy="16" r="2.6" fill="#fff"/></svg>',
+  '<svg viewBox="0 0 40 32" aria-hidden="true"><path fill="currentColor" d="M2 11h17v10H2z" opacity=".8"/><rect x="5" y="9" width="3" height="14" fill="#fff" opacity=".4"/><circle cx="27" cy="16" r="10" fill="currentColor"/><circle cx="24" cy="13" r="3.2" fill="#fff" opacity=".45"/><path fill="#ffb040" d="M37 13.5l3 2.5-3 2.5z"/></svg>'];
+const REEL={key:'',cur:[-1,-1,-1],k:[{},{},{}]};
+function reelOpts(r){ return r===0?S.tanks.map((_,i)=>i):[0,1,2,3].filter(i=>i!==S.lo[r===1?1:0]); }
+function reelCur(r){ return r===0?S.tank:S.lo[r-1]; }
+function reelItem(r,i){ if(r===0){ const t=S.tanks[i]||{}; return '<span class="ri-img">'+(TH.img[i]?'<img src="'+TH.img[i]+'" alt="">':'<i class="ri-fb">'+esc(String(t.name||'?').slice(0,1))+'</i>')+'</span><b>'+esc(String(t.name||''))+'</b>'; }
+  return '<span class="ri-ico">'+WICON[i]+'</span><b>'+esc(WSHORT[i])+'</b>'; }
+function renderReels(){
+  const key=String(S.tanks.length); if(REEL.key!==key){ REEL.key=key; document.querySelectorAll('.reel').forEach(el=>{ el.querySelector('.rl-strip').innerHTML=''; }); REEL.k=[{},{},{}]; REEL.cur=[-1,-1,-1]; }
+  document.querySelectorAll('.reel').forEach(el=>{ const r=+el.dataset.reel, strip=el.querySelector('.rl-strip'), opts=reelOpts(r), cur=reelCur(r), n=opts.length; if(!n) return;
+    const ci=Math.max(0,opts.indexOf(cur));
+    for(let i of (r===0?S.tanks.map((_,j)=>j):[0,1,2,3])){ let it=strip.querySelector('[data-i="'+i+'"]');
+      if(!it){ it=document.createElement('div'); it.className='ri'; it.dataset.i=i; it.innerHTML=reelItem(r,i); strip.appendChild(it); }
+      const oi=opts.indexOf(i); let k; if(oi<0) k=99; else { k=oi-ci; if(k>n/2) k-=n; if(k<-n/2) k+=n; }
+      const old=REEL.k[r][i], jump=old===undefined||Math.abs(k-old)>1.01||k===99;
+      if(jump) it.style.transition='none';
+      it.style.setProperty('--k',String(k===99?0:k)); it.classList.toggle('cur',k===0); it.classList.toggle('far',k===99||Math.abs(k)>1);
+      if(jump){ void it.offsetWidth; it.style.transition=''; }
+      REEL.k[r][i]=k; }
+    el.querySelector('.rl-win').setAttribute('aria-label',(r===0?'Tank: ':'Weapon '+r+': ')+(r===0?String((S.tanks[cur]||{}).name||''):WSHORT[cur]));
+    REEL.cur[r]=cur; });
+}
+function reelStep(r,d){ if(S.ready) return; if(r===0){ pickTank(d); return; }
+  const opts=reelOpts(r), n=opts.length, ci=Math.max(0,opts.indexOf(reelCur(r))), nw=opts[(ci+d+n)%n];
+  S.lo=r===1?[nw,S.lo[1]]:[S.lo[0],nw]; send({t:'loadout',w:S.lo}); vib([8]); renderLobby(); }
+document.querySelectorAll('.reel').forEach(el=>{ const r=+el.dataset.reel, win=el.querySelector('.rl-win');
+  el.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-rd]'); if(b) reelStep(r,+b.dataset.rd); });
+  // drag the reel up or down, or tap the item above or below the frame
+  let id=null, sy=0, moved=false;
+  win.addEventListener('pointerdown',e=>{ id=e.pointerId; sy=e.clientY; moved=false; try{ win.setPointerCapture(id); }catch(_){} });
+  win.addEventListener('pointermove',e=>{ if(e.pointerId!==id) return; const dy=e.clientY-sy; if(Math.abs(dy)>26){ reelStep(r,dy<0?1:-1); sy=e.clientY; moved=true; } });
+  const end=e=>{ if(e.pointerId!==id) return; id=null; if(moved) return; const rc=win.getBoundingClientRect(), y=e.clientY-rc.top, ih=rc.height/2.15;
+    if(y<rc.height/2-ih/2) reelStep(r,-1); else if(y>rc.height/2+ih/2) reelStep(r,1); };
+  win.addEventListener('pointerup',end); win.addEventListener('pointercancel',()=>{ id=null; }); });
+$('specBtn').addEventListener('click',()=>{ const pb=$('pickBox'), open=pb.hidden; pb.hidden=!open; $('specBtn').setAttribute('aria-expanded',String(open)); vib([6]); });
+$('pickBox').addEventListener('click',()=>{ $('pickBox').hidden=true; $('specBtn').setAttribute('aria-expanded','false'); });
 $('unready').addEventListener('click',()=>{ S.ready=false; send({t:'ready',ready:false}); vib([10]); renderLobby(); });
 // ---------- control settings (from the waiting screen): double-tap weapon swap, and which side drives ----------
 const CS={dbl:store.get('salvo-dbl')==='1',swap:store.get('salvo-swap')==='1'};
@@ -1370,7 +1415,7 @@ if(pre){ try{ sessionStorage.setItem('salvo-ol-auto',pre); }catch(e){} try{ hist
 const auto=pre.length===4?pre:sess.length===4?sess:'';
 codeIn.value=auto||last; syncJoinBtn();
 if(auto){ S.code=auto; S.altCode=last.length===4&&last!==auto?last:''; connect(); } else show('vJoin');
-if(window.__SALVO_PAD_TEST__) window.__pad={SR,CS,HA,haGo,pickTank,applyCS,renderLobby,S,onData,connect,fire,setPhase,renderHud,show,toggleFull,PS,phoneSound,hostSend,syncStrike};
+if(window.__SALVO_PAD_TEST__) window.__pad={SR,CS,TH,REEL,reelStep,renderReels,pickTank,applyCS,renderLobby,S,onData,connect,fire,setPhase,renderHud,show,toggleFull,PS,phoneSound,hostSend,syncStrike};
 })();
 </script>
 </body>
