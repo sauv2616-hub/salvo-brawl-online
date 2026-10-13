@@ -1,6 +1,6 @@
 # Salvo Online
 
-The online version of [Salvo](https://github.com/sauv2616-hub/salvo-brawl): the same 2–8 player tank brawler, but every player can be on their own computer, in different places, each with their own screen. One computer **hosts** the game and gets a 4-letter room code. Everyone else opens the game, presses **JOIN** and types the code. Guests play with their keyboard, or link their own phone as the controller.
+The online version of [Salvo](https://github.com/sauv2616-hub/salvo-brawl): the same 2–8 player tank brawler, but every player can be on their own computer, in different places, each with their own screen. One computer (or phone) **hosts** the game and gets a 4-letter room code. Everyone else opens the game, presses **JOIN** and types the code. Guests play with their keyboard, or link their own phone as the controller.
 
 It is a separate copy of the game. The local version in the `salvo-brawl` repository is untouched and keeps working as before.
 
@@ -31,7 +31,7 @@ Everyone uses that same address.
 
 The host should be the player with the best internet connection: the match runs on their computer and their tab needs to stay open. It keeps running if they switch to another tab or window; just don't close it.
 
-1. Open the address and click **HOST A GAME**. The lobby shows a big room code, plus an invite link with a **Copy link** button. The leave icon at the top right closes the room.
+1. Open the address, type your name under **YOUR NAME** (up to 12 letters; it's saved for next time) and click **HOST A GAME**. The lobby shows a big room code, plus an invite link with a **Copy link** button. The leave icon at the top right closes the room.
 2. Send the code (or the link) to your friends.
 3. Pick the arena and match settings as usual. You can also add CPU players, and people in the room with you can join on this computer with the keyboard, a game controller, or a phone (scan the QR code).
 4. Start the match with **Start match**, or it starts by itself when everyone is ready.
@@ -40,7 +40,7 @@ The host's screen works like the local game's big screen. To make it follow your
 
 **Everyone else**
 
-1. Open the address, type the room code under **JOIN A GAME** and click **JOIN** (or just open the invite link).
+1. Open the address, type your name under **YOUR NAME**, then the room code under **JOIN A GAME**, and click **JOIN** (or just open the invite link). Your name shows over your tank and on everyone's scoreboard.
 2. Your lobby looks like the host's: the arena and settings on the left (the host picks those), everyone's tanks in the middle, and the CPUs on the right. Change your tank with **A / D** (or click your tank's name), change your two weapons with **R** (or click them), and press **G** or **Enter** (or **Ready up**) when you're ready.
 3. During a match your screen follows your own tank and anyone near it. Press **V** to switch to the whole battle and back.
 
@@ -68,6 +68,12 @@ Guests usually join from a computer. A phone can join on its own too (see *No co
 
 Someone with only a phone can still join an online game. Open the game's address on the phone (or tap **NO COMPUTER? PLAY ON THIS PHONE** on the phone controller page), type the room code and tap **JOIN**. The phone shows the game itself, following your tank, with the same touch controls as the phone controller on top: left thumb drives (push up to jet, pull down to drop), right thumb drags to aim and lets go to fire, plus the **BOMB**, weapon-swap and air-strike buttons. **MENU** (top right) has the camera, keys and leave options, and **⤢ FULL** goes full screen. Turn the phone sideways to play. Your thumbs cover part of a small screen, so a computer (or a phone used as a controller next to a computer) is still the better way to play; this is for when there's no computer around.
 
+### Host from your phone
+
+A phone can host a game too. Open the address on the phone, type your name and tap **HOST A GAME**. The phone runs the match itself and you play on it with the same touch controls as above. Send the room code (or the invite link) to everyone else.
+
+On a phone the host lobby is laid out for thumbs: the room code and the CPUs come first, then your tank, then the match settings, with **START MATCH** pinned to the bottom of the screen. During a match, **MENU** pauses it. The phone tries to keep its screen on while it hosts. Keep the game open in front: phones pause web pages when you switch apps or lock the screen, and that freezes the match for everyone. The hosting phone does all the work for every player, so a recent phone works best, and smaller matches run smoothest.
+
 ### Change any key, or aim with the mouse
 
 Guests can change every key too: open settings (the gear in your lobby) or **KEYS** in the Esc menu, click **Customize keys**, click a key and press the new one. Your keys are saved on your computer.
@@ -85,13 +91,13 @@ The leave icon (top right of your lobby) or **LEAVE ROOM** in the Esc menu takes
 ### The lobby
 
 - **Left:** the match setup. The **arena** drop-down lists the seven arena types with a little map of each; the size buttons under it pick **Small**, **Big** or **Mega**. The **map type** drop-down picks **Regular**, **Classic**, **Bounce**, **Active** or **Rising** (see *Map type*), and the match rules sit underneath. The arena you pick is shown live behind the lobby, a little darker so the tanks stand out.
-- **Middle:** every player's tank, big, turning slowly on a plain dark turntable under a spotlight. Under each tank is the player's name plate: their tank, their two weapons and how they're playing (keys, controller or phone). Keyboard and controller players can click their tank's name or weapons to change them. Click the team badge to move a player to another team, and **×** to remove them.
+- **Middle:** every player's tank, big, turning slowly on a plain dark turntable under a spotlight. Under each tank is the player's name plate: their name (or P number), their tank, their two weapons and how they're playing (keys, controller or phone). Keyboard and controller players can click their tank's name or weapons to change them. Click the team badge to move a player to another team, and **×** to remove them.
 - **Right:** the room code and QR code for phones, the CPU players, and **Start match**.
 - **Top right:** the gear opens the settings: music and effects volume, mouse aiming, and **Customize keys**, which shows and changes every control. The icon next to it goes full screen.
 
 ### CPU players
 
-Click **+ Add CPU** in the CPUs panel on the right to add a computer-controlled tank, up to 5 of them. Each CPU gets a small row instead of a big turntable. Use **− / +** to set its level from 1 (slow, wild shots, falls off a lot) to 10 (quick, accurate, recovers well, switches weapons by range, grabs power-ups and dodges). Click its tank name to change its tank, its weapons to change its two weapons, and **×** to remove it. CPUs are always ready, so the brawl starts as soon as every human is ready; it never starts with CPUs alone. The host phone can also add or remove CPUs and set their difficulty.
+Click **+ Add CPU** in the CPUs panel on the right to add a computer-controlled tank, up to 5 of them. Each CPU gets a small row instead of a big turntable. Use **− / +** to set its level from 1 (slow, wild shots, falls off a lot) to 10 (quick, accurate, recovers well, switches weapons by range, grabs power-ups and dodges). Click its tank name to change its tank, its weapons to change its two weapons, and **×** to remove it. CPUs are always ready, so the brawl starts as soon as every human is ready; it never starts with CPUs alone. A CPU that can't find a clear shot for a few seconds (a wall or a tower in the way) moves in and hops, or jets across the gap, to get a new angle, so matches don't stall. The host phone can also add or remove CPUs and set their difficulty.
 
 ### Match settings
 
@@ -124,8 +130,10 @@ Even without full screen, the controller blocks pinch and double-tap zoom while 
 
 ### Your phone in the lobby
 
+- **Your name:** type it under **YOUR NAME** on the join screen (up to 12 letters). If you join straight from the QR code, the phone asks for it once. Your name goes over your tank, on your card, on the scoreboard and on the winner screen; players without a name show their P number. The phone shows your name big at the top, with your P number next to it.
+- **Menu:** the **⋯** button at the top right opens the menu: change your name, turn the phone's own sound on or off, go full screen, or leave the game.
 - **Tank garage:** one side of the screen shows your tank turning on a stage, the other its stats (speed, armour, blast, reload, jet) and what makes it different. **Swipe the tank** left or right (or tap the arrows) and the next one slides in, spinning. Your two weapons are underneath.
-- **Ready up:** tap **READY UP** and the screen shows **WAITING FOR GAME START**. **← Change tank** takes you back to the garage.
+- **Ready up:** tap **READY UP** and the screen shows **WAITING FOR GAME START**. On the host phone, **START** sits next to it and starts the match right away. **← Change tank** takes you back to the garage.
 - **Control settings:** once you're ready, the gear at the top right (**CONTROLS**) opens your control settings, saved on that phone:
   - **Quick weapon swap:** double-tap the driving side of the screen to swap weapons, instead of using the weapon button above BOMB.
   - **Sides:** drive on the left and aim on the right (the normal way), or swap them: aim on the left, drive on the right. The BOMB and weapon buttons move to the aiming side.
@@ -138,7 +146,7 @@ Even without full screen, the controller blocks pinch and double-tap zoom while 
 - **Weapon button** (above BOMB): tap to swap between your two weapons (see *Weapons*). It shows the one you have. With **quick weapon swap** on, double-tap the driving side instead.
 - The left and right halves swap over if you picked **aim left · drive right** in the control settings.
 - **AIR STRIKE button** (next to BOMB): appears when you grab an air strike. Tap it, then steer the big red target on the TV with the left stick and tap **LAUNCH**.
-- **SOUND** (lobby): your phone plays its own sounds when your tank gets hit, knocks someone out, grabs a power-up or goes down. iPhones stay silent when the ring/silent switch is set to silent.
+- **Sound** (in the lobby menu, the **⋯** button): your phone plays its own sounds when your tank gets hit, knocks someone out, grabs a power-up or goes down. iPhones stay silent when the ring/silent switch is set to silent.
 
 ### Keyboard controls (people at the host computer)
 
@@ -185,8 +193,15 @@ Game controllers join with A. Left stick drives (A or LB for jetpack), right sti
 - Falling off the map is **instant death**: you lose a life no matter how much health you had.
 - Running out of health also costs a life. You respawn at the top after a couple of seconds, invincible for about 3 seconds.
 - **Combos:** hit the same tank again before it lands and settles and the hit does more damage: ×1.25 for the second hit, ×1.5 for the third, up to ×2. The hit shows **2 HIT COMBO**, **3 HIT COMBO** and so on. Only hits from the same player (or CPU) count, so hits from different players never add up to one combo. For example, bomb a tank into the air, then snipe it before it lands, and the snipe does extra damage.
+- **KO streaks:** knock out another tank within 7 seconds of your last knockout and the game calls it out over your tank: **DOUBLE KO!**, **TRIPLE KO!** and so on.
+- While you wait to respawn, your card counts down the seconds until you're **BACK IN**. Once you've lost your last life it says **OUT**.
+- A tank that gets knocked flying leaves a short trail in its colour, and every tank has a soft glow on the ground under it in its player colour, so you can always find yours, even in the air.
 - Who goes down and who grabs a power-up shows near the top of the host’s screen, small enough to stay out of the way.
 - The camera only zooms in and slows down for the **final knockout** of a match. The screen shakes when tanks get hit, and shakes less the more tanks there are, so an 8-player brawl stays easy to watch.
+
+### After the match
+
+The results screen shows who won, a scoreboard for every player (lives left, knockouts, falls, damage, direct hits, bomb hits and missile hit rate) and up to four awards: **Most damage**, **Most KOs**, **Sharpshooter** (best hit rate, with at least 5 shots), **Bomb expert** and, with power-ups on, **Collector**. **Rematch** plays the same setup again; **Back to lobby** lets everyone change tanks and settings.
 
 ### Music
 
@@ -203,10 +218,10 @@ Before each match, every player picks **two of the four weapons** and can only u
 
 | Weapon | How it fires | Damage | Reload |
 |---|---|---|---|
-| ◆ Missile | Arcs; drag farther (or charge longer) for more power | 22 direct, splash around the blast | About 1 second |
-| ≡ Machine gun | A stream of fast rounds while you hold the aim; just point it | 3 per round, no splash; each round pushes a little | About 8 rounds a second |
-| ⊕ Sniper | A very fast, almost straight shot | 40 direct, small blast | About 2.6 seconds |
-| ⬤ Bazooka | A slow, heavy rocket with a high arc | 30 direct and a huge blast radius with big knockback | About 3.2 seconds |
+| ◆ Missile | Arcs; drag farther (or charge longer) for more power | 21 direct, splash around the blast | About 1.1 seconds |
+| ≡ Machine gun | A stream of fast rounds while you hold the aim; just point it | 4 per round, no splash; each round pushes a little | About 9 rounds a second |
+| ⊕ Sniper | A very fast, almost straight shot | 48 direct, small blast | About 2.1 seconds |
+| ⬤ Bazooka | A slow, heavy rocket with a high arc | 34 direct and a huge blast radius with big knockback | About 2.8 seconds |
 
 Your card on the host’s screen shows the weapon you have and the other one you can swap to.
 
@@ -239,7 +254,9 @@ Pick how often they fall with the **POWER-UPS** button in the lobby: **LOW** (ev
 
 ### Arenas
 
-There are seven arena types, and each one comes in three sizes: **Small**, **Big** (about double) and **Mega** (huge, for up to 8 players). Every type changes the game in its own way.
+There are seven arena types, and each one comes in three sizes: **Small**, **Big** (about double) and **Mega** (huge, for up to 8 players). Every type changes the game in its own way, and each has its own look: grass and layered rock, packed snow and ice, steel tread plate, space-station panels, sand and sandstone, or city rooftops. Busy backgrounds (the city windows in Neon City and Magma Foundry, for example) are toned down so the platforms you drive on stand out.
+
+The game adjusts its resolution as it runs to stay smooth, so it plays well on older computers and on phones as well as on a big TV.
 
 | Type | Small | Big | Mega | What's special |
 |---|---|---|---|---|
@@ -291,10 +308,10 @@ In the lobby, each player's tank turns slowly on a turntable. Each tank has its 
 | Tank | Role | Strengths | Trade-offs |
 |---|---|---|---|
 | Vanguard | All-rounder | Even in every stat | No standout strengths |
-| Striker | Scout | 25% faster, 25% more jet fuel, slightly quicker reload | 15% less health, easier to knock back |
-| Bulwark | Heavy | 28% more health, 28% harder to knock back, 5% more damage | 20% slower, reloads 22% slower, 15% less jet fuel |
-| Ravager | Demolition | 15% bigger blasts, 10% more damage, 20% more knockback | Reloads 10% slower, a little slower to drive |
-| Viper | Rapid fire | Reloads 26% faster, faster missiles | 22% less damage, 10% less health, smaller blasts |
+| Striker | Scout | 25% faster, 25% more jet fuel, slightly quicker reload | 10% less health, easier to knock back |
+| Bulwark | Heavy | 28% more health, 28% harder to knock back, 5% more damage | 20% slower, reloads 15% slower, 15% less jet fuel |
+| Ravager | Demolition | 15% bigger blasts, 10% more damage, 12% more knockback | Reloads 10% slower, a little slower to drive |
+| Viper | Rapid fire | Reloads 26% faster, faster missiles | 20% less damage, 10% less health, smaller blasts |
 
 ## If something goes wrong
 

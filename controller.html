@@ -52,6 +52,9 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 #joinForm label{font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--ink-dim);}
 #codeIn{width:5.4em;box-sizing:border-box;padding:6px 0 0 .3em;background:var(--panel);border:0;border-bottom:3px solid var(--alert);color:var(--ink);font-family:var(--display);font-weight:600;font-size:64px;letter-spacing:.3em;line-height:1;text-align:center;text-transform:uppercase;-webkit-user-select:text;user-select:text;border-radius:0;}
 #codeIn:focus{outline:none;border-bottom-color:var(--ink);}
+#nameIn,#nameEdit,#nameAsk{width:9.5em;max-width:100%;box-sizing:border-box;padding:8px 10px 3px;background:var(--panel);border:0;border-bottom:3px solid var(--edge);color:var(--ink);font-family:var(--display);font-weight:600;font-size:34px;letter-spacing:.08em;line-height:1;text-align:center;text-transform:uppercase;border-radius:0;}
+#nameIn:focus,#nameEdit:focus,#nameAsk:focus{outline:none;border-bottom-color:var(--alert);}
+#nameIn::placeholder,#nameEdit::placeholder,#nameAsk::placeholder{color:rgba(255,255,255,.2);}
 .note{margin:0;max-width:36ch;font-size:13px;line-height:1.5;color:var(--ink-dim);}
 
 /* message + result */
@@ -73,7 +76,32 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 .lob-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px;}
 .you{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
 .you small{font-size:11px;font-weight:700;letter-spacing:.26em;color:var(--ink-dim);}
-.you b{font-family:var(--display);font-weight:700;font-size:68px;line-height:.78;padding-top:.08em;color:var(--pc);}
+.you{min-width:0;flex:1;}
+.you b{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--display);font-weight:700;font-size:clamp(38px,12vw,64px);line-height:.8;padding-top:.08em;color:var(--pc);transform:skewX(-6deg);transform-origin:left bottom;}
+.meslot{margin-left:2px;padding:2px 6px 1px;background:var(--pc);color:var(--night)!important;letter-spacing:.18em!important;}
+.meslot:empty{display:none;}
+.lob-head{flex-wrap:nowrap!important;align-items:center!important;}
+.lob-actions{flex-wrap:nowrap!important;}
+.menubtn{width:46px;min-height:46px!important;padding:0!important;display:inline-flex;align-items:center;justify-content:center;gap:4px;}
+.menubtn i{width:5px;height:5px;border-radius:50%;background:currentColor;}
+.menusheet{gap:14px;}
+.menusheet p{margin:0;font-size:13px;line-height:1.45;color:var(--ink-dim);}
+#nameAsk{align-self:center;}
+.mrow{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.mrow span{font-size:11px;font-weight:700;letter-spacing:.26em;color:var(--ink-dim);}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.mgrid .ghost,#leaveBtn{min-height:46px;}
+#leaveBtn{color:#ff9a9a;border-color:rgba(255,90,90,.35);}
+.btnrow{display:flex;gap:10px;}
+.btnrow .primary{flex:1;min-width:0;white-space:nowrap;font-size:clamp(20px,6.6vw,30px);padding-left:14px;padding-right:14px;}
+.btnrow #readyBtn{flex:1.35;}
+.btnrow #hostStart{flex:1;}
+@media (orientation:landscape) and (max-height:600px){
+  .you b{font-size:clamp(30px,10.5vh,52px);}
+  .btnrow{gap:8px;}
+  .btnrow .primary{font-size:clamp(18px,5.6vh,26px);padding-left:10px;padding-right:10px;}
+  #lobNote{font-size:12px;}
+}
 .lob-actions{display:flex;flex-wrap:wrap;gap:6px;}
 .lob-actions .ghost{min-height:36px;padding:7px 10px;font-size:11px;letter-spacing:.12em;}
 .lob-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;display:flex;flex-direction:column;gap:8px;}
@@ -345,6 +373,8 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
   <form id="joinForm" autocomplete="off">
     <label for="codeIn">ROOM CODE</label>
     <input id="codeIn" inputmode="text" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="4" placeholder="····" aria-label="Room code">
+    <label for="nameIn">YOUR NAME</label>
+    <input id="nameIn" type="text" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="12" placeholder="PLAYER" aria-label="Your name" autocomplete="nickname">
     <button class="primary" id="joinBtn" type="submit" disabled>JOIN</button>
   </form>
   <p class="note">The four-letter code is on the game screen. Scanning its QR code fills this in for you. Phones connect best on the same Wi-Fi as the game screen.</p>
@@ -364,8 +394,8 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
 
 <section class="view" id="vLobby" hidden>
   <div class="lob-head">
-    <div class="you"><small>YOU ARE</small><b id="meTag">P1</b><small id="lobInfo" class="lobinfo"></small></div>
-    <div class="lob-actions"><button class="ghost ctlbtn" id="ctlBtn" type="button" aria-label="Control settings" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6a8 8 0 0 1 1.9 1.1l2.5-.9 1.7 3-2 1.7a8 8 0 0 1 0 2.2l2 1.7-1.7 3-2.5-.9a8 8 0 0 1-1.9 1.1l-.5 2.6h-3.4l-.5-2.6a8 8 0 0 1-1.9-1.1l-2.5.9-1.7-3 2-1.7a8 8 0 0 1 0-2.2l-2-1.7 1.7-3 2.5.9a8 8 0 0 1 1.9-1.1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>CONTROLS</span></button><button class="ghost" id="teamPick" type="button" hidden>TEAM</button><button class="ghost" id="sndBtn" type="button" aria-pressed="true">SOUND · ON</button><button class="ghost fsbtn" type="button">FULL SCREEN</button><button class="ghost" id="leaveBtn" type="button">LEAVE</button></div>
+    <div class="you"><b id="meTag">P1</b><small id="meSlot" class="meslot"></small><small id="lobInfo" class="lobinfo"></small></div>
+    <div class="lob-actions"><button class="ghost ctlbtn" id="ctlBtn" type="button" aria-label="Control settings" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6a8 8 0 0 1 1.9 1.1l2.5-.9 1.7 3-2 1.7a8 8 0 0 1 0 2.2l2 1.7-1.7 3-2.5-.9a8 8 0 0 1-1.9 1.1l-.5 2.6h-3.4l-.5-2.6a8 8 0 0 1-1.9-1.1l-2.5.9-1.7-3 2-1.7a8 8 0 0 1 0-2.2l-2-1.7 1.7-3 2.5.9a8 8 0 0 1 1.9-1.1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>CONTROLS</span></button><button class="ghost" id="teamPick" type="button" hidden>TEAM</button><button class="ghost menubtn" id="menuBtn" type="button" aria-label="Menu"><i></i><i></i><i></i></button></div>
   </div>
   <div class="lob-body">
     <div class="ltabs" id="lTabs" role="tablist" hidden>
@@ -406,8 +436,7 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
   </div>
   <div class="lob-side">
     <p class="lob-note" id="lobNote">The brawl starts when everyone is ready, or when the host starts it. Turn your phone sideways and go full screen to play.</p>
-    <button class="primary" id="readyBtn" type="button">READY UP</button>
-    <button class="primary" id="hostStart" type="button" hidden>START MATCH</button>
+    <div class="btnrow"><button class="primary" id="readyBtn" type="button">READY UP</button><button class="primary" id="hostStart" type="button" hidden>START</button></div>
   </div>
 </section>
 
@@ -468,6 +497,26 @@ button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;}
   </div>
 </div>
 
+<div class="sheet" id="menuSheet" hidden>
+  <div class="sheet-in menusheet">
+    <h3>MENU</h3>
+    <label class="mrow"><span>YOUR NAME</span><input id="nameEdit" type="text" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="12" placeholder="PLAYER" autocomplete="nickname"></label>
+    <div class="mgrid"><button class="ghost" id="sndBtn" type="button" aria-pressed="true">SOUND · ON</button><button class="ghost fsbtn" type="button">FULL SCREEN</button></div>
+    <button class="ghost" id="leaveBtn" type="button">LEAVE THE GAME</button>
+    <button class="primary" id="menuDone" type="button">DONE</button>
+  </div>
+</div>
+
+<div class="sheet" id="nameSheet" hidden>
+  <div class="sheet-in menusheet">
+    <h3>WHAT'S YOUR NAME?</h3>
+    <p>It goes over your tank and on the scoreboard. You can change it any time from the menu (the three dots).</p>
+    <input id="nameAsk" type="text" autocapitalize="characters" autocorrect="off" spellcheck="false" maxlength="12" placeholder="PLAYER" autocomplete="nickname">
+    <button class="primary" id="nameOk" type="button">OK</button>
+    <button class="ghost" id="nameSkip" type="button">SKIP</button>
+  </div>
+</div>
+
 <div class="sheet" id="fsSheet" hidden>
   <div class="sheet-in">
     <h3>PLAY FULL SCREEN</h3>
@@ -492,6 +541,7 @@ const clamp=(v,a,b)=>v<a?a:v>b?b:v;
 const now=()=>performance.now();
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const store={ get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
+function cleanName(s){ return String(s==null?'':s).replace(/[\u0000-\u001f<>"&`\\]/g,'').replace(/\s+/g,' ').trim().toUpperCase().slice(0,12); }
 let cid=store.get('salvo-ol-cid-pad'); if(!cid){ cid=Math.random().toString(36).slice(2,12); store.set('salvo-ol-cid-pad',cid); }
 const S={code:'',peer:null,conn:null,welcomed:false,leaving:false,slot:-1,tag:'',tanks:[],tank:0,ready:false,phase:'',you:'play',hud:null,
   mx:0,my:0,up:false,dn:false,aim:false,ax:0,ay:0,shot:0,fx:0,fy:0,bomb:0,baim:false,bx:0,by:0,bm:0,w:0,lo:[0,1],mk:'',st:0,as:0,seq:0,hasShot:false,lastKey:'',lastSend:0,lastRx:0,timer:null,tok:0,attempt:0,stage:'',reconnecting:false,altCode:'',host:false,cfg:null,tab:'tank'};
@@ -627,7 +677,7 @@ function connect(retry){
     setStage('link','Found the game. Linking to the game screen…');
     const conn=peer.connect(PREFIX+S.code.toLowerCase(),{reliable:true,serialization:'json'});
     S.conn=conn;
-    conn.on('open',()=>{ if(S.conn!==conn) return; setStage('hello','Linked. Joining…'); send({t:'hello',cid}); });
+    conn.on('open',()=>{ if(S.conn!==conn) return; setStage('hello','Linked. Joining…'); send({t:'hello',cid,name:S.name||''}); });
     conn.on('data',d=>{ if(S.conn!==conn) return; S.lastRx=now(); try{ onData(d); }catch(e){ console.error(e); } });
     conn.on('close',()=>{ if(S.conn===conn) lost(); });
     conn.on('error',()=>{ if(S.conn===conn) lost(); });
@@ -673,11 +723,11 @@ function onData(d){
   if(!d||typeof d!=='object') return;
   switch(d.t){
     case 'welcome': {
-      clearTimeout(S.timer); S.welcomed=true; S.reconnecting=false; S.attempt=0; S.altCode=''; S.seq=0; store.set('salvo-ol-last-room',S.code); S.slot=clamp(d.slot|0,0,7); S.tag=String(d.tag||'P'+(S.slot+1));
+      clearTimeout(S.timer); S.welcomed=true; S.reconnecting=false; S.attempt=0; S.altCode=''; S.seq=0; store.set('salvo-ol-last-room',S.code); S.slot=clamp(d.slot|0,0,7); S.tag=String(d.tag||'P'+(S.slot+1)); if(typeof d.name==='string'&&d.name) S.name=cleanName(d.name);
       S.tanks=Array.isArray(d.tanks)?d.tanks:[]; S.tank=d.tank|0; S.ready=!!d.ready;
       document.body.className='s'+S.slot+(playing?' playing':'');
       const tc=document.querySelector('meta[name="theme-color"]'); if(tc) tc.setAttribute('content',COLORS[S.slot]);
-      $('meTag').textContent=S.tag; $('pTag').textContent=S.tag;
+      syncName(); askName();
       renderLobby(); keepAwake(); trapBack(); vib([20,40,20]);
       break; }
     case 'lobby': S.sty=d.sty&&typeof d.sty==='object'?d.sty:null; setLo(d.lo); setMk(d.mk); S.tank=d.tank|0; S.ready=!!d.ready; S.lteam=typeof d.team==='number'?d.team:-1; S.lmode=['time','gem'].includes(d.mode)?d.mode:'stock'; S.lmins=d.mins|0; S.llives=d.lives|0; S.host=!!d.host; S.cfg=d.cfg&&typeof d.cfg==='object'?d.cfg:null; S.teamsOn=!!d.teamsOn; S.myTeam=d.myTeam|0; setCol(d.col); renderLobby(); break;
@@ -693,6 +743,18 @@ function onData(d){
 function setCol(c){ if(typeof c!=='string'||!/^#[0-9a-f]{6}$/i.test(c)||S.col===c) return; S.col=c; document.body.style.setProperty('--pc',c); const tc=document.querySelector('meta[name="theme-color"]'); if(tc) tc.setAttribute('content',c); }
 function setLo(a){ if(Array.isArray(a)&&a.length===2){ const x=a[0]|0, y=a[1]|0; if(x!==y&&x>=0&&y>=0&&x<WPN.length&&y<WPN.length) S.lo=[x,y]; } }
 function setMk(c){ S.mk=typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c)?c:''; $('meTag').style.color=S.mk; $('pTag').style.color=S.mk; }
+function syncName(){ const n=S.name||S.tag||'P1'; $('meTag').textContent=n; $('meSlot').textContent=S.name?S.tag:''; $('pTag').textContent=n; }
+function saveName(v){ const n=cleanName(v); if(n===(S.name||'')) return; S.name=n; store.set('salvo-name',n); syncName(); if(S.welcomed) send({t:'name',name:n}); }
+$('menuBtn').addEventListener('click',()=>{ $('nameEdit').value=S.name||''; $('menuSheet').hidden=false; vib([8]); });
+$('menuDone').addEventListener('click',()=>{ saveName($('nameEdit').value); $('menuSheet').hidden=true; });
+$('nameEdit').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('nameEdit').blur(); } });
+$('nameEdit').addEventListener('change',()=>saveName($('nameEdit').value));
+S.name=cleanName(store.get('salvo-name')||'');
+// the first time a phone joins without a name (straight from the QR code), it asks for one once
+function askName(){ if(S.name||store.get('salvo-name-asked')==='1') return; store.set('salvo-name-asked','1'); setTimeout(()=>{ if(current==='vLobby'&&!S.name){ $('nameAsk').value=''; $('nameSheet').hidden=false; } },450); }
+$('nameOk').addEventListener('click',()=>{ saveName($('nameAsk').value); $('nameSheet').hidden=true; });
+$('nameAsk').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); saveName($('nameAsk').value); $('nameSheet').hidden=true; } });
+$('nameSkip').addEventListener('click',()=>{ $('nameSheet').hidden=true; });
 function setPhase(d){
   setCol(d.col); setLo(d.lo); if('mk' in d) setMk(d.mk);
   S.phase=String(d.phase||''); S.you=d.you==='spectate'?'spectate':'play'; if(typeof d.host==='boolean') S.host=d.host;
@@ -747,13 +809,14 @@ syncSnd();
 const codeIn=$('codeIn');
 function syncJoinBtn(){ $('joinBtn').disabled=codeIn.value.length!==4; }
 codeIn.addEventListener('input',()=>{ codeIn.value=codeIn.value.toUpperCase().replace(/[^A-Z]/g,'').slice(0,4); syncJoinBtn(); });
-$('joinForm').addEventListener('submit',e=>{ e.preventDefault(); if(codeIn.value.length!==4) return; codeIn.blur(); S.code=codeIn.value; S.altCode=''; S.reconnecting=false; keepAwake(); connect(); });
-$('leaveBtn').addEventListener('click',()=>{ send({t:'leave'}); S.leaving=true; setTimeout(cleanup,150); codeIn.value=S.code; syncJoinBtn(); show('vJoin'); });
+$('nameIn').value=S.name||''; $('nameIn').addEventListener('change',()=>saveName($('nameIn').value));
+$('joinForm').addEventListener('submit',e=>{ e.preventDefault(); if(codeIn.value.length!==4) return; codeIn.blur(); saveName($('nameIn').value); S.code=codeIn.value; S.altCode=''; S.reconnecting=false; keepAwake(); connect(); });
+$('leaveBtn').addEventListener('click',()=>{ $('menuSheet').hidden=true; send({t:'leave'}); S.leaving=true; setTimeout(cleanup,150); codeIn.value=S.code; syncJoinBtn(); show('vJoin'); });
 
 // The same tank models as the big screen (copied in from the game when it's built), for the garage below.
 function tankKit(T){
   const TAU=Math.PI*2, col=(h,m)=>{const c=new T.Color(h); c.convertSRGBToLinear(); if(m!==undefined) c.multiplyScalar(m); return c;};
-  const TEX={}, EMBLEMS={};
+  const TEX={}, EMBLEMS={}; let ARMOR_TEX=null;
 function canvasTex(w,h,draw,srgb){
   const c=document.createElement('canvas'); c.width=w; c.height=h;
   const x=c.getContext('2d'); draw(x,w,h);
@@ -788,6 +851,21 @@ function sideProfile(pts,depth,bev){ const s=new T.Shape(); pts.forEach(([x,y],i
 function emblemTex(st){ if(EMBLEMS[st.tag]) return EMBLEMS[st.tag];
   const t=canvasTex(128,64,(x,w,h)=>{ x.clearRect(0,0,w,h); x.fillStyle='rgba(255,255,255,0.9)'; x.font='700 42px Arial, sans-serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText(st.tag,w/2-14,h/2); x.fillRect(w-34,14,6,36); x.fillRect(w-24,14,6,36); },true);
   EMBLEMS[st.tag]=t; return t; }
+function armorTex(){ if(ARMOR_TEX) return ARMOR_TEX;
+  const t=canvasTex(512,512,(x,w,h)=>{
+    x.fillStyle='rgb(238,238,238)'; x.fillRect(0,0,w,h);
+    let sd=7; const rnd=()=>{ sd=(sd*16807)%2147483647; return sd/2147483647; };
+    for(let i=0;i<900;i++){ const s=8+((rnd()*3)|0)*8, v=rnd()<0.5?214:252; x.fillStyle='rgba('+v+','+v+','+v+',0.45)'; x.fillRect(((rnd()*64)|0)*8,((rnd()*64)|0)*8,s,s*(rnd()<0.5?1:2)); }
+    for(let i=0;i<5000;i++){ const v=rnd()<0.5?190:255; x.fillStyle='rgba('+v+','+v+','+v+',0.08)'; x.fillRect(rnd()*w,rnd()*h,1.5,1.5); }
+    const seam=(x0,y0,x1,y1)=>{ x.strokeStyle='rgba(30,32,40,0.62)'; x.lineWidth=2.2; x.beginPath(); x.moveTo(x0,y0); x.lineTo(x1,y1); x.stroke();
+      x.strokeStyle='rgba(255,255,255,0.55)'; x.lineWidth=1; x.beginPath(); x.moveTo(x0+(y0===y1?0:1.8),y0+(y0===y1?1.8:0)); x.lineTo(x1+(y0===y1?0:1.8),y1+(y0===y1?1.8:0)); x.stroke(); };
+    const rows=[0,150,290,420,512];
+    for(let r=0;r<rows.length-1;r++){ seam(0,rows[r]+1,w,rows[r]+1); const off=r%2?90:0; for(let c=off;c<w+180;c+=180) seam(c%w,rows[r],c%w,rows[r+1]);
+      for(let c=10;c<w;c+=26){ for(const yy of [rows[r]+9,rows[r+1]-9]){ x.fillStyle='rgba(40,42,50,0.7)'; x.beginPath(); x.arc(c,yy,2.6,0,Math.PI*2); x.fill(); x.fillStyle='rgba(255,255,255,0.7)'; x.beginPath(); x.arc(c-0.8,yy-0.8,1.1,0,Math.PI*2); x.fill(); } } }
+    for(let i=0;i<70;i++){ const a=rnd()*Math.PI, l=6+rnd()*26, px=rnd()*w, py=rnd()*h; x.strokeStyle='rgba(255,255,255,'+(0.25+rnd()*0.3)+')'; x.lineWidth=1; x.beginPath(); x.moveTo(px,py); x.lineTo(px+Math.cos(a)*l,py+Math.sin(a)*l); x.stroke(); }
+    for(let i=0;i<26;i++){ const px=rnd()*w, py=rnd()*h, r=20+rnd()*70, g=x.createRadialGradient(px,py,0,px,py,r); g.addColorStop(0,'rgba(60,52,44,0.16)'); g.addColorStop(1,'rgba(60,52,44,0)'); x.fillStyle=g; x.fillRect(px-r,py-r,r*2,r*2); }
+  },true);
+  t.wrapS=t.wrapT=T.RepeatWrapping; t.repeat.set(0.85,0.85); t.anisotropy=4; ARMOR_TEX=t; return t; }
 const TANK_STYLE={
   standard:{len:2.86,th:0.68,wheels:5,wr:0.175,tz:0.6,hull:[[-1.4,0.6],[1.18,0.6],[1.52,0.84],[1.26,1.06],[-1.28,1.08],[-1.46,0.88]],hd:1.3},
   light:{len:2.8,th:0.62,wheels:5,wr:0.16,tz:0.6,hull:[[-1.42,0.56],[1.08,0.56],[1.56,0.76],[1.02,0.98],[-1.3,1.0],[-1.48,0.8]],hd:1.24},
@@ -807,8 +885,8 @@ function buildTankMesh(st,sh,styleKey){
   const S=TANK_STYLE[styleKey]||TANK_STYLE.standard;
   const root=new T.Group(), body=new T.Group(); root.add(body);
   const M={
-    paint:new T.MeshStandardMaterial({color:col(st.paint),metalness:.5,roughness:.36}),
-    paint2:new T.MeshStandardMaterial({color:col(st.paint2),metalness:.6,roughness:.45}),
+    paint:new T.MeshStandardMaterial({color:col(st.paint),metalness:.5,roughness:.36,map:armorTex()}),
+    paint2:new T.MeshStandardMaterial({color:col(st.paint2),metalness:.6,roughness:.45,map:armorTex()}),
     rubber:new T.MeshStandardMaterial({color:col('#16171c'),metalness:.15,roughness:.92}),
     steel:new T.MeshStandardMaterial({color:col('#a3acb8'),metalness:.9,roughness:.3}),
     gun:new T.MeshStandardMaterial({color:col('#2b2f37'),metalness:.85,roughness:.38}),
@@ -816,6 +894,10 @@ function buildTankMesh(st,sh,styleKey){
     glow:new T.MeshStandardMaterial({color:col('#060606'),emissive:col(st.color),emissiveIntensity:3}),
     lamp:new T.MeshStandardMaterial({color:col('#101010'),emissive:col('#fff1d0'),emissiveIntensity:5})
   };
+  // a rim of the player's colour around the tank's outline (it fades to nothing face-on), so tanks read clearly
+  const rimify=(m,c,k)=>{ const u={value:c.clone().multiplyScalar(k)}; m.userData.rim=u;
+    m.onBeforeCompile=sh=>{ sh.uniforms.uRim=u; sh.fragmentShader=sh.fragmentShader.replace('#include <common>','#include <common>\nuniform vec3 uRim;').replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n  totalEmissiveRadiance+=uRim*pow(1.0-clamp(abs(dot(normal,normalize(vViewPosition))),0.0,1.0),2.4);'); }; };
+  { const rc=col(st.color); [['paint',0.62],['paint2',0.55],['gun',0.42],['dark',0.42],['rubber',0.36],['steel',0.3]].forEach(([k,v])=>rimify(M[k],rc,v)); }
   const B=partBatch(), A=(p,m,g,x,y,z,rx,ry,rz,sx,sy,sz)=>B.add(p,m,g,x,y,z,rx,ry,rz,sx,sy,sz);
   const box=(w,h,d)=>new T.BoxGeometry(w,h,d), cyl=(rt,rb,h,n)=>new T.CylinderGeometry(rt,rb,h,n||14);
   const turret=new T.Group(); turret.position.set(0,1.08,0); turret.scale.setScalar(sh.tS); root.add(turret);
@@ -1078,7 +1160,7 @@ function renderLobby(){
   const wait=!!S.ready; $('pickBox').hidden=wait; $('waitBox').hidden=!wait; $('wpnBox').hidden=wait; $('tPrev').hidden=wait; $('tNext').hidden=wait; $('swipeHint').hidden=wait; $('ctlBtn').hidden=!wait;
   const rb=$('readyBtn'); rb.hidden=wait; rb.textContent='READY UP';
   renderGarage();
-  setTxt($('lobNote'),host?((C.n|0)+((C.n|0)===1?' player':' players')+' in, '+(C.rd|0)+' ready. Pick your tank, then set up the match. START MATCH begins right away. Turn your phone sideways to play.'):wait?'Turn your phone sideways and go full screen to play.':'Swipe the tank to change it, pick two weapons, then ready up. Turn your phone sideways to play.');
+  setTxt($('lobNote'),host?((C.n|0)+((C.n|0)===1?' player':' players')+' in · '+(C.rd|0)+' ready · START begins the match right away'):wait?(matchMedia('(orientation:portrait)').matches?'Turn your phone sideways to play':'Ready · the match starts when everyone is'):'Swipe to pick a tank · pick two weapons · ready up');
   if(host) renderHost(C);
   srWake();
 }
@@ -1098,7 +1180,7 @@ function renderHost(C){
   const hk=$('hPk'); if(hk._h!==kh){ hk._h=kh; hk.innerHTML=kh; } hk.classList.toggle('off',(C.pwl|0)===0); $('hKinds').hidden=(C.pwl|0)===0;
   $('hPair').hidden=!C.teams; setTxt($('hTeamsSum'),C.teams?String(C.pair||''):'');
   if(!HA.busy) haPaint(HA.want>=0&&HA.want!==(C.ai|0)&&now()-HA.at<1500?HA.want:C.ai|0);
-  const n=C.n|0, hs=$('hostStart'); hs.disabled=n<2; setTxt(hs,n<2?'NEED 2 PLAYERS':'START MATCH');
+  const n=C.n|0, hs=$('hostStart'); hs.disabled=n<2; setTxt(hs,n<2?'NEED 2':'START');
 }
 // the arena theme card: swipe it (or tap the arrows) to change the arena on the big screen
 const HA={idx:-1,busy:false,want:-1,at:0,t:0};
