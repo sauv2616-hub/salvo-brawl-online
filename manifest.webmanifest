@@ -1,7 +1,7 @@
 {
-  "name": "Salvo Online Controller",
-  "short_name": "Salvo Pad",
-  "description": "Phone controller for Salvo Online.",
+  "name": "Salvo",
+  "short_name": "Salvo",
+  "description": "Tank brawler for 2–8 players: phone controller, online player or host.",
   "start_url": "./controller.html",
   "scope": "./",
   "display": "fullscreen",
